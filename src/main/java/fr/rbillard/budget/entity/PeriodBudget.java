@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import fr.rbillard.budget.entity.PeriodBudget.PeriodBudgetId;
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
@@ -26,6 +27,7 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	
 	
 	@EmbeddedId
+	@NotNull
 	public PeriodBudgetId getId() {
 		return id;
 	}
@@ -53,6 +55,7 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		private Budget budget;
 		
 		
+		@NotNull
 		@ManyToOne
 		@JoinColumn(name = "T_PERIOD_ID")
 		public Period getPeriod() {
@@ -63,6 +66,7 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		}
 		
 		
+		@NotNull
 		@ManyToOne
 		@JoinColumn(name = "T_BUDGET_ID")
 		public Budget getBudget() {

@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
@@ -33,6 +34,7 @@ public class Period extends AbstractEntity<Long> {
 	
 
 	@Id
+	@NotNull
 	@Column
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	public Long getId() {
@@ -43,6 +45,7 @@ public class Period extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public String getLabel() {
 		return label;
 	}
@@ -51,6 +54,7 @@ public class Period extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -59,6 +63,7 @@ public class Period extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -67,6 +72,7 @@ public class Period extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "T_USER_ID")
 	public User getUser() {
@@ -77,7 +83,8 @@ public class Period extends AbstractEntity<Long> {
 	}
 	
 	
-	@OneToMany( mappedBy = "period" )
+	@NotNull
+	@OneToMany( mappedBy = "id.period" )
 	public List<PeriodBudget> getlBudgets() {
 		if ( lBudgets == null ) {
 			lBudgets = new ArrayList<PeriodBudget>();

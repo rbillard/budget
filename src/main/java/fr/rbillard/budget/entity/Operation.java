@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
@@ -40,6 +41,7 @@ public class Operation extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public Date getDate() {
 		return date;
 	}
@@ -48,6 +50,7 @@ public class Operation extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public String getLabel() {
 		return label;
 	}
@@ -56,6 +59,7 @@ public class Operation extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public BigDecimal getAmount() {
 		return amount;
 	}
@@ -64,6 +68,7 @@ public class Operation extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "T_BUDGET_ID")
 	public Budget getBudget() {

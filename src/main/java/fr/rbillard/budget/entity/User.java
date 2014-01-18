@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,6 +32,7 @@ public class User extends AbstractEntity<Long> {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
+	@NotNull
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +41,7 @@ public class User extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public String getLogin() {
 		return login;
 	}
@@ -47,6 +50,7 @@ public class User extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public String getPassword() {
 		return password;
 	}

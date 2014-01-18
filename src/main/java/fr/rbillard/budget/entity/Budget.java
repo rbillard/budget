@@ -3,13 +3,13 @@ package fr.rbillard.budget.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -31,7 +31,7 @@ public class Budget extends AbstractEntity<Long> {
 	
 	
 	@Id
-	@Column
+	@NotNull
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	public Long getId() {
 		return id;
@@ -41,6 +41,7 @@ public class Budget extends AbstractEntity<Long> {
 	}
 	
 	
+	@NotNull
 	public String getLabel() {
 		return label;
 	}
@@ -49,7 +50,7 @@ public class Budget extends AbstractEntity<Long> {
 	}
 	
 	
-	@OneToMany( mappedBy = "budget" )
+	@OneToMany( mappedBy = "id.budget" )
 	public List<PeriodBudget> getlPeriod() {
 		if ( lPeriod == null ) {
 			lPeriod = new ArrayList<PeriodBudget>();
