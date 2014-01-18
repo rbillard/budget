@@ -3,7 +3,6 @@ package fr.rbillard.budget.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,7 +30,6 @@ public class Operation extends AbstractEntity<Long> {
 	
 
 	@Id
-	@Column
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	public Long getId() {
 		return id;

@@ -42,6 +42,20 @@
 			<version>1.2</version>
 		</dependency>
 		
+		<!-- Basic Datasource -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<!-- MySQL -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.27</version>
+		</dependency>
+		
 		<!-- UNIT TEST -->
 		<dependency>
 			<groupId>junit</groupId>

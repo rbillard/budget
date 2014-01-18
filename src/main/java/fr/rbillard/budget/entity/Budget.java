@@ -31,7 +31,6 @@ public class Budget extends AbstractEntity<Long> {
 	
 	
 	@Id
-	@NotNull
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	public Long getId() {
 		return id;

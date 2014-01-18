@@ -3,6 +3,7 @@ package fr.rbillard.budget.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,9 @@ public class User extends AbstractEntity<Long> {
 	
 	
 	private static final long serialVersionUID = 1L;
+
+
+	public static final String PROP_LOGIN = "login";
 	
 	
 	private Long id;
@@ -32,7 +36,6 @@ public class User extends AbstractEntity<Long> {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
-	@NotNull
 	public Long getId() {
 		return id;
 	}
@@ -42,6 +45,7 @@ public class User extends AbstractEntity<Long> {
 	
 	
 	@NotNull
+	@Column( unique = true )
 	public String getLogin() {
 		return login;
 	}

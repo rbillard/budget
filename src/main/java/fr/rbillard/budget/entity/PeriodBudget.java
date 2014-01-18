@@ -27,7 +27,6 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	
 	
 	@EmbeddedId
-	@NotNull
 	public PeriodBudgetId getId() {
 		return id;
 	}
