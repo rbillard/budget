@@ -30,7 +30,7 @@ public class UserDAO extends GenericHibernateDAO<User, Long> implements IUserDAO
 			throw new UsernameNotFoundException( username );
 		}
 		
-		return new SimpleUserDetails( user.getLogin(), user.getPassword() );
+		return new SimpleUserDetails( user );
 		
 	}
 

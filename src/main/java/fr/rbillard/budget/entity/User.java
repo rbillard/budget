@@ -25,8 +25,9 @@ public class User extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 
+	public static final String PROP_ID = "id";
 	public static final String PROP_LOGIN = "login";
-	
+
 	
 	private Long id;
 	private String login;
@@ -76,6 +77,9 @@ public class User extends AbstractEntity<Long> {
 	}
 	public void addPeriod( Period period ) {
 		getPeriods().add( period );
+	}
+	public void removePeriod( Period period ) {
+		getPeriods().remove( period );
 	}
 	
 

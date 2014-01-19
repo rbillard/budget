@@ -1,22 +1,30 @@
-var budgetApp = angular.module('budgetApp', [
+var budgetApp = angular.module( 'budgetApp', [
   'ngRoute',
-  'budgetControllers',
+  'periodControllers',
   'budgetFilters',
-  'budgetServices'
+  'periodServices'
 ]);
  
 budgetApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
-      when('/period/periods', {
-        templateUrl: 'resources/partials/period-list.html',
-        controller: 'BudgetListCtrl'
+      when('/period/list', {
+        templateUrl: 'resources/partials/period/period-list.html',
+        controller: 'PeriodListCtrl'
+      }).
+      when('/period/create', {
+    	  templateUrl: 'resources/partials/period/period-wrapper-form-create.html',
+    	  controller: 'PeriodCreateCtrl'
       }).
       when('/period/:periodId', {
-        templateUrl: 'resources/partials/period-detail.html',
-        controller: 'BudgetDetailCtrl'
+        templateUrl: 'resources/partials/period/period-detail.html',
+        controller: 'PeriodDetailCtrl'
+      }).
+      when('/period/update/:periodId', {
+    	  templateUrl: 'resources/partials/period/period-form.html',
+    	  controller: 'PeriodDetailCtrl'
       }).
       otherwise({
-        redirectTo: '/period/periods'
+        redirectTo: '/period/list'
       });
   }]);

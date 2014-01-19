@@ -5,6 +5,8 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import fr.rbillard.budget.entity.User;
+
 // TODO remonter
 public class SimpleUserDetails implements UserDetails {
 	
@@ -12,15 +14,16 @@ public class SimpleUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private final String login;
-	private final String password;
+	private final User user;
 	
 	
-	public SimpleUserDetails( String login, String password ) {
-		this.login = login;
-		this.password = password;
+	public SimpleUserDetails( User user ) {
+		this.user = user;
 	}
 
+	public User getUser() {
+		return user;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -29,12 +32,12 @@ public class SimpleUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return password;
+		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return login;
+		return user.getLogin();
 	}
 
 	@Override

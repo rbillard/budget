@@ -1,4 +1,4 @@
-<div>
+<div ng-controller="PeriodListCtrl">
 	
 	<p><input data-ng-model="query" /></p>
 	
@@ -7,8 +7,8 @@
 		<select data-ng-model="orderProp">
 		  <option value="label">Libellé croissant</option>
 		  <option value="-label">Libellé décroissant</option>
-		  <option value="dateDebut">Date croissant</option>
-		  <option value="-dateDebut">Date décroissant</option>
+		  <option value="startDate">Date croissant</option>
+		  <option value="-startDate">Date décroissant</option>
 		</select>
 		{{ orderProp }}
 	</p>
@@ -17,9 +17,10 @@
 
 	<ul>
 		<li data-ng-repeat="period in periods | filter:query | orderBy:orderProp">
-			{{ period.dateDebut }}
-			<a href="#/period/{{ period.id }}" class="thumb"><img data-ng-src="{{ period.img[0] }}"></a>
            	<a href="#/period/{{ period.id }}">{{ period.label }}</a>
+			{{ period.dateDebut }}
+			<a href="#/period/update/{{ period.id }}">Modifier</a>
+			<a ng-click="delete( period )">Supprimer</a>
 		</li>
 	</ul>
 

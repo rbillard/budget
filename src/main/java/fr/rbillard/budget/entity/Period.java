@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
@@ -22,6 +24,9 @@ public class Period extends AbstractEntity<Long> {
 	
 	
 	private static final long serialVersionUID = 1L;
+
+
+	public static final String PROP_USER = "user";
 	
 	
 	private Long id;
@@ -31,6 +36,18 @@ public class Period extends AbstractEntity<Long> {
 	private User user;
 	private List<PeriodBudget> lBudgets;
 	
+
+	public Period() {
+	
+	}
+	public Period( Long id, String label, Date startDate, Date endDate, User user, List<PeriodBudget> lBudgets ) {
+		this.id = id;
+		this.label = label;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.user = user;
+		this.lBudgets = lBudgets;
+	}
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
@@ -95,4 +112,13 @@ public class Period extends AbstractEntity<Long> {
 		getlBudgets().add( lBudget );
 	}
 
+	// Validation
+	@Transient
+	// TODO message en conf
+	@AssertTrue( message = "La date de début doit être antérieur à la date de fin" )
+	private boolean isStartDateBeforeEndDate() {
+		// TODO
+		return true;
+	}
+	
 }
