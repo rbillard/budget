@@ -7,12 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
@@ -22,12 +25,16 @@ public class Budget extends AbstractEntity<Long> {
 
 	
 	private static final long serialVersionUID = 1L;
+
+
+	public static final String PROP_USER = "user";
 	
 	
 	private Long id;
 	private String label;
 	private List<PeriodBudget> lPeriod;
 	private List<Operation> operations;
+	private User user;
 	
 	
 	@Id
@@ -40,7 +47,7 @@ public class Budget extends AbstractEntity<Long> {
 	}
 	
 	
-	@NotNull
+	@NotEmpty
 	public String getLabel() {
 		return label;
 	}
@@ -78,5 +85,16 @@ public class Budget extends AbstractEntity<Long> {
 	public void addOperation( Operation operation ) {
 		getOperations().add( operation );
 	}
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "T_USER_ID")
+	public User getUser() {
+		return user;
+	}
+	public void setUser( User user ) {
+		this.user = user;
+	}
+	
 
 }

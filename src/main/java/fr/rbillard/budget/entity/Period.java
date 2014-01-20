@@ -16,6 +16,8 @@ import javax.persistence.Transient;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
 @Entity
@@ -59,7 +61,7 @@ public class Period extends AbstractEntity<Long> {
 	}
 	
 	
-	@NotNull
+	@NotEmpty
 	public String getLabel() {
 		return label;
 	}

@@ -29,26 +29,25 @@ periodServices.factory( 'PeriodDeleteSrv', function( $resource ) {
 // CONTROLLERS
 var periodControllers = angular.module( 'periodControllers', [] );
 
-periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, PeriodCreateSrv ) {
+periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, $location, PeriodCreateSrv ) {
 	
 	$scope.period = PeriodCreateSrv.query();
 	
 	$scope.createOrUpdatePeriod = function() {
 		
-		var config = {headers: {'Content-Type': 'application/json; charset=UTF-8'}};
-		
-		$http.post('/budget/period', $scope.period, config)
-	        .success(function (data) {
-	        	console.log( "success" );
-	        	console.log( data );
+		$http.post( '/budget/period', $scope.period, headers )
+	        .success( function ( data ) {
+	        	window.location = "/budget/#/period/" + data.id;
 	        })
-	        .error(function(data, status, headers, config) {
+	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data;
 	        });
     }
+	
 });
 
 periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv, PeriodDeleteSrv ) {
+	
 	$scope.periods = PeriodListSrv.query();
 	$scope.orderProp = 'startDate';
 	
@@ -58,21 +57,19 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 	
 });
 
-periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, PeriodDetailSrv ) {
-	
+periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv ) {
+
 	$scope.period = PeriodDetailSrv.get({ periodId: $routeParams.periodId });
 	
 	$scope.createOrUpdatePeriod = function() {
-
-		console.log( $scope.period );
-		// TODO factoriser
-		var config = {headers: {'Content-Type': 'application/json; charset=UTF-8'}};
-		$http.put('/budget/period', $scope.period, config)
-	        .success(function (data) {
-	        	console.log( "success" );
+		
+		$http.put( '/budget/period', $scope.period, headers )
+	        .success( function ( data ) {
 	        	console.log( data );
+//	        	$location.path( "/budget/#/period/" + data.id );
+	        	window.location = "/budget/#/period/" + data.id;
 	        })
-	        .error(function(data, status, headers, config) {
+	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data;
 	        });
 		

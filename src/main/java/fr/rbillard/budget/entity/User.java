@@ -33,6 +33,7 @@ public class User extends AbstractEntity<Long> {
 	private String login;
 	private String password;
 	private List<Period> periods;
+	private List<Budget> budgets;
 	
 
 	@Id
@@ -80,6 +81,25 @@ public class User extends AbstractEntity<Long> {
 	}
 	public void removePeriod( Period period ) {
 		getPeriods().remove( period );
+	}
+	
+	
+	@OneToMany( mappedBy = "user" )
+	@Cascade( CascadeType.ALL )
+	public List<Budget> getBudgets() {
+		if ( budgets == null ) {
+			budgets = new ArrayList<Budget>();
+		}
+		return budgets;
+	}
+	public void setBudgets( List<Budget> budgets ) {
+		this.budgets = budgets;
+	}
+	public void addBudget( Budget budget ) {
+		getBudgets().add( budget );
+	}
+	public void removeBudget( Budget budget ) {
+		getBudgets().remove( budget );
 	}
 	
 

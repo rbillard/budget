@@ -1,21 +1,21 @@
 package fr.rbillard.budget.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.rbillard.budget.AbstractTest;
 
-public class PeriodServiceTest extends AbstractTest {
-
+public class BudgetServiceTest extends AbstractTest {
+	
 	@Autowired
-	private IPeriodService periodService;
+	private IBudgetService budgetService;
 	
 	@Test
-	public void testFindByUser() {
+	public void todo() {
 		// TODO
 		assertTrue( false );
 	}
-	
+
 }

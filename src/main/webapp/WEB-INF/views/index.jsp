@@ -4,21 +4,23 @@
 <link rel="stylesheet" href="/${ context }/resources/css/app.css">
 <link rel="stylesheet" href="/${ context }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/${ context }/resources/css/bootstrap-responsive.min.css">
+<script src="/${ context }/resources/js/angular/constants.js"></script>
 <script src="/${ context }/resources/js/angular/angular.min.js"></script>
 <script src="/${ context }/resources/js/angular/angular-route.js"></script>
 <script src="/${ context }/resources/js/angular/angular-resource.js"></script>
-<%-- <script src="/${ context }/resources/js/angular/angular-animate.js"></script> --%>
 <script src="/${ context }/resources/js/angular/app.js"></script>
+<script src="/${ context }/resources/js/angular/common.js"></script>
 <script src="/${ context }/resources/js/angular/period.js"></script>
-<%-- <script src="/${ context }/resources/js/angular/controllers.js"></script> --%>
-<script src="/${ context }/resources/js/angular/filters.js"></script>
-<%-- <script src="/${ context }/resources/js/angular/services.js"></script> --%>
+<script src="/${ context }/resources/js/angular/budget.js"></script>
 </head>
 <body>
 
 	<ul>
-		<li><a href="#/period/list"/>Accueil</a></li>
+		<li>TODO i18n</li>
+		<li><a href="#/period/list"/>Périodes</a></li>
 		<li><a href="#/period/create"/>Ajouter période</a></li>
+		<li><a href="#/budget/list"/>Budgets</a></li>
+		<li><a href="#/budget/create"/>Ajouter budget</a></li>
 	</ul>
  
   	<div ng-view></div>

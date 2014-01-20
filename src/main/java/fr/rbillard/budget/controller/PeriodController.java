@@ -24,27 +24,27 @@ public class PeriodController extends AbstractController {
 	@Autowired
 	private IPeriodService periodService;
 	
-	@Produces("application/json") // TODO constant
+	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/list", method = RequestMethod.GET )
 	public @ResponseBody List<PeriodDTO> getPeriods() {
 		List<Period> periods = periodService.findByUser( getConnectedUserId() );
 		return PeriodDTO.listPeriods2ListPeriodsDTO( periods );
 	}
 	
-	@Produces("application/json") 
+	@Produces( APPLICATION_JSON ) 
 	@RequestMapping( value = "/create", method = RequestMethod.GET )
 	public @ResponseBody Period newPeriod() {
 		return new Period();
 	}
 	
-	@Produces("application/json") 
+	@Produces( APPLICATION_JSON ) 
 	@RequestMapping( value = "/{id}", method = RequestMethod.GET )
 	public @ResponseBody PeriodDTO getPeriod( @PathVariable( value = "id" ) Long id ) {
 		Period period = periodService.getEntity( id );
 		return new PeriodDTO( period );
 	}
 	
-	@Produces("application/json")
+	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
 	public @ResponseBody List<PeriodDTO> deletePeriod( @PathVariable( value = "id" ) Long id ) {
 		
@@ -57,22 +57,22 @@ public class PeriodController extends AbstractController {
 	
 	// FULL REST
 	
-	@Consumes("application/json") // TODO constant
-	@Produces("application/json")
+	@Consumes( APPLICATION_JSON )
+	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
-	public @ResponseBody Period createPeriod( @RequestBody Period period ) {
+	public @ResponseBody PeriodDTO createPeriod( @RequestBody Period period ) {
 		period.setUser( getConnectedUser() );
 		periodService.create( period );
-		return period;
+		return new PeriodDTO( period );
 	}
 	
-	@Consumes("application/json") // TODO constant
-	@Produces("application/json")
+	@Consumes( APPLICATION_JSON )
+	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.PUT )
-	public @ResponseBody Period updatePeriod( @RequestBody Period period ) {
+	public @ResponseBody PeriodDTO updatePeriod( @RequestBody Period period ) {
 		period.setUser( getConnectedUser() );
 		periodService.update( period );
-		return period;
+		return new PeriodDTO( period );
 	}
 	
 }

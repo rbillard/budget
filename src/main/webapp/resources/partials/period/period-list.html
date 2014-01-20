@@ -13,7 +13,7 @@
 		{{ orderProp }}
 	</p>
 
-	<p>Total number of periods : {{ periods.length }}</p>
+	<p>Total number of periods : {{ periods.length }} (TODO update filter query)</p>
 
 	<ul>
 		<li data-ng-repeat="period in periods | filter:query | orderBy:orderProp">

@@ -14,6 +14,7 @@ public abstract class AbstractController {
 	
 	// FIXME trouver solution pour mettre en conf
 	public static final String FORMAT_DATE = "dd/MM/yyyy";
+	public static final String APPLICATION_JSON = "application/json";
 	
 	@Autowired
 	private Environment environment;
