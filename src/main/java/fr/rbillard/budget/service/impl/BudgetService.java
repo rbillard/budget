@@ -50,4 +50,10 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 		
 	}
 
+	@Override
+	@Transactional( readOnly = true )
+	public List<Budget> findNotAssociatedToPeriod( Long periodId, Long userId ) {
+		return dao.findNotAssociatedToPeriod( periodId, userId );
+	}
+
 }

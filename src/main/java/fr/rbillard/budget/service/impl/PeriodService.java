@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import fr.rbillard.budget.dao.IPeriodDAO;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.User;
+import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 import fr.rbillard.budget.service.IUserService;
 import fr.rbillard.springhibernate.domain.service.impl.GenericService;
@@ -21,6 +22,8 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 	
 	@Autowired
 	private IUserService userService;
+	
+	@Autowired IBudgetService budgetService;
 	
 	@Override
 	public IPeriodDAO getDao() {

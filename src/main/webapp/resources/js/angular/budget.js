@@ -25,10 +25,16 @@ budgetServices.factory( 'BudgetDeleteSrv', function( $resource ) {
 	});
 });
 
+budgetServices.factory( 'BudgetSelectSrv', function( $resource ) {
+	return $resource( '/budget/budget/period/:periodId', {}, {
+		query: { method:'GET', isArray:true }
+	});
+});
+
 // CONTROLLERS
 var budgetControllers = angular.module( 'budgetControllers', [] );
 
-budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http, $location, BudgetCreateSrv ) {
+budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http, BudgetCreateSrv ) {
 	
 	$scope.budget = BudgetCreateSrv.query();
 	
@@ -47,9 +53,9 @@ budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http, $loc
 	
 });
 
-budgetControllers.controller( 'BudgetDetailCtrl', function ( $scope, $routeParams, $http, $location, BudgetDetailSrv ) {
+budgetControllers.controller( 'BudgetDetailCtrl', function ( $scope, $routeParams, $http, BudgetDetailSrv ) {
 
-	$scope.budget = BudgetDetailSrv.get({ budgetId: $routeParams.budgetId });
+	$scope.budget = BudgetDetailSrv.query({ budgetId: $routeParams.budgetId });
 	
 	$scope.submit = "Modifier"; // TODO constants i18n
 	

@@ -22,8 +22,17 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	private static final long serialVersionUID = 1L;
 	
 	
+	public static final String PROP_ID = "id";
+
+
 	private PeriodBudgetId id;
 	private BigDecimal amount;
+	
+	
+	public PeriodBudget( Period period, Budget budget, BigDecimal amount ) {
+		this.id = new PeriodBudgetId( period, budget );
+		this.amount = amount;
+	}
 	
 	
 	@EmbeddedId
@@ -50,8 +59,18 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		private static final long serialVersionUID = 1L;
 		
 		
+		public static final String PROP_PERIOD = "period";
+		public static final String PROP_BUDGET = "budget";
+		
+		
 		private Period period;
 		private Budget budget;
+		
+		
+		public PeriodBudgetId( Period period, Budget budget ) {
+			this.period = period;
+			this.budget = budget;
+		}
 		
 		
 		@NotNull

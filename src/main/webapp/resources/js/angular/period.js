@@ -29,7 +29,7 @@ periodServices.factory( 'PeriodDeleteSrv', function( $resource ) {
 // CONTROLLERS
 var periodControllers = angular.module( 'periodControllers', [] );
 
-periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, $location, PeriodCreateSrv ) {
+periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, PeriodCreateSrv ) {
 	
 	$scope.period = PeriodCreateSrv.query();
 	
@@ -57,9 +57,12 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 	
 });
 
-periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv ) {
+// TODO supprimer $location si inutile
+periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv ) {
 
-	$scope.period = PeriodDetailSrv.get({ periodId: $routeParams.periodId });
+	$scope.period = PeriodDetailSrv.query({ periodId: $routeParams.periodId });
+	
+	$scope.budgetsSelect = BudgetSelectSrv.query({ periodId: $routeParams.periodId });
 	
 	$scope.createOrUpdatePeriod = function() {
 		
@@ -74,4 +77,24 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	        });
 		
 	};
+	
+	$scope.message = { "periodId": $routeParams.periodId };
+	
+	$scope.addBudget = function() {
+		console.log('added');
+		// FIXME directement l'id dans budgetId
+		$scope.message.budgetId = $scope.message.budgetId.id; 
+
+		console.log( $scope.message );
+		
+		$http.post( '/budget/period-budget', $scope.message, headers )
+	        .success( function ( data ) {
+	        	$scope.budgetsSelect = data;
+	        })
+	        .error( function( data, status, headers, config ) {
+	            $scope.errors = data; // TODO
+	        });
+		
+	};
+	
 });

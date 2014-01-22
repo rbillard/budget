@@ -1,29 +1,14 @@
 <div>
 	<p>{{ period.id }}</p>
 	<p>{{ period.label }}</p>
-	<p>Du {{ period.dateDebut }} au {{ period.dateFin }}</p>
-	<p>Fini : {{ period.fini | checkFini }}</p>
-	<p>
-		Images :
-		<ul class="phone-thumbs">
-		  <li ng-repeat="img in period.img">
-		    <span ng-click="setImage(img)" >X</span>
-		  </li>
-		</ul>
-	</p>
+	<p>Du {{ period.startDate }} au {{ period.endDate }}</p>
 </div>
 
 <div>
-	<img ng-src="{{mainImageUrl}}" class="phone">
-</div>
-
-<div>
-	{{ "lower cap string" | uppercase }}<br/>
-	{{ {foo: "bar", baz: 23} | json }}<br/>
-	{{ 1304375948024 | date }}<br/>
-	{{ 1304375948024 | date:"MM/dd/yyyy @ h:mma" }}
-</div>
-
-<div>
-	<input ng-model="userInput"> Uppercased: {{ userInput | uppercase }}
+	// TODO ne pas afficher si aucun budget
+	<form ng-submit="addBudget()">
+		Budgets : <select ng-model="message.budgetId" ng-options="budget.label for budget in budgetsSelect"></select>
+		<input type="text" ng-model="message.amount" /> // TODO vider montant après submit
+		<input type="submit" />
+	</form>
 </div>

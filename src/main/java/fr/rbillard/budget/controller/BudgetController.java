@@ -49,6 +49,16 @@ public class BudgetController extends AbstractController {
 		return BudgetDTO.listBudgets2ListBudgetsDTO( budgets );
 	}
 	
+	@Produces( APPLICATION_JSON )
+	@RequestMapping( value = "/period/{periodId}", method = RequestMethod.GET )
+	public @ResponseBody List<BudgetDTO> findBudgetsNotAssociatedToPeriod( @PathVariable( value = "periodId" ) Long periodId ) {
+		
+		List<Budget> budgets = budgetService.findNotAssociatedToPeriod( periodId, getConnectedUserId() );
+		return BudgetDTO.listBudgets2ListBudgetsDTO( budgets );
+		
+	}
+	
+	
 	// FULL REST
 	
 	@Consumes( APPLICATION_JSON )

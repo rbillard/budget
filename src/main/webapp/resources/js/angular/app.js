@@ -7,7 +7,7 @@ var budgetApp = angular.module( 'budgetApp', [
   'budgetServices'
 ]);
  
-budgetApp.config( function($routeProvider) {
+budgetApp.config( function( $routeProvider ) {
     $routeProvider.
     
       // PERIOD

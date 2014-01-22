@@ -28,6 +28,7 @@ public class Period extends AbstractEntity<Long> {
 	private static final long serialVersionUID = 1L;
 
 
+	public static final String PROP_ID = "id";
 	public static final String PROP_USER = "user";
 	
 	

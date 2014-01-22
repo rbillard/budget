@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import fr.rbillard.budget.dao.IBudgetDAO;
 import fr.rbillard.budget.entity.Budget;
+import fr.rbillard.budget.entity.Period;
+import fr.rbillard.budget.entity.PeriodBudget;
+import fr.rbillard.budget.entity.PeriodBudget.PeriodBudgetId;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.springhibernate.domain.dao.impl.GenericHibernateDAO;
 
@@ -26,6 +29,30 @@ public class BudgetDAO extends GenericHibernateDAO<Budget, Long> implements IBud
 				.createCriteria( Budget.PROP_USER )
 					.add( Restrictions.eq( User.PROP_ID, userId ) )
 		);
+		
+	}
+
+	@SuppressWarnings( "unchecked" )
+	@Override
+	public List<Budget> findNotAssociatedToPeriod( Long periodId, Long userId ) {
+		
+		StringBuilder queryString = new StringBuilder()
+			.append( " select budget " )
+			.append( " from " ).append( Budget.class.getName() ).append( " budget " )
+			.append( " inner join budget." ).append( Budget.PROP_USER ).append( " user " )
+			.append( " with user." ).append( User.PROP_ID ).append( " = :userId " )
+			.append( " where budget." ).append( Budget.PROP_ID ).append( " not in ( ")
+				.append( " select l2." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_BUDGET ).append( "." ).append( Budget.PROP_ID )
+				.append( " from " ).append( PeriodBudget.class.getName() ).append( " l2 " )
+				.append( " inner join l2." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_PERIOD ).append( " period ")
+				.append( " with period." ).append( Period.PROP_ID ).append( " = :periodId ")
+			.append( " )");
+			
+		return getCurrentSession()
+			.createQuery( queryString.toString() )
+			.setLong( "periodId", periodId )
+			.setLong( "userId", userId )
+			.list();
 		
 	}
 

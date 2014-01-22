@@ -11,4 +11,6 @@ public interface IBudgetService extends IGenericService<Budget, Long> {
 
 	void delete( Long id, Long userId );
 
+	List<Budget> findNotAssociatedToPeriod( Long periodId, Long userId );
+
 }
