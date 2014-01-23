@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -26,7 +27,7 @@ public class Operation extends AbstractEntity<Long> {
 	private Date date;
 	private String label;
 	private BigDecimal amount;
-	private Budget budget;
+	private PeriodBudget periodBudget;
 	
 
 	@Id
@@ -68,12 +69,12 @@ public class Operation extends AbstractEntity<Long> {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "T_BUDGET_ID")
-	public Budget getBudget() {
-		return budget;
+	@JoinColumns(value = { @JoinColumn( name = "T_BUDGET_ID" ), @JoinColumn( name = "T_PERIOD_ID" ) }  )
+	public PeriodBudget getPeriodBudget() {
+		return periodBudget;
 	}
-	public void setBudget( Budget budget ) {
-		this.budget = budget;
+	public void setPeriodBudget( PeriodBudget periodBudget ) {
+		this.periodBudget = periodBudget;
 	}
 	
 

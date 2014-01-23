@@ -2,14 +2,20 @@ package fr.rbillard.budget.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import fr.rbillard.budget.entity.PeriodBudget.PeriodBudgetId;
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
@@ -27,6 +33,7 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 
 	private PeriodBudgetId id;
 	private BigDecimal amount;
+	private List<Operation> operations;
 	
 	
 	public PeriodBudget( Period period, Budget budget, BigDecimal amount ) {
@@ -49,6 +56,21 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	}
 	public void setAmount( BigDecimal amount ) {
 		this.amount = amount;
+	}
+	
+	@OneToMany( mappedBy = "periodBudget" )
+	@Cascade( CascadeType.ALL )
+	public List<Operation> getOperations() {
+		if ( operations == null ) {
+			operations = new ArrayList<Operation>();
+		}
+		return operations;
+	}
+	public void setOperations( List<Operation> operations ) {
+		this.operations = operations;
+	}
+	public void addOperation( Operation operation ) {
+		getOperations().add( operation );
 	}
 	
 	

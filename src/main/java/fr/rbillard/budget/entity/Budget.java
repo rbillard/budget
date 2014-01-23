@@ -13,8 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
@@ -35,7 +33,6 @@ public class Budget extends AbstractEntity<Long> {
 	private Long id;
 	private String label;
 	private List<PeriodBudget> lPeriod;
-	private List<Operation> operations;
 	private User user;
 	
 	
@@ -72,21 +69,6 @@ public class Budget extends AbstractEntity<Long> {
 		getlPeriod().add( lPeriod );
 	}
 	
-	
-	@OneToMany( mappedBy = "budget" )
-	@Cascade( CascadeType.ALL )
-	public List<Operation> getOperations() {
-		if ( operations == null ) {
-			operations = new ArrayList<Operation>();
-		}
-		return operations;
-	}
-	public void setOperations( List<Operation> operations ) {
-		this.operations = operations;
-	}
-	public void addOperation( Operation operation ) {
-		getOperations().add( operation );
-	}
 	
 	@NotNull
 	@ManyToOne
