@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.dto.PeriodDTO;
-import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
@@ -48,12 +46,7 @@ public class PeriodController extends AbstractController {
 	public @ResponseBody PeriodDTO getPeriod( @PathVariable( value = "id" ) Long id ) {
 		
 		Period period = periodService.getEntity( id );
-		PeriodDTO dto = new PeriodDTO( period );
-		
-		List<Budget> budgets = budgetService.findNotAssociatedToPeriod( id, getConnectedUserId() );
-		dto.setBudgets( BudgetDTO.listBudgets2ListBudgetsDTO( budgets ) );
-		
-		return dto;
+		return new PeriodDTO( period, getTypeBudgets( id ) );
 		
 	}
 	

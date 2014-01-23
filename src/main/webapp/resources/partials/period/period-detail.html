@@ -4,11 +4,25 @@
 	<p>Du {{ period.startDate }} au {{ period.endDate }}</p>
 </div>
 
+<h1>GESTION</h1>
 <div>
 	// TODO ne pas afficher si aucun budget
 	<form ng-submit="addBudget()">
-		Budgets : <select ng-model="message.budgetId" ng-options="budget.label for budget in period.budgets"></select>
+		Budgets : <select ng-model="message.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated"></select>
 		<input type="text" ng-model="message.amount" /> // TODO vider montant après submit
 		<input type="submit" />
 	</form>
 </div>
+
+<div>
+	// TODO ne pas afficher si aucun budget
+	<form ng-submit="createOperation()">
+		Budgets : <select ng-model="todo.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated"></select>
+		<br/>Date : TODO<br/>
+		Label : TODO<br/>
+		Montant : TODO<br/>
+		<input type="submit" />
+	</form>
+</div>
+
+<h1>LECTURE</h1>

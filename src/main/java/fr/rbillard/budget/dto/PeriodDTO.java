@@ -18,14 +18,18 @@ public class PeriodDTO implements Serializable {
 	private final String label;
 	private final String startDate;
 	private final String endDate;
-	private List<BudgetDTO> budgets;
+	private final TypeBudgets typeBudgets;
 	
 	
-	public PeriodDTO( Period period ) {
+	public PeriodDTO( Period period, TypeBudgets typeBudgets ) {
 		this.id = period.getId();
 		this.label = period.getLabel();
 		this.startDate = DateUtils.dateToString( period.getStartDate(), AbstractController.FORMAT_DATE );
 		this.endDate = DateUtils.dateToString( period.getEndDate(), AbstractController.FORMAT_DATE );
+		this.typeBudgets = typeBudgets;
+	}
+	public PeriodDTO( Period period ) {
+		this( period, null );
 	}
 
 
@@ -48,15 +52,12 @@ public class PeriodDTO implements Serializable {
 		return endDate;
 	}
 	
-	
-	public List<BudgetDTO> getBudgets() {
-		return budgets;
-	}
-	public void setBudgets( List<BudgetDTO> budgets ) {
-		this.budgets = budgets;
+
+	public TypeBudgets getTypeBudgets() {
+		return typeBudgets;
 	}
 
-	
+
 	public static List<PeriodDTO> listPeriods2ListPeriodsDTO( List<Period> periods ) {
 		
 		List<PeriodDTO> periodsDTO = new ArrayList<PeriodDTO>( periods.size() );

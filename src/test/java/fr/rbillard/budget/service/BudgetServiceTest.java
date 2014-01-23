@@ -4,16 +4,16 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.rbillard.budget.AbstractTest;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
-import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.User;
 
 public class BudgetServiceTest extends AbstractTest {
@@ -22,7 +22,46 @@ public class BudgetServiceTest extends AbstractTest {
 	private IBudgetService budgetService;
 	
 	@Autowired
-	private IPeriodBudgetService periodBudgetService;
+	private IUserService userService;
+	
+	private User user1;
+	private User user2;
+
+	private Period period1;
+	private Period period2;
+
+	private Budget budget1;
+	private Budget budget2;
+	private Budget budget3;
+	private Budget budget4;
+	
+	
+	@Before
+	public void setUp() {
+
+		user1 = newUser( "rbillard" );
+		user2 = newUser( "chebika" );
+		
+		period1 = newPeriod( user1 );
+		budget1 = newBudget( user1 );
+		budget2 = newBudget( user1 );
+		budget3 = newBudget( user1 );
+		period2 = newPeriod( user1 );
+		
+		budget4 = newBudget( user2 );
+		
+		newPeriodBudget( period1, budget2 );
+		newPeriodBudget( period2, budget3 );
+		
+	}
+	
+	@After
+	public void tearDown() {
+
+		userService.delete( user1 );
+		userService.delete( user2 );
+		
+	}
 	
 	@Test
 	public void todo() {
@@ -31,23 +70,7 @@ public class BudgetServiceTest extends AbstractTest {
 	}
 	
 	@Test
-	public void testFindNotAssociateToPeriod() {
-		
-		// given
-		User user1 = newUser( "rbillard" );
-		Period period1 = newPeriod( user1 );
-		Budget budget1 = newBudget( user1 );
-		Budget budget2 = newBudget( user1 );
-		Budget budget3 = newBudget( user1 );
-		Period period2 = newPeriod( user1 );
-		
-		User user2 = newUser( "chebika" );
-		Budget budget4 = newBudget( user2 );
-		
-		PeriodBudget periodBudget1 = new PeriodBudget( period1, budget2, BigDecimal.TEN );
-		periodBudgetService.create( periodBudget1 );
-		PeriodBudget periodBudget2 = new PeriodBudget( period2, budget3, BigDecimal.TEN );
-		periodBudgetService.create( periodBudget2 );
+	public void testFindNotAssociatedToPeriod() {
 		
 		// when
 		List<Budget> budgets = budgetService.findNotAssociatedToPeriod( period1.getId(), user1.getId() );
@@ -60,5 +83,16 @@ public class BudgetServiceTest extends AbstractTest {
 		assertFalse( "budget4 owned by another user", budgets.contains( budget4 ) );
 		
 	}
+	
+	@Test
+	public void testFindAssociatedToPeriod() {
+		
+		// when
+		List<Budget> budgets = budgetService.findAssociatedToPeriod( period1.getId(), user1.getId() );
+		assertEquals( 1, budgets.size() );
+		assertTrue( budgets.contains( budget2 ) );
+		
+	}
+	
 
 }

@@ -3,6 +3,7 @@ package fr.rbillard.budget.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,7 +56,7 @@ public class Budget extends AbstractEntity<Long> {
 	}
 	
 	
-	@OneToMany( mappedBy = "id.budget" )
+	@OneToMany( mappedBy = "id.budget", cascade = CascadeType.REMOVE )
 	public List<PeriodBudget> getlPeriod() {
 		if ( lPeriod == null ) {
 			lPeriod = new ArrayList<PeriodBudget>();

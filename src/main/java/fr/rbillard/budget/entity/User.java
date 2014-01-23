@@ -3,6 +3,7 @@ package fr.rbillard.budget.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
@@ -65,8 +63,7 @@ public class User extends AbstractEntity<Long> {
 	}
 	
 	
-	@OneToMany( mappedBy = "user" )
-	@Cascade( CascadeType.ALL )
+	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
 	public List<Period> getPeriods() {
 		if ( periods == null ) {
 			periods = new ArrayList<Period>();
@@ -84,8 +81,7 @@ public class User extends AbstractEntity<Long> {
 	}
 	
 	
-	@OneToMany( mappedBy = "user" )
-	@Cascade( CascadeType.ALL )
+	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
 	public List<Budget> getBudgets() {
 		if ( budgets == null ) {
 			budgets = new ArrayList<Budget>();

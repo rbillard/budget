@@ -79,20 +79,22 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	$scope.message = { "periodId": $routeParams.periodId };
 	
 	$scope.addBudget = function() {
-		console.log('added');
+
 		// FIXME directement l'id dans budgetId
 		$scope.message.budgetId = $scope.message.budgetId.id; 
 
-		console.log( $scope.message );
-		
 		$http.post( '/budget/period-budget', $scope.message, headers )
 	        .success( function ( data ) {
-	        	$scope.period.budgets = data;
+	        	$scope.period.typeBudgets = data;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data; // TODO
 	        });
 		
+	};
+	
+	$scope.createOperation = function() {
+		console.log('createOperation');
 	};
 	
 });

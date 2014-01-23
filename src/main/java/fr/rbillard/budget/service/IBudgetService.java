@@ -13,4 +13,6 @@ public interface IBudgetService extends IGenericService<Budget, Long> {
 
 	List<Budget> findNotAssociatedToPeriod( Long periodId, Long userId );
 
+	List<Budget> findAssociatedToPeriod( Long periodId, Long userId );
+
 }

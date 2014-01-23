@@ -32,27 +32,50 @@ public class BudgetDAO extends GenericHibernateDAO<Budget, Long> implements IBud
 		
 	}
 
-	@SuppressWarnings( "unchecked" )
 	@Override
 	public List<Budget> findNotAssociatedToPeriod( Long periodId, Long userId ) {
 		
-		StringBuilder queryString = new StringBuilder()
-			.append( " select budget " )
-			.append( " from " ).append( Budget.class.getName() ).append( " budget " )
-			.append( " inner join budget." ).append( Budget.PROP_USER ).append( " user " )
-			.append( " with user." ).append( User.PROP_ID ).append( " = :userId " )
+		StringBuilder queryString = getBeginningQueryStringFindBudgetFromUser()
 			.append( " where budget." ).append( Budget.PROP_ID ).append( " not in ( ")
-				.append( " select l2." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_BUDGET ).append( "." ).append( Budget.PROP_ID )
-				.append( " from " ).append( PeriodBudget.class.getName() ).append( " l2 " )
-				.append( " inner join l2." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_PERIOD ).append( " period ")
+				.append( " select l." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_BUDGET ).append( "." ).append( Budget.PROP_ID )
+				.append( " from " ).append( PeriodBudget.class.getName() ).append( " l " )
+				.append( " inner join l." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_PERIOD ).append( " period ")
 				.append( " with period." ).append( Period.PROP_ID ).append( " = :periodId ")
 			.append( " )");
 			
+		return findBudgets( periodId, userId, queryString );
+		
+	}
+
+	@SuppressWarnings( "unchecked" )
+	private List<Budget> findBudgets( Long periodId, Long userId, StringBuilder queryString ) {
+		
 		return getCurrentSession()
 			.createQuery( queryString.toString() )
 			.setLong( "periodId", periodId )
 			.setLong( "userId", userId )
 			.list();
+		
+	}
+
+	@Override
+	public List<Budget> findAssociatedToPeriod( Long periodId, Long userId ) {
+		
+		StringBuilder queryString = getBeginningQueryStringFindBudgetFromUser()
+			.append( " inner join budget." ).append( Budget.PROP_L_PERIOD ).append( " l " )
+			.append( " inner join l." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_PERIOD ).append( " period " )
+			.append( " with period." ).append( Period.PROP_ID ).append( " = :periodId " );
+		
+		return findBudgets( periodId, userId, queryString );
+	}
+	
+	private StringBuilder getBeginningQueryStringFindBudgetFromUser() {
+		
+		return new StringBuilder()
+			.append( " select budget " )
+			.append( " from " ).append( Budget.class.getName() ).append( " budget " )
+			.append( " inner join budget." ).append( Budget.PROP_USER ).append( " user " )
+			.append( " with user." ).append( User.PROP_ID ).append( " = :userId " );
 		
 	}
 

@@ -1,5 +1,6 @@
 package fr.rbillard.budget;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.runner.RunWith;
@@ -10,8 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import fr.rbillard.budget.conf.BudgetTestConfiguration;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
+import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
+import fr.rbillard.budget.service.IPeriodBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 import fr.rbillard.budget.service.IUserService;
 
@@ -27,6 +30,9 @@ public abstract class AbstractTest {
 	
 	@Autowired
 	private IPeriodService periodService;
+	
+	@Autowired
+	private IPeriodBudgetService periodBudgetService;
 	
 	protected User newUser( String login ) {
 		
@@ -44,6 +50,7 @@ public abstract class AbstractTest {
 		Budget budget = new Budget();
 		budget.setUser( user );
 		budget.setLabel( "Lable budget" );
+		user.addBudget( budget );
 		budgetService.create( budget );
 		
 		return budget;
@@ -57,9 +64,21 @@ public abstract class AbstractTest {
 		period.setLabel( "Label period" );
 		period.setStartDate( new Date() );
 		period.setEndDate( new Date() );
+		user.addPeriod( period );
 		periodService.create( period );
 		
 		return period;
+	}
+	
+	protected PeriodBudget newPeriodBudget( Period period, Budget budget ) {
+		
+		PeriodBudget periodBudget = new PeriodBudget( period, budget, BigDecimal.TEN );
+		period.addlBudget( periodBudget );
+		budget.addlBudget( periodBudget );
+		periodBudgetService.create( periodBudget );
+		
+		return periodBudget;
+		
 	}
 
 }
