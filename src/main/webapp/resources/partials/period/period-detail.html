@@ -7,7 +7,7 @@
 <div>
 	// TODO ne pas afficher si aucun budget
 	<form ng-submit="addBudget()">
-		Budgets : <select ng-model="message.budgetId" ng-options="budget.label for budget in budgetsSelect"></select>
+		Budgets : <select ng-model="message.budgetId" ng-options="budget.label for budget in period.budgets"></select>
 		<input type="text" ng-model="message.amount" /> // TODO vider montant après submit
 		<input type="submit" />
 	</form>

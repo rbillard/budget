@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.dto.PeriodDTO;
+import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
+import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 
 @Controller
@@ -23,6 +26,9 @@ public class PeriodController extends AbstractController {
 	
 	@Autowired
 	private IPeriodService periodService;
+	
+	@Autowired
+	private IBudgetService budgetService;
 	
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/list", method = RequestMethod.GET )
@@ -40,8 +46,15 @@ public class PeriodController extends AbstractController {
 	@Produces( APPLICATION_JSON ) 
 	@RequestMapping( value = "/{id}", method = RequestMethod.GET )
 	public @ResponseBody PeriodDTO getPeriod( @PathVariable( value = "id" ) Long id ) {
+		
 		Period period = periodService.getEntity( id );
-		return new PeriodDTO( period );
+		PeriodDTO dto = new PeriodDTO( period );
+		
+		List<Budget> budgets = budgetService.findNotAssociatedToPeriod( id, getConnectedUserId() );
+		dto.setBudgets( BudgetDTO.listBudgets2ListBudgetsDTO( budgets ) );
+		
+		return dto;
+		
 	}
 	
 	@Produces( APPLICATION_JSON )

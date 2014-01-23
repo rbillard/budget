@@ -18,6 +18,7 @@ public class PeriodDTO implements Serializable {
 	private final String label;
 	private final String startDate;
 	private final String endDate;
+	private List<BudgetDTO> budgets;
 	
 	
 	public PeriodDTO( Period period ) {
@@ -45,6 +46,14 @@ public class PeriodDTO implements Serializable {
 
 	public String getEndDate() {
 		return endDate;
+	}
+	
+	
+	public List<BudgetDTO> getBudgets() {
+		return budgets;
+	}
+	public void setBudgets( List<BudgetDTO> budgets ) {
+		this.budgets = budgets;
 	}
 
 	

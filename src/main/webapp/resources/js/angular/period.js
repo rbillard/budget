@@ -62,8 +62,6 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 
 	$scope.period = PeriodDetailSrv.query({ periodId: $routeParams.periodId });
 	
-	$scope.budgetsSelect = BudgetSelectSrv.query({ periodId: $routeParams.periodId });
-	
 	$scope.createOrUpdatePeriod = function() {
 		
 		$http.put( '/budget/period', $scope.period, headers )
@@ -89,7 +87,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		
 		$http.post( '/budget/period-budget', $scope.message, headers )
 	        .success( function ( data ) {
-	        	$scope.budgetsSelect = data;
+	        	$scope.period.budgets = data;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data; // TODO
