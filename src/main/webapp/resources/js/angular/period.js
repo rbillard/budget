@@ -58,9 +58,10 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 });
 
 // TODO supprimer $location si inutile
-periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv ) {
+periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv ) {
 
 	$scope.period = PeriodDetailSrv.query({ periodId: $routeParams.periodId });
+	$scope.orderOperation = "date";
 	
 	$scope.createOrUpdatePeriod = function() {
 		
@@ -76,25 +77,52 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		
 	};
 	
-	$scope.message = { "periodId": $routeParams.periodId };
+	// add budget
+	
+	$scope.messageAddBudget = { "periodId": $routeParams.periodId };
 	
 	$scope.addBudget = function() {
-
+		
 		// FIXME directement l'id dans budgetId
-		$scope.message.budgetId = $scope.message.budgetId.id; 
+		$scope.messageAddBudget.budgetId = $scope.messageAddBudget.budgetId.id; 
 
-		$http.post( '/budget/period-budget', $scope.message, headers )
+		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
 	        .success( function ( data ) {
 	        	$scope.period.typeBudgets = data;
 	        })
 	        .error( function( data, status, headers, config ) {
-	            $scope.errors = data; // TODO
+	            $scope.errorsAddBudget = data;
 	        });
 		
 	};
 	
+	// create operation
+	
+	$scope.messageCreateOperation = { "periodId": $routeParams.periodId };
+	
 	$scope.createOperation = function() {
-		console.log('createOperation');
+		
+		// FIXME directement l'id dans budgetId
+		$scope.messageCreateOperation.budgetId = $scope.messageCreateOperation.budgetId.id; 
+		
+		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
+	        .success( function ( data ) {
+	        	// TODO
+	        })
+	        .error( function( data, status, headers, config ) {
+	            $scope.errorsCreateOperation = data;
+	        });
+		
+	};
+	
+	$scope.deleteOperation = function( operation ) {
+		OperationDeleteSrv.query(
+			{ operationId: operation.id },
+			function() {
+				var index = $scope.period.operations.indexOf( operation )
+				$scope.period.operations.splice( index, 1 );
+			}
+		);
 	};
 	
 });

@@ -1,5 +1,6 @@
 package fr.rbillard.budget.controller;
 
+import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fr.rbillard.budget.dto.TypeBudgets;
 import fr.rbillard.budget.message.MessageAssociatePeriodBudget;
 import fr.rbillard.budget.service.IPeriodBudgetService;
+import fr.rbillard.budget.utils.ValidatorUtils;
 
 @Controller
 @RequestMapping( value = "period-budget" )
@@ -20,13 +22,18 @@ public class PeriodBudgetController extends AbstractController {
 	
 	@Autowired
 	private IPeriodBudgetService periodBudgetService;
+	
+	@Autowired
+	private Validator validator;
 
 	@Consumes( APPLICATION_JSON )
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
-	public @ResponseBody TypeBudgets associatePeriodBudget( @RequestBody MessageAssociatePeriodBudget message ) {
+	public @ResponseBody TypeBudgets associatePeriodBudget( @RequestBody MessageAssociatePeriodBudget message ) throws fr.rbillard.budget.exception.ConstraintViolationFunctionalException {
 		
 		message.setUserId( getConnectedUserId() );
+		
+		ValidatorUtils.assertValid( validator, message );
 		
 		periodBudgetService.associatePeriodBudget( message );
 	

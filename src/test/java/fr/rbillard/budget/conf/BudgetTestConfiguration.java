@@ -4,10 +4,12 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import fr.rbillard.springhibernate.domain.conf.DataSourceConfigProvider;
 import fr.rbillard.springhibernate.domain.conf.DefaultDataSourceConfiguration;
@@ -50,6 +52,11 @@ public class BudgetTestConfiguration extends DefaultDataSourceConfiguration {
 			}
 			
 		};
+	}
+	
+	@Bean
+	public LocalValidatorFactoryBean localValidatorFactoryBean() {
+		return new LocalValidatorFactoryBean();
 	}
 
 }

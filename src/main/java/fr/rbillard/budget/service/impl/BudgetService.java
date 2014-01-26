@@ -42,6 +42,7 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 	@Transactional
 	public void delete( Long id, Long userId ) {
 
+		// TODO dao.getBudget( id, userId ); instead of :
 		User user = userService.getEntity( userId );
 		Budget budget = getEntity( id );
 		user.removeBudget( budget );

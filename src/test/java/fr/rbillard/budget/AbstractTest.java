@@ -10,10 +10,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.rbillard.budget.conf.BudgetTestConfiguration;
 import fr.rbillard.budget.entity.Budget;
+import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
+import fr.rbillard.budget.service.IOperationService;
 import fr.rbillard.budget.service.IPeriodBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 import fr.rbillard.budget.service.IUserService;
@@ -34,12 +36,31 @@ public abstract class AbstractTest {
 	@Autowired
 	private IPeriodBudgetService periodBudgetService;
 	
+	@Autowired
+	private IOperationService operationService;
+	
+	protected User newUser() {
+		return newUser( "rbillard" );
+	}
+	
 	protected User newUser( String login ) {
 		
 		User user = new User();
 		user.setLogin( login );
 		user.setPassword( "password" );
 		userService.create( user );
+		
+		return user;
+		
+	}
+	
+	protected User newUserWithOperation() {
+		
+		User user = newUser();
+		Period period = newPeriod( user );
+		Budget budget = newBudget( user );
+		PeriodBudget periodBudget = newPeriodBudget( period, budget );
+		newOperation( periodBudget );
 		
 		return user;
 		
@@ -78,6 +99,22 @@ public abstract class AbstractTest {
 		periodBudgetService.create( periodBudget );
 		
 		return periodBudget;
+		
+	}
+	
+	protected Operation newOperation( PeriodBudget periodBudget ) {
+		
+		Operation operation = new Operation();
+		operation.setAmount( BigDecimal.TEN );
+		operation.setDate( new Date() );
+		operation.setLabel( "Achat matériel" );
+		operation.setPeriodBudget( periodBudget );
+		
+		periodBudget.addOperation( operation );
+		
+		operationService.create( operation );
+		
+		return operation;
 		
 	}
 

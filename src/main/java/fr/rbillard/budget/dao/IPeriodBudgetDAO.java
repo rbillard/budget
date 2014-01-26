@@ -6,4 +6,6 @@ import fr.rbillard.springhibernate.domain.dao.IGenericDAO;
 
 public interface IPeriodBudgetDAO extends IGenericDAO<PeriodBudget, PeriodBudgetId> {
 
+	PeriodBudget getEntity( Long userId, Long periodId, Long budgetId );
+
 }

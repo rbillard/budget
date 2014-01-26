@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class PeriodController extends AbstractController {
 	
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/list", method = RequestMethod.GET )
+	@Transactional( readOnly = true )
 	public @ResponseBody List<PeriodDTO> getPeriods() {
 		List<Period> periods = periodService.findByUser( getConnectedUserId() );
 		return PeriodDTO.listPeriods2ListPeriodsDTO( periods );
@@ -43,6 +45,7 @@ public class PeriodController extends AbstractController {
 	
 	@Produces( APPLICATION_JSON ) 
 	@RequestMapping( value = "/{id}", method = RequestMethod.GET )
+	@Transactional( readOnly = true )
 	public @ResponseBody PeriodDTO getPeriod( @PathVariable( value = "id" ) Long id ) {
 		
 		Period period = periodService.getEntity( id );

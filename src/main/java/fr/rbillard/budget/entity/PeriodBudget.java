@@ -40,6 +40,9 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		this.id = new PeriodBudgetId( period, budget );
 		this.amount = amount;
 	}
+	public PeriodBudget() {
+		
+	}
 	
 	
 	@EmbeddedId
@@ -72,6 +75,9 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	public void addOperation( Operation operation ) {
 		getOperations().add( operation );
 	}
+	public void removeOperation( Operation operation ) {
+		getOperations().remove( operation );
+	}
 	
 	
 	@Embeddable
@@ -92,6 +98,9 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		public PeriodBudgetId( Period period, Budget budget ) {
 			this.period = period;
 			this.budget = budget;
+		}
+		public PeriodBudgetId() {
+			
 		}
 		
 		
@@ -116,6 +125,37 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 			this.budget = budget;
 		}
 		
+		@Override
+		public boolean equals( Object obj ) {
+			
+			// reference
+			if ( this == obj ) return true;
+			
+			// nullité ou type
+			if ( obj == null || ! getClass().isAssignableFrom( obj.getClass() ) ) return false;
+			
+			if ( period == null || period.getId() == null || budget == null || budget.getId() == null ) {
+				return super.equals( obj );
+			} else {
+				// id persisté
+				PeriodBudgetId id = (PeriodBudgetId) obj;
+				return period.equals( id.getPeriod() ) && budget.equals( id.getBudget() );
+			}
+			
+		}
+		
+		@Override
+		public int hashCode() {
+			
+			if ( period == null || period.getId() == null || budget == null || budget.getId() == null ) {
+				return super.hashCode();
+			} else {
+				return period.getId().hashCode() + budget.getId().hashCode();
+			}
+
+		}
+		
 	}
+
 
 }

@@ -67,4 +67,10 @@ public class PeriodBudgetService extends GenericService<PeriodBudget, PeriodBudg
 		
 	}
 
+	@Override
+	@Transactional( readOnly = true )
+	public PeriodBudget getEntity( Long userId, Long periodId, Long budgetId ) {
+		return dao.getEntity( userId, periodId, budgetId );
+	}
+
 }

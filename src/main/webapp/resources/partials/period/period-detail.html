@@ -4,12 +4,36 @@
 	<p>Du {{ period.startDate }} au {{ period.endDate }}</p>
 </div>
 
+// TODO tab gestion/lecture
+<h1>LECTURE</h1>
+
+<div>
+	TODO select filtre budgets -> opérations
+	TODO liste des opérations
+	<p><input data-ng-model="queryOperation" />// TODO label</p>
+	<p>
+	Sort by:
+		<select data-ng-model="orderOperation">
+		  <option value="label">Libellé croissant</option>
+		  <option value="-label">Libellé décroissant</option>
+		  <option value="date">Date croissant</option>
+		  <option value="-date">Date décroissant</option>
+		</select>
+	</p>
+	<ul>
+		<li ng-repeat="operation in period.operations | filter:queryOperation | orderBy:orderOperation">
+			{{ operation.date }} {{ operation.label }}
+			<a ng-click="deleteOperation( operation )">Supprimer</a>
+		</li>
+	</ul>
+</div>
+
 <h1>GESTION</h1>
 <div>
 	// TODO ne pas afficher si aucun budget
 	<form ng-submit="addBudget()">
-		Budgets : <select ng-model="message.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated"></select>
-		<input type="text" ng-model="message.amount" /> // TODO vider montant après submit
+		Budgets : <select ng-model="messageAddBudget.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated"></select><span>{{ errorsAddBudget.budgetId }}</span>
+		<input type="text" ng-model="messageAddBudget.amount" /><span>{{ errorsAddBudget.amount }}</span> // TODO vider montant après submit
 		<input type="submit" />
 	</form>
 </div>
@@ -17,12 +41,10 @@
 <div>
 	// TODO ne pas afficher si aucun budget
 	<form ng-submit="createOperation()">
-		Budgets : <select ng-model="todo.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated"></select>
-		<br/>Date : TODO<br/>
-		Label : TODO<br/>
-		Montant : TODO<br/>
+		Budgets : <select ng-model="messageCreateOperation.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated"></select><span>{{ errorsCreateOperation.budgetId }}</span>
+		<br/>Date (1390148264000): <input type="text" ng-model="messageCreateOperation.date" /><span>{{ errorsCreateOperation.date }}</span><br/>
+		Label : <input type="text" ng-model="messageCreateOperation.label" /><span>{{ errorsCreateOperation.label }}</span><br/>
+		Montant : <input type="text" ng-model="messageCreateOperation.amount" /><span>{{ errorsCreateOperation.amount }}</span><br/>
 		<input type="submit" />
 	</form>
 </div>
-
-<h1>LECTURE</h1>

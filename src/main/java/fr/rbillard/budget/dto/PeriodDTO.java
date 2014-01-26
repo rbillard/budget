@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.rbillard.budget.controller.AbstractController;
+import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
+import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.utils.DateUtils;
 
 public class PeriodDTO implements Serializable {
@@ -19,14 +21,24 @@ public class PeriodDTO implements Serializable {
 	private final String startDate;
 	private final String endDate;
 	private final TypeBudgets typeBudgets;
+	private final List<OperationDTO> operations;
 	
 	
 	public PeriodDTO( Period period, TypeBudgets typeBudgets ) {
+		
 		this.id = period.getId();
 		this.label = period.getLabel();
 		this.startDate = DateUtils.dateToString( period.getStartDate(), AbstractController.FORMAT_DATE );
 		this.endDate = DateUtils.dateToString( period.getEndDate(), AbstractController.FORMAT_DATE );
 		this.typeBudgets = typeBudgets;
+		
+		this.operations = new ArrayList<OperationDTO>();
+		for ( PeriodBudget periodBudget : period.getlBudgets() ) {
+			for ( Operation operation : periodBudget.getOperations() ) {
+				operations.add( new OperationDTO( operation ) );
+			}
+		}
+		
 	}
 	public PeriodDTO( Period period ) {
 		this( period, null );
@@ -55,6 +67,11 @@ public class PeriodDTO implements Serializable {
 
 	public TypeBudgets getTypeBudgets() {
 		return typeBudgets;
+	}
+	
+	
+	public List<OperationDTO> getOperations() {
+		return operations;
 	}
 
 

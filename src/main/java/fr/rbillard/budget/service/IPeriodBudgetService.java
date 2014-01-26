@@ -9,4 +9,6 @@ public interface IPeriodBudgetService extends IGenericService<PeriodBudget, Peri
 
 	PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message );
 
+	PeriodBudget getEntity( Long userId, Long periodId, Long budgetId );
+
 }

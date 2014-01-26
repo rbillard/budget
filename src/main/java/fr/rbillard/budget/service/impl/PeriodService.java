@@ -45,6 +45,7 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 	@Transactional
 	public void delete( Long id, Long userId ) {
 		
+		// TODO dao.getPeriod( id, userId ); instead of :
 		User user = userService.getEntity( userId );
 		Period period = getEntity( id );
 		user.removePeriod( period );
