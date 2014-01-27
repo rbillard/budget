@@ -59,8 +59,18 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 
 // TODO supprimer $location si inutile
 periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv ) {
-
-	$scope.period = PeriodDetailSrv.query({ periodId: $routeParams.periodId });
+	
+	$scope.showBudgetsAssociated = false;
+	$scope.showBudgetsNotAssociated = false;
+	
+	$scope.period = PeriodDetailSrv.query(
+		{ periodId: $routeParams.periodId },
+		function( data ) {
+			// TODO factoriser avec addBudget
+			$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+			$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+		}
+	);
 	$scope.orderOperation = "date";
 	
 	$scope.createOrUpdatePeriod = function() {
@@ -89,6 +99,9 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
 	        .success( function ( data ) {
 	        	$scope.period.typeBudgets = data;
+	        	// TODO factoriser avec get period
+	        	$scope.showBudgetsAssociated = data.budgetsAssociated.length > 0;
+				$scope.showBudgetsNotAssociated = data.budgetsNotAssociated.length > 0;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errorsAddBudget = data;
