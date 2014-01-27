@@ -1,0 +1,22 @@
+<div>
+	TODO select filtre budgets -> opérations
+	TODO liste des opérations
+	<p><input data-ng-model="queryOperation" />// TODO label</p>
+	<p>
+	Sort by:
+		<select data-ng-model="orderOperation">
+		  <option value="label">Libellé croissant</option>
+		  <option value="-label">Libellé décroissant</option>
+		  <option value="date">Date croissant</option>
+		  <option value="-date">Date décroissant</option>
+		  <option value="amount">Montant croissant</option>
+		  <option value="-amount">Montant décroissant</option>
+		</select>
+	</p>
+	<ul>
+		<li ng-repeat="operation in period.operations | filter:queryOperation | orderBy:orderOperation">
+			{{ operation.date }} {{ operation.label }} {{ operation.amount }}
+			<a ng-click="deleteOperation( operation )">Supprimer</a>
+		</li>
+	</ul>
+</div>

@@ -4,6 +4,12 @@
 <link rel="stylesheet" href="/${ context }/resources/css/app.css">
 <link rel="stylesheet" href="/${ context }/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/${ context }/resources/css/bootstrap-responsive.min.css">
+
+<link rel="stylesheet" href="/${ context }/resources/css/jquery/jquery-ui.min.css">
+
+<script src="/${ context }/resources/js/jquery/jquery-1.10.2.min.js"></script>
+<script src="/${ context }/resources/js/jquery/jquery-ui.min.js"></script>
+
 <script src="/${ context }/resources/js/angular/constants.js"></script>
 <script src="/${ context }/resources/js/angular/angular.min.js"></script>
 <script src="/${ context }/resources/js/angular/angular-route.js"></script>

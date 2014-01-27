@@ -107,7 +107,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
-	        	// TODO
+	        	$scope.period.operations.push( data );
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errorsCreateOperation = data;
@@ -125,4 +125,13 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		);
 	};
 	
+})
+.directive( 'hboTabs', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, elm, attrs) {
+            var jqueryElm = $(elm[0]);
+            $(jqueryElm).tabs()
+        }
+    };
 });

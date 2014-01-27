@@ -1,0 +1,19 @@
+<div>
+	// TODO ne pas afficher si aucun budget
+	<form ng-submit="addBudget()">
+		Budgets : <select ng-model="messageAddBudget.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated"></select><span>{{ errorsAddBudget.budgetId }}</span>
+		<input type="text" ng-model="messageAddBudget.amount" /><span>{{ errorsAddBudget.amount }}</span> // TODO vider montant après submit
+		<input type="submit" />
+	</form>
+</div>
+
+<div>
+	// TODO ne pas afficher si aucun budget
+	<form ng-submit="createOperation()">
+		Budgets : <select ng-model="messageCreateOperation.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated"></select><span>{{ errorsCreateOperation.budgetId }}</span>
+		<br/>Date (1390148264000): <input type="text" ng-model="messageCreateOperation.date" /><span>{{ errorsCreateOperation.date }}</span><br/>
+		Label : <input type="text" ng-model="messageCreateOperation.label" /><span>{{ errorsCreateOperation.label }}</span><br/>
+		Montant : <input type="text" ng-model="messageCreateOperation.amount" /><span>{{ errorsCreateOperation.amount }}</span><br/>
+		<input type="submit" />
+	</form>
+</div>

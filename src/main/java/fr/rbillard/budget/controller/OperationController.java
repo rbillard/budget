@@ -1,7 +1,5 @@
 package fr.rbillard.budget.controller;
 
-import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.rbillard.budget.dto.OperationDTO;
+import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.message.MessageCreateOperation;
 import fr.rbillard.budget.service.IOperationService;
 
@@ -27,13 +26,13 @@ public class OperationController extends AbstractController {
 	@Consumes( APPLICATION_JSON )
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
-	public @ResponseBody List<OperationDTO> createOperation( @RequestBody MessageCreateOperation message ) {
+	public @ResponseBody OperationDTO createOperation( @RequestBody MessageCreateOperation message ) {
 		
 		message.setUserId( getConnectedUserId() );
 		
-		operationService.create( message );
+		Operation operation = operationService.create( message );
 		
-		return null;
+		return new OperationDTO( operation );
 		
 	}
 	
