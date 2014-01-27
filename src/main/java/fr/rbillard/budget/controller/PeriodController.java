@@ -48,6 +48,7 @@ public class PeriodController extends AbstractController {
 	@Transactional( readOnly = true )
 	public @ResponseBody PeriodDTO getPeriod( @PathVariable( value = "id" ) Long id ) {
 		
+		// TODO factoriser avec PeriodBudgetController DELETE 
 		Period period = periodService.getEntity( id );
 		return new PeriodDTO( period, getTypeBudgets( id ) );
 		

@@ -58,7 +58,7 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 });
 
 // TODO supprimer $location si inutile
-periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv ) {
+periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
 	
 	$scope.showBudgetsAssociated = false;
 	$scope.showBudgetsNotAssociated = false;
@@ -134,6 +134,26 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 			function() {
 				var index = $scope.period.operations.indexOf( operation )
 				$scope.period.operations.splice( index, 1 );
+			}
+		);
+	};
+	
+	// dissociate budget
+	
+	$scope.dissociateBudget = function( budget ) {
+		
+		PeriodBudgetDeleteSrv.query(
+			{
+				periodId: $scope.period.id,
+				budgetId: budget.id
+			},
+			function( data ) {
+				console.log(data);
+				$scope.period = data;
+				// TODO factoriser avec get period
+				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+				
 			}
 		);
 	};

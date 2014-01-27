@@ -1,3 +1,4 @@
+<h1>Opérations</h1>
 <div>
 	TODO select filtre budgets -> opérations
 	<p><input data-ng-model="queryOperation" />// TODO label</p>
@@ -16,6 +17,17 @@
 		<li ng-repeat="operation in period.operations | filter:queryOperation | orderBy:orderOperation">
 			{{ operation.date }} {{ operation.label }} {{ operation.amount }}
 			<a ng-click="deleteOperation( operation )">Supprimer</a>
+		</li>
+	</ul>
+</div>
+
+<h1>Budgets</h1>
+
+<div>
+	// TODO filtre + tri
+	<ul>
+		<li ng-repeat="budget in period.typeBudgets.budgetsAssociated">
+			{{ budget.label }} {{ budget.amount }} <a ng-click="dissociateBudget( budget )">Dissocier de la période</a>
 		</li>
 	</ul>
 </div>

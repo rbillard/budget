@@ -1,6 +1,7 @@
 package fr.rbillard.budget.controller;
 
 import static fr.rbillard.budget.dto.BudgetDTO.listBudgets2ListBudgetsDTO;
+import static fr.rbillard.budget.dto.BudgetDTO.listPeriodsBudgets2ListBudgetsDTO;
 
 import java.util.List;
 
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import fr.rbillard.budget.auth.SimpleUserDetails;
 import fr.rbillard.budget.dto.TypeBudgets;
 import fr.rbillard.budget.entity.Budget;
+import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
+import fr.rbillard.budget.service.IPeriodBudgetService;
 
 @PropertySource({ "classpath:/application.properties" })
 public abstract class AbstractController {
@@ -28,6 +31,9 @@ public abstract class AbstractController {
 	
 	@Autowired
 	private IBudgetService budgetService;
+	
+	@Autowired
+	private IPeriodBudgetService periodBudgetService;
 	
 	protected Environment getEnvironment() {
 		return environment;
@@ -48,11 +54,11 @@ public abstract class AbstractController {
 	protected TypeBudgets getTypeBudgets( Long periodId ) {
 		
 		List<Budget> budgetsNotAssociated = budgetService.findNotAssociatedToPeriod( periodId, getConnectedUserId() );
-		List<Budget> budgetsAssociated = budgetService.findAssociatedToPeriod( periodId, getConnectedUserId() );
+		List<PeriodBudget> budgetsAssociated = periodBudgetService.findAssociatedToPeriod( periodId, getConnectedUserId() );
 		
 		return new TypeBudgets(
 			listBudgets2ListBudgetsDTO( budgetsNotAssociated ),
-			listBudgets2ListBudgetsDTO( budgetsAssociated )
+			listPeriodsBudgets2ListBudgetsDTO( budgetsAssociated )
 		);
 		
 	}

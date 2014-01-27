@@ -3,6 +3,8 @@ package fr.rbillard.budget.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +42,25 @@ public class PeriodBudgetServiceTest extends AbstractTest {
 		assertEquals( period, loadedPeriodBudget.getId().getPeriod() );
 		assertEquals( budget, loadedPeriodBudget.getId().getBudget() );
 		
+	}
+	
+	@Test
+	public void testFindAssociatedToPeriod() {
+		
+		// given
+		User user = newUserWithOperation();
+		Period period = user.getPeriods().get( 0 );
+		Budget budget = user.getBudgets().get( 0 );
+		
+		// when
+		List<PeriodBudget> periodsBudgets = periodBudgetService.findAssociatedToPeriod( period.getId(), user.getId() );
+		PeriodBudget periodBudget = periodsBudgets.get( 0 );
+		
+		// then
+		assertEquals( 1, periodsBudgets.size() );
+		assertEquals( period, periodBudget.getId().getPeriod() );
+		assertEquals( budget, periodBudget.getId().getBudget() );
+
 	}
 
 }

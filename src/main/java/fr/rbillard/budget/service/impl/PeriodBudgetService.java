@@ -1,5 +1,7 @@
 package fr.rbillard.budget.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,6 +73,22 @@ public class PeriodBudgetService extends GenericService<PeriodBudget, PeriodBudg
 	@Transactional( readOnly = true )
 	public PeriodBudget getEntity( Long userId, Long periodId, Long budgetId ) {
 		return dao.getEntity( userId, periodId, budgetId );
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public List<PeriodBudget> findAssociatedToPeriod( Long periodId, Long userId ) {
+		return dao.findAssociatedToPeriod( periodId, userId );
+	}
+
+	@Override
+	@Transactional
+	public void dissociate( Long periodId, Long budgetId, Long userId ) {
+		
+		PeriodBudget periodBudget = getEntity( userId, periodId, budgetId );
+		
+		delete( periodBudget );
+		
 	}
 
 }

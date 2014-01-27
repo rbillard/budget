@@ -84,15 +84,4 @@ public class BudgetServiceTest extends AbstractTest {
 		
 	}
 	
-	@Test
-	public void testFindAssociatedToPeriod() {
-		
-		// when
-		List<Budget> budgets = budgetService.findAssociatedToPeriod( period1.getId(), user1.getId() );
-		assertEquals( 1, budgets.size() );
-		assertTrue( budgets.contains( budget2 ) );
-		
-	}
-	
-
 }

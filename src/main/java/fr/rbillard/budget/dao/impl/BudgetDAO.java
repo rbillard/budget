@@ -58,17 +58,6 @@ public class BudgetDAO extends GenericHibernateDAO<Budget, Long> implements IBud
 		
 	}
 
-	@Override
-	public List<Budget> findAssociatedToPeriod( Long periodId, Long userId ) {
-		
-		StringBuilder queryString = getBeginningQueryStringFindBudgetFromUser()
-			.append( " inner join budget." ).append( Budget.PROP_L_PERIOD ).append( " l " )
-			.append( " inner join l." ).append( PeriodBudget.PROP_ID ).append( "." ).append( PeriodBudgetId.PROP_PERIOD ).append( " period " )
-			.append( " with period." ).append( Period.PROP_ID ).append( " = :periodId " );
-		
-		return findBudgets( periodId, userId, queryString );
-	}
-	
 	private StringBuilder getBeginningQueryStringFindBudgetFromUser() {
 		
 		return new StringBuilder()

@@ -1,5 +1,7 @@
 package fr.rbillard.budget.service;
 
+import java.util.List;
+
 import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.PeriodBudget.PeriodBudgetId;
 import fr.rbillard.budget.message.MessageAssociatePeriodBudget;
@@ -10,5 +12,9 @@ public interface IPeriodBudgetService extends IGenericService<PeriodBudget, Peri
 	PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message );
 
 	PeriodBudget getEntity( Long userId, Long periodId, Long budgetId );
+
+	List<PeriodBudget> findAssociatedToPeriod( Long periodId, Long userId );
+
+	void dissociate( Long periodId, Long budgetId, Long userId );
 
 }

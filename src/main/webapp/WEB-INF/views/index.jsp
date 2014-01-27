@@ -19,6 +19,7 @@
 <script src="/${ context }/resources/js/angular/period.js"></script>
 <script src="/${ context }/resources/js/angular/budget.js"></script>
 <script src="/${ context }/resources/js/angular/operation.js"></script>
+<script src="/${ context }/resources/js/angular/period-budget.js"></script>
 </head>
 <body>
 

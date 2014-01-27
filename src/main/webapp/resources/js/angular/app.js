@@ -5,7 +5,8 @@ var budgetApp = angular.module( 'budgetApp', [
   'periodServices',
   'budgetControllers',
   'budgetServices',
-  'operationServices'
+  'operationServices',
+  'periodBudgetServices'
 ]);
  
 budgetApp.config( function( $routeProvider ) {
