@@ -12,22 +12,26 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import fr.rbillard.budget.auth.SimpleUserDetails;
+import fr.rbillard.budget.dto.PeriodDTO;
 import fr.rbillard.budget.dto.TypeBudgets;
 import fr.rbillard.budget.entity.Budget;
+import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodBudgetService;
+import fr.rbillard.budget.service.IPeriodService;
 
 @PropertySource({ "classpath:/application.properties" })
 public abstract class AbstractController {
 	
-	// FIXME trouver solution pour mettre en conf
-	public static final String FORMAT_DATE = "dd/MM/yyyy";
 	public static final String APPLICATION_JSON = "application/json";
 	
 	@Autowired
 	private Environment environment;
+	
+	@Autowired
+	private IPeriodService periodService;
 	
 	@Autowired
 	private IBudgetService budgetService;
@@ -51,6 +55,11 @@ public abstract class AbstractController {
 		return getConnectedUser().getId();
 	}
 	
+	protected PeriodDTO getPeriodDTO( Long periodId ) {
+		Period period = periodService.getEntity( periodId );
+		return new PeriodDTO( period, getTypeBudgets( periodId ) );
+	}
+	
 	protected TypeBudgets getTypeBudgets( Long periodId ) {
 		
 		List<Budget> budgetsNotAssociated = budgetService.findNotAssociatedToPeriod( periodId, getConnectedUserId() );
@@ -62,5 +71,18 @@ public abstract class AbstractController {
 		);
 		
 	}
-
+	
+	
+	// getters
+	
+	protected IPeriodService getPeriodService() {
+		return periodService;
+	}
+	protected IBudgetService getBudgetService() {
+		return budgetService;
+	}
+	protected IPeriodBudgetService getPeriodBudgetService() {
+		return periodBudgetService;
+	}
+	
 }

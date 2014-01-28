@@ -1,12 +1,6 @@
 // SERVICES
 var budgetServices = angular.module( 'budgetServices', ['ngResource'] );
 
-budgetServices.factory( 'BudgetCreateSrv', function( $resource ) {
-	return $resource( '/budget/budget/create', {}, {
-		query: { method:'GET' }
-	});
-});
-
 budgetServices.factory( 'BudgetDetailSrv', function( $resource ) {
 	return $resource( '/budget/budget/:budgetId', {}, {
 		query: { method:'GET' }
@@ -34,9 +28,9 @@ budgetServices.factory( 'BudgetSelectSrv', function( $resource ) {
 // CONTROLLERS
 var budgetControllers = angular.module( 'budgetControllers', [] );
 
-budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http, BudgetCreateSrv ) {
+budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http ) {
 	
-	$scope.budget = BudgetCreateSrv.query();
+	$scope.budget = {};
 	
 	$scope.submit = "Enregistrer"; // TODO constants i18n
 	

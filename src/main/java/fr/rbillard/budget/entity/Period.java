@@ -1,5 +1,6 @@
 package fr.rbillard.budget.entity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -114,6 +115,40 @@ public class Period extends AbstractEntity<Long> {
 	}
 	public void addlBudget( PeriodBudget lBudget ) {
 		getlBudgets().add( lBudget );
+	}
+	
+	// TODO TU
+	@Transient
+	public BigDecimal getTotalAmount() {
+		
+		BigDecimal totalAmount = BigDecimal.ZERO;
+		
+		for ( PeriodBudget periodBudget : getlBudgets() ) {
+			totalAmount = totalAmount.add( periodBudget.getAmount() );
+		}
+		
+		return totalAmount;
+		
+	}
+	
+	// TODO TU
+	@Transient
+	public BigDecimal getTotalConsumedAmount() {
+		
+		BigDecimal totalConsumedAmount = BigDecimal.ZERO;
+		
+		for ( PeriodBudget periodBudget : getlBudgets() ) {
+			totalConsumedAmount = totalConsumedAmount.add( periodBudget.getConsumedAmount() );
+		}
+		
+		return totalConsumedAmount;
+		
+	}
+	
+	// TODO TU
+	@Transient
+	public BigDecimal getRemainingAmount() {
+		return getTotalAmount().subtract( getTotalConsumedAmount() );
 	}
 
 	// Validation

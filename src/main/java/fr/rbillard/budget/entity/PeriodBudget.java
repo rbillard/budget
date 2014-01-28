@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
@@ -36,12 +37,32 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	private List<Operation> operations;
 	
 	
+	public PeriodBudget() {
+		
+	}
 	public PeriodBudget( Period period, Budget budget, BigDecimal amount ) {
 		this.id = new PeriodBudgetId( period, budget );
 		this.amount = amount;
 	}
-	public PeriodBudget() {
+	
+	// TODO TU
+	@Transient
+	public BigDecimal getConsumedAmount() {
 		
+		BigDecimal consumedAmount = BigDecimal.ZERO;
+		
+		for ( Operation operation : getOperations() ) {
+			consumedAmount = consumedAmount.add( operation.getAmount() );
+		}
+		
+		return consumedAmount;
+		
+	}
+	
+	// TODO TU
+	@Transient
+	public BigDecimal getRemainingAmount() {
+		return getAmount() != null ? getAmount().subtract( getConsumedAmount() ) : BigDecimal.ZERO;
 	}
 	
 	

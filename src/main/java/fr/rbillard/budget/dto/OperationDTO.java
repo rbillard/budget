@@ -1,7 +1,9 @@
 package fr.rbillard.budget.dto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import fr.rbillard.budget.entity.Operation;
 
@@ -39,5 +41,16 @@ public class OperationDTO {
 		return amount;
 	}
 	
+	public static List<OperationDTO> listOperation2ListOperationDTO( List<Operation> operations ) {
+		
+		List<OperationDTO> operationsDTO = new ArrayList<OperationDTO>( operations.size() );
+		
+		for ( Operation operation : operations ) {
+			operationsDTO.add( new OperationDTO( operation ) );
+		}
+		
+		return operationsDTO;
+		
+	}
 
 }

@@ -1,8 +1,8 @@
 // SERVICES
 var periodServices = angular.module( 'periodServices', ['ngResource'] );
 
-periodServices.factory( 'PeriodCreateSrv', function( $resource ) {
-	return $resource( '/budget/period/create', {}, {
+periodServices.factory( 'PeriodLightSrv', function( $resource ) {
+	return $resource( '/budget/period/:periodId/light', {}, {
 		query: { method:'GET' }
 	});
 });
@@ -29,12 +29,15 @@ periodServices.factory( 'PeriodDeleteSrv', function( $resource ) {
 // CONTROLLERS
 var periodControllers = angular.module( 'periodControllers', [] );
 
-periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, PeriodCreateSrv ) {
+periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http ) {
 	
-	$scope.period = PeriodCreateSrv.query();
+	$scope.period = {};
 	
 	$scope.createOrUpdatePeriod = function() {
 		
+		console.log($scope.period);
+		
+		// TODO factoriser avec update
 		$http.post( '/budget/period', $scope.period, headers )
 	        .success( function ( data ) {
 	        	window.location = "/budget/#/period/" + data.id;
@@ -43,6 +46,26 @@ periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, Peri
 	            $scope.errors = data;
 	        });
     }
+	
+});
+
+periodControllers.controller( 'PeriodUpdateCtrl', function ( $scope, $http, $routeParams, PeriodLightSrv ) {
+	
+	$scope.period = PeriodLightSrv.query({ periodId: $routeParams.periodId }, function(data) {console.log(data);});
+	
+	$scope.createOrUpdatePeriod = function() {
+		
+		console.log($scope.period);
+		
+		// TODO factoriser avec create
+		$http.put( '/budget/period', $scope.period, headers )
+			.success( function ( data ) {
+				window.location = "/budget/#/period/" + data.id;
+			})
+			.error( function( data, status, headers, config ) {
+				$scope.errors = data;
+			});
+	}
 	
 });
 
@@ -60,32 +83,20 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 // TODO supprimer $location si inutile
 periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
 	
+	$scope.orderOperation = "date";
+
 	$scope.showBudgetsAssociated = false;
 	$scope.showBudgetsNotAssociated = false;
 	
-	$scope.period = PeriodDetailSrv.query(
+	PeriodDetailSrv.query(
 		{ periodId: $routeParams.periodId },
 		function( data ) {
 			// TODO factoriser avec addBudget
+			$scope.period = data;
 			$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
 			$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
 		}
 	);
-	$scope.orderOperation = "date";
-	
-	$scope.createOrUpdatePeriod = function() {
-		
-		$http.put( '/budget/period', $scope.period, headers )
-	        .success( function ( data ) {
-	        	console.log( data );
-//	        	$location.path( "/budget/#/period/" + data.id );
-	        	window.location = "/budget/#/period/" + data.id;
-	        })
-	        .error( function( data, status, headers, config ) {
-	            $scope.errors = data;
-	        });
-		
-	};
 	
 	// add budget
 	
@@ -98,10 +109,10 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 
 		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
 	        .success( function ( data ) {
-	        	$scope.period.typeBudgets = data;
-	        	// TODO factoriser avec get period
-	        	$scope.showBudgetsAssociated = data.budgetsAssociated.length > 0;
-				$scope.showBudgetsNotAssociated = data.budgetsNotAssociated.length > 0;
+				// TODO factoriser avec addBudget
+				$scope.period = data;
+				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errorsAddBudget = data;
@@ -116,11 +127,14 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	$scope.createOperation = function() {
 		
 		// FIXME directement l'id dans budgetId
-		$scope.messageCreateOperation.budgetId = $scope.messageCreateOperation.budgetId.id; 
+		$scope.messageCreateOperation.budgetId = $scope.messageCreateOperation.budgetId.id;
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
-	        	$scope.period.operations.push( data );
+	        	// TODO factoriser avec addBudget
+				$scope.period = data;
+				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errorsCreateOperation = data;
@@ -131,9 +145,11 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	$scope.deleteOperation = function( operation ) {
 		OperationDeleteSrv.query(
 			{ operationId: operation.id },
-			function() {
-				var index = $scope.period.operations.indexOf( operation )
-				$scope.period.operations.splice( index, 1 );
+			function( data ) {
+				// TODO factoriser avec addBudget
+				$scope.period = data;
+				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
 			}
 		);
 	};

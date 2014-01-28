@@ -1,6 +1,6 @@
 <form novalidate class="simple-form" ng-submit="createOrUpdatePeriod()" >
 	Libellé: <input type="text" ng-model="period.label" /><span>{{ errors.label }}</span><br />
-	Date de début (1390148264000): <input type="text" ng-model="period.startDate" /><span>{{ errors.startDate }}</span><span>{{ errors.startDateBeforeEndDate }}</span><br />
+	Date de début: <input type="text" ng-model="period.startDate" /><span>{{ errors.startDate }}</span><span>{{ errors.startDateBeforeEndDate }}</span><br />
 	Date de fin: <input type="text" ng-model="period.endDate" /><span>{{ errors.endDate }}</span><br />
-	<button>SAVE</button>
+	<input type="submit" />
 </form>

@@ -16,7 +16,7 @@ public class MessageCreateOperation implements Serializable {
 	private Long periodId;
 	private Long budgetId;
 	private BigDecimal amount;
-	private Date date;
+	private String date; // TODO date dateFormat
 	private String label;
 	
 	
@@ -57,10 +57,10 @@ public class MessageCreateOperation implements Serializable {
 	
 	
 	@NotNull
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate( Date date ) {
+	public void setDate( String date ) {
 		this.date = date;
 	}
 	

@@ -27,7 +27,10 @@
 	// TODO filtre + tri
 	<ul>
 		<li ng-repeat="budget in period.typeBudgets.budgetsAssociated">
-			{{ budget.label }} {{ budget.amount }} <a ng-click="dissociateBudget( budget )">Dissocier de la période</a>
+			{{ budget.label }} {{ budget.amount }} {{ budget.consumedAmount }} {{ budget.remainingAmount }} <a ng-click="dissociateBudget( budget )">Dissocier de la période</a>
+		</li>
+		<li>
+			TOTAL = {{ period.totalAmount }} {{ period.totalConsumedAmount }} {{ period.remainingAmount }}
 		</li>
 	</ul>
 </div>

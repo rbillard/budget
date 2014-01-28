@@ -2,6 +2,7 @@ package fr.rbillard.budget.service;
 
 import java.util.List;
 
+import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.springhibernate.domain.service.IGenericService;
 
@@ -12,5 +13,9 @@ public interface IBudgetService extends IGenericService<Budget, Long> {
 	void delete( Long id, Long userId );
 
 	List<Budget> findNotAssociatedToPeriod( Long periodId, Long userId );
+
+	Budget update( BudgetDTO dto, Long userId );
+
+	Budget create( BudgetDTO dto, Long userId );
 
 }

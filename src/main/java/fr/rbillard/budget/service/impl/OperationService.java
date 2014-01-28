@@ -1,9 +1,14 @@
 package fr.rbillard.budget.service.impl;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.dao.IOperationDAO;
 import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.PeriodBudget;
@@ -37,7 +42,9 @@ public class OperationService extends GenericService<Operation, Long, IOperation
 
 	@Override
 	@Transactional
-	public Operation create( MessageCreateOperation message ) {
+	public Operation create( MessageCreateOperation message ) throws ParseException {
+		
+		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
 		
 		// TODO assert valid message
 		
@@ -46,7 +53,7 @@ public class OperationService extends GenericService<Operation, Long, IOperation
 		Operation operation = new Operation();
 		operation.setPeriodBudget( periodBudget );
 		operation.setAmount( message.getAmount() );
-		operation.setDate( message.getDate() );
+		operation.setDate( df.parse( message.getDate() ) );
 		operation.setLabel( message.getLabel() );
 		
 		periodBudget.addOperation( operation );
