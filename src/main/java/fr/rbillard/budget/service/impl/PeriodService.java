@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.dao.IPeriodDAO;
-import fr.rbillard.budget.dto.PeriodDTO;
+import fr.rbillard.budget.dto.PeriodLightDTO;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
@@ -61,7 +61,7 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 
 	@Override
 	@Transactional
-	public Period update( PeriodDTO dto, Long connectedUserId ) throws ParseException {
+	public Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException {
 		
 		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
 		
@@ -79,7 +79,7 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 	
 	@Override
 	@Transactional
-	public Period create( PeriodDTO dto, Long userId ) throws ParseException {
+	public Period create( PeriodLightDTO dto, Long userId ) throws ParseException {
 		
 		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
 		

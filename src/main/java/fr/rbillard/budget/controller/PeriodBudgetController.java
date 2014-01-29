@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fr.rbillard.budget.dto.PeriodDTO;
+import fr.rbillard.budget.dto.PeriodFullDTO;
 import fr.rbillard.budget.message.MessageAssociatePeriodBudget;
 
 @Controller
@@ -22,13 +22,9 @@ public class PeriodBudgetController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
 	@Transactional
-	public @ResponseBody PeriodDTO associatePeriodBudget( @RequestBody MessageAssociatePeriodBudget message ) throws fr.rbillard.budget.exception.ConstraintViolationFunctionalException {
+	public @ResponseBody PeriodFullDTO associatePeriodBudget( @RequestBody MessageAssociatePeriodBudget message ) throws fr.rbillard.budget.exception.ConstraintViolationFunctionalException {
 		
 		message.setUserId( getConnectedUserId() );
-		
-		// TODO dans services
-//		ValidatorUtils.assertValid( validator, message );
-		
 		getPeriodBudgetService().associatePeriodBudget( message );
 		return getPeriodDTO( message.getPeriodId() );
 		
@@ -37,7 +33,7 @@ public class PeriodBudgetController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/{periodId}/{budgetId}", method = RequestMethod.DELETE )
 	@Transactional
-	public @ResponseBody PeriodDTO deletePeriodBudget( @PathVariable( value = "periodId" ) Long periodId, @PathVariable( value = "budgetId" ) Long budgetId ) {
+	public @ResponseBody PeriodFullDTO deletePeriodBudget( @PathVariable( value = "periodId" ) Long periodId, @PathVariable( value = "budgetId" ) Long budgetId ) {
 		getPeriodBudgetService().dissociate( periodId, budgetId, getConnectedUserId() );
 		return getPeriodDTO( periodId );
 	}

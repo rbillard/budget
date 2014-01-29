@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import fr.rbillard.budget.auth.SimpleUserDetails;
-import fr.rbillard.budget.dto.PeriodDTO;
+import fr.rbillard.budget.dto.PeriodFullDTO;
 import fr.rbillard.budget.dto.TypeBudgets;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
@@ -55,9 +55,9 @@ public abstract class AbstractController {
 		return getConnectedUser().getId();
 	}
 	
-	protected PeriodDTO getPeriodDTO( Long periodId ) {
+	protected PeriodFullDTO getPeriodDTO( Long periodId ) {
 		Period period = periodService.getEntity( periodId );
-		return new PeriodDTO( period, getTypeBudgets( periodId ) );
+		return new PeriodFullDTO( period, getTypeBudgets( periodId ) );
 	}
 	
 	protected TypeBudgets getTypeBudgets( Long periodId ) {

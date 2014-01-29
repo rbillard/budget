@@ -5,22 +5,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.PeriodBudget;
-import fr.rbillard.utils.DateUtils;
 
-public class PeriodDTO implements Serializable {
+public final class PeriodFullDTO extends PeriodLightDTO implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
 
 	
-	private Long id;
-	private String label;
-	private String startDate;
-	private String endDate;
 	private TypeBudgets typeBudgets;
 	private List<OperationDTO> operations;
 	private BigDecimal totalAmount;
@@ -28,15 +22,11 @@ public class PeriodDTO implements Serializable {
 	private BigDecimal remainingAmount;
 	
 	
-	public PeriodDTO() {
-		System.out.println();
-	}
-	public PeriodDTO( Period period, TypeBudgets typeBudgets ) {
+	public PeriodFullDTO() {
 		
-		this.id = period.getId();
-		this.label = period.getLabel();
-		this.startDate = DateUtils.dateToString( period.getStartDate(), AppConstants.FORMAT_DATE );
-		this.endDate = DateUtils.dateToString( period.getEndDate(), AppConstants.FORMAT_DATE );
+	}
+	public PeriodFullDTO( Period period, TypeBudgets typeBudgets ) {
+		super( period );
 		this.totalAmount = period.getTotalAmount();
 		this.totalConsumedAmount = period.getTotalConsumedAmount();
 		this.remainingAmount = period.getRemainingAmount();
@@ -51,42 +41,10 @@ public class PeriodDTO implements Serializable {
 		}
 		
 	}
-	public PeriodDTO( Period period ) {
+	public PeriodFullDTO( Period period ) {
 		this( period, null );
 	}
 
-
-	public Long getId() {
-		return id;
-	}
-	public void setId( Long id ) {
-		this.id = id;
-	}
-
-	
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel( String label ) {
-		this.label = label;
-	}
-
-
-	public String getStartDate() {
-		return startDate;
-	}
-	public void setStartDate( String startDate ) {
-		this.startDate = startDate;
-	}
-	
-
-	public String getEndDate() {
-		return endDate;
-	}
-	public void setEndDate( String endDate ) {
-		this.endDate = endDate;
-	}
-	
 
 	public TypeBudgets getTypeBudgets() {
 		return typeBudgets;
@@ -128,12 +86,12 @@ public class PeriodDTO implements Serializable {
 	}
 	
 	
-	public static List<PeriodDTO> listPeriods2ListPeriodsDTO( List<Period> periods ) {
+	public static List<PeriodFullDTO> listPeriods2ListPeriodsDTO( List<Period> periods ) {
 		
-		List<PeriodDTO> periodsDTO = new ArrayList<PeriodDTO>( periods.size() );
+		List<PeriodFullDTO> periodsDTO = new ArrayList<PeriodFullDTO>( periods.size() );
 		
 		for ( Period period : periods ) {
-			periodsDTO.add( new PeriodDTO( period ) );
+			periodsDTO.add( new PeriodFullDTO( period ) );
 		}
 		
 		return periodsDTO;

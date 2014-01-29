@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import fr.rbillard.budget.dto.PeriodDTO;
+import fr.rbillard.budget.dto.PeriodFullDTO;
 import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.message.MessageCreateOperation;
@@ -31,7 +31,7 @@ public class OperationController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
 	@Transactional
-	public @ResponseBody PeriodDTO createOperation( @RequestBody MessageCreateOperation message ) throws ParseException {
+	public @ResponseBody PeriodFullDTO createOperation( @RequestBody MessageCreateOperation message ) throws ParseException {
 		message.setUserId( getConnectedUserId() );
 		operationService.create( message );
 		return getPeriodDTO( message.getPeriodId() );
@@ -40,14 +40,14 @@ public class OperationController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
 	@Transactional
-	public @ResponseBody PeriodDTO deleteOperation( @PathVariable( value = "id" ) Long id ) {
+	public @ResponseBody PeriodFullDTO deleteOperation( @PathVariable( value = "id" ) Long id ) {
 		
 		Operation operation = operationService.getEntity( id );
 		Period period = operation.getPeriodBudget().getId().getPeriod();
 		
 		operationService.delete( id, getConnectedUserId() );
 		
-		return new PeriodDTO( period, getTypeBudgets( period.getId() ) );
+		return new PeriodFullDTO( period, getTypeBudgets( period.getId() ) );
 		
 	}
 	
