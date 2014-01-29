@@ -55,8 +55,6 @@ periodControllers.controller( 'PeriodUpdateCtrl', function ( $scope, $http, $rou
 	
 	$scope.createOrUpdatePeriod = function() {
 		
-		console.log($scope.period);
-		
 		// TODO factoriser avec create
 		$http.put( '/budget/period', $scope.period, headers )
 			.success( function ( data ) {
@@ -74,8 +72,14 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 	$scope.periods = PeriodListSrv.query();
 	$scope.orderProp = 'startDate';
 	
-	$scope.delete = function( period ) {
-		$scope.periods = PeriodDeleteSrv.query({ periodId: period.id });
+	$scope.deletePeriod = function( period ) {
+		
+		var confirmDeletePeriod = confirm("Voulez-vous supprimer la période ?");
+		
+		if ( confirmDeletePeriod ) {
+			$scope.periods = PeriodDeleteSrv.query({ periodId: period.id });
+		}
+		
 	};
 	
 });
@@ -84,6 +88,7 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
 	
 	$scope.orderOperation = "date";
+	$scope.orderBudget = "label";
 
 	$scope.showBudgetsAssociated = false;
 	$scope.showBudgetsNotAssociated = false;
@@ -102,13 +107,17 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	
 	$scope.messageAddBudget = { "periodId": $routeParams.periodId };
 	
-	$scope.addBudget = function() {
+	$scope.associateBudget = function() {
 		
 		// FIXME directement l'id dans budgetId
 		$scope.messageAddBudget.budgetId = $scope.messageAddBudget.budgetId.id; 
 
 		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
 	        .success( function ( data ) {
+	        	
+	        	// TODO solution angular pour vider un formulaire ?
+	        	$("#amountBudget").val("");
+	        	
 				// TODO factoriser avec addBudget
 				$scope.period = data;
 				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
@@ -131,6 +140,11 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
+	        	
+	        	// TODO
+//	        	console.log( $scope.formCreateOperation );
+//	        	$scope.formCreateOperation.$setPristine();
+	        	
 	        	// TODO factoriser avec addBudget
 				$scope.period = data;
 				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
@@ -143,35 +157,45 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	};
 	
 	$scope.deleteOperation = function( operation ) {
-		OperationDeleteSrv.query(
-			{ operationId: operation.id },
-			function( data ) {
-				// TODO factoriser avec addBudget
-				$scope.period = data;
-				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
-			}
-		);
+		
+		var confirmDeleteOperation = confirm( "Voulez-vous supprimer l'opération ?" );
+		
+		if ( confirmDeleteOperation ) {
+			OperationDeleteSrv.query(
+				{ operationId: operation.id },
+				function( data ) {
+					// TODO factoriser avec addBudget
+					$scope.period = data;
+					$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+					$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+				}
+			);
+		}
+		
 	};
 	
 	// dissociate budget
 	
 	$scope.dissociateBudget = function( budget ) {
 		
-		PeriodBudgetDeleteSrv.query(
-			{
-				periodId: $scope.period.id,
-				budgetId: budget.id
-			},
-			function( data ) {
-				console.log(data);
-				$scope.period = data;
-				// TODO factoriser avec get period
-				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
-				
-			}
-		);
+		var confirmDissociateBudget = confirm( "Voulez-vous dissocier la période du budget et supprimer les opérations ?");
+		
+		if ( confirmDissociateBudget ) {
+			PeriodBudgetDeleteSrv.query(
+				{
+					periodId: $scope.period.id,
+					budgetId: budget.id
+				},
+				function( data ) {
+					console.log(data);
+					$scope.period = data;
+					// TODO factoriser avec get period
+					$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+					$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+					
+				}
+			);
+		}
 	};
 	
 })

@@ -1,19 +1,2 @@
-<div ng-switch on="showBudgetsNotAssociated">
-	<form ng-submit="addBudget()" ng-switch-when="true">
-		<h1>Associer un budget</h1>
-		Budgets : <select ng-model="messageAddBudget.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated"></select><span>{{ errorsAddBudget.budgetId }}</span>
-		<input type="text" ng-model="messageAddBudget.amount" /><span>{{ errorsAddBudget.amount }}</span> // TODO vider montant après submit
-		<input type="submit" />
-	</form>
-</div>
-
-<div ng-switch on="showBudgetsAssociated">
-	<form ng-submit="createOperation()" ng-switch-when="true">
-		<h1>Créer une opération</h1>
-		Budgets : <select ng-model="messageCreateOperation.budgetId" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated"></select><span>{{ errorsCreateOperation.budgetId }}</span>
-		<br/>Date (1390148264000): <input type="text" ng-model="messageCreateOperation.date" /><span>{{ errorsCreateOperation.date }}</span><br/>
-		Label : <input type="text" ng-model="messageCreateOperation.label" /><span>{{ errorsCreateOperation.label }}</span><br/>
-		Montant : <input type="text" ng-model="messageCreateOperation.amount" /><span>{{ errorsCreateOperation.amount }}</span><br/>
-		<input type="submit" />
-	</form>
-</div>
+<ng-include src="'/budget/resources/partials/period/budget-associate.html'"></ng-include>
+<ng-include src="'/budget/resources/partials/period/operation-create.html'"></ng-include>

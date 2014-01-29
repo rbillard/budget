@@ -1,23 +1,46 @@
 <div ng-controller="BudgetListCtrl">
 
-	<p><input data-ng-model="query" /></p>
+	<div class="form-horizontal">
 	
-	<p>
-	Sort by:
-		<select data-ng-model="orderProp">
-		  <option value="label">Libellé croissant</option>
-		  <option value="-label">Libellé décroissant</option>
-		</select>
-	</p>
-	
-	<p>Total number of budgets : {{ budgets.length }} (TODO update filter query)</p>
-	
-	<ul>
-		<li data-ng-repeat="budget in budgets | filter:query | orderBy:orderProp">
-           	<a href="#/budget/{{ budget.id }}">{{ budget.label }}</a>
-			<a href="#/budget/update/{{ budget.id }}">Modifier</a>
-			<a ng-click="delete( budget )">Supprimer</a>
-		</li>
-	</ul>
+		<div class="form-group">
+		    <label class="col-sm-1 control-label" for="label">Filtre</label>
+		    <div class="col-sm-3">
+			    <input type="text" class="form-control" id="label" data-ng-model="query.label" placeholder="Libellé"/>
+		    </div>
+	  	</div>
+	  	
+		<div class="form-group">
+		    <label class="col-sm-1 control-label" for="sort">Tri</label>
+		    <div class="col-sm-3">
+				<select data-ng-model="orderProp" id="sort" class="form-control">
+				  <option value="label">Libellé croissant</option>
+				  <option value="-label">Libellé décroissant</option>
+				</select>
+			</div>
+	  	</div>
+	  	
+	</div>
 
+	<p class="lead">Nombre de budgets : {{ ( budgets|filter:query ).length }}/{{ budgets.length }}</p>
+	
+	<table class="table table-bordered table-condensed">
+	
+		<thead>
+			<tr>
+				<th>Libellé</th>	
+				<th></th>	
+				<th></th>	
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr data-ng-repeat="budget in budgets | filter:query | orderBy:orderProp">
+				<td><a href="#/budget/{{ budget.id }}">{{ budget.label }}</a></td>
+				<td><a href="#/budget/update/{{ budget.id }}">Modifier</a></td>
+				<td><a ng-click="deleteBudget( budget )">Supprimer</a></td>
+			</tr>
+		</tbody>
+	
+	</table>
+	
 </div>

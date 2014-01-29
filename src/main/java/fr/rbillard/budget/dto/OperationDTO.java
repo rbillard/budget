@@ -2,15 +2,16 @@ package fr.rbillard.budget.dto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.entity.Operation;
+import fr.rbillard.utils.DateUtils;
 
 public class OperationDTO {
 	
 	private final Long id;
-	private final Date date;
+	private final String date;
 	private final String label;
 	private final BigDecimal amount;
 
@@ -19,7 +20,7 @@ public class OperationDTO {
 		// TODO use mapper
 		
 		this.id = operation.getId();
-		this.date = operation.getDate();
+		this.date = DateUtils.dateToString( operation.getDate(), AppConstants.FORMAT_DATE );
 		this.label = operation.getLabel();
 		this.amount = operation.getAmount();
 		
@@ -29,7 +30,7 @@ public class OperationDTO {
 		return id;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 

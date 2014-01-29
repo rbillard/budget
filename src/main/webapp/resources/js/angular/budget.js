@@ -72,8 +72,13 @@ budgetControllers.controller( 'BudgetListCtrl', function ( $scope, BudgetListSrv
 	$scope.budgets = BudgetListSrv.query();
 	$scope.orderProp = 'label';
 	
-	$scope.delete = function( budget ) {
-		$scope.budgets = BudgetDeleteSrv.query({ budgetId: budget.id });
+	$scope.deleteBudget = function( budget ) {
+		
+		var confirmDeleteBudget = confirm("Voulez-vous supprimer le budget ?");
+		
+		if ( confirmDeleteBudget ) {
+			$scope.budgets = BudgetDeleteSrv.query({ budgetId: budget.id });
+		}
 	};
 	
 });
