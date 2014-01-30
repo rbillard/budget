@@ -25,9 +25,9 @@ public class PeriodController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/list", method = RequestMethod.GET )
 	@Transactional( readOnly = true )
-	public @ResponseBody List<PeriodFullDTO> getPeriods() {
+	public @ResponseBody List<PeriodLightDTO> getPeriods() {
 		List<Period> periods = getPeriodService().findByUser( getConnectedUserId() );
-		return PeriodFullDTO.listPeriods2ListPeriodsDTO( periods );
+		return PeriodLightDTO.listPeriods2ListPeriodsLightDTO( periods );
 	}
 	
 	@Produces( APPLICATION_JSON ) 
@@ -47,13 +47,13 @@ public class PeriodController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
 	@Transactional
-	public @ResponseBody List<PeriodFullDTO> deletePeriod( @PathVariable( value = "id" ) Long id ) {
+	public @ResponseBody List<PeriodLightDTO> deletePeriod( @PathVariable( value = "id" ) Long id ) {
 		
 		getPeriodService().delete( id, getConnectedUserId() );
 		
 		// TODO factoriser
 		List<Period> periods = getPeriodService().findByUser( getConnectedUserId() );
-		return PeriodFullDTO.listPeriods2ListPeriodsDTO( periods );
+		return PeriodLightDTO.listPeriods2ListPeriodsLightDTO( periods );
 	}
 	
 	// FULL REST
@@ -63,7 +63,7 @@ public class PeriodController extends AbstractController {
 	@RequestMapping( method = RequestMethod.POST )
 	public @ResponseBody PeriodFullDTO createPeriod( @RequestBody PeriodLightDTO dto ) throws ParseException {
 		Period period = getPeriodService().create( dto, getConnectedUserId() );
-		return new PeriodFullDTO( period );
+		return new PeriodFullDTO( period, getTypeBudgets( period.getId() ) );
 	}
 	
 	@Consumes( APPLICATION_JSON )

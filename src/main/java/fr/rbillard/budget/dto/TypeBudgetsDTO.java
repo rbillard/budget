@@ -3,7 +3,7 @@ package fr.rbillard.budget.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class TypeBudgets implements Serializable {
+public class TypeBudgetsDTO implements Serializable {
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -13,10 +13,10 @@ public class TypeBudgets implements Serializable {
 	private List<BudgetDTO> budgetsAssociated;
 	
 	
-	public TypeBudgets() {
-		System.out.println();
+	public TypeBudgetsDTO() {
+
 	}
-	public TypeBudgets( List<BudgetDTO> budgetsNotAssociated, List<BudgetDTO> budgetsAssociated ) {
+	public TypeBudgetsDTO( List<BudgetDTO> budgetsNotAssociated, List<BudgetDTO> budgetsAssociated ) {
 		this.budgetsNotAssociated = budgetsNotAssociated;
 		this.budgetsAssociated = budgetsAssociated;
 	}

@@ -1,6 +1,8 @@
 package fr.rbillard.budget.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.entity.Period;
@@ -58,6 +60,19 @@ public class PeriodLightDTO implements Serializable {
 	}
 	public void setEndDate( String endDate ) {
 		this.endDate = endDate;
+	}
+	
+	
+	public static List<PeriodLightDTO> listPeriods2ListPeriodsLightDTO( List<Period> periods ) {
+		
+		List<PeriodLightDTO> periodsDTO = new ArrayList<PeriodLightDTO>( periods.size() );
+		
+		for ( Period period : periods ) {
+			periodsDTO.add( new PeriodLightDTO( period ) );
+		}
+		
+		return periodsDTO;
+		
 	}
 	
 

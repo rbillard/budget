@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import fr.rbillard.budget.auth.SimpleUserDetails;
 import fr.rbillard.budget.dto.PeriodFullDTO;
-import fr.rbillard.budget.dto.TypeBudgets;
+import fr.rbillard.budget.dto.TypeBudgetsDTO;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.PeriodBudget;
@@ -60,12 +60,12 @@ public abstract class AbstractController {
 		return new PeriodFullDTO( period, getTypeBudgets( periodId ) );
 	}
 	
-	protected TypeBudgets getTypeBudgets( Long periodId ) {
+	protected TypeBudgetsDTO getTypeBudgets( Long periodId ) {
 		
 		List<Budget> budgetsNotAssociated = budgetService.findNotAssociatedToPeriod( periodId, getConnectedUserId() );
 		List<PeriodBudget> budgetsAssociated = periodBudgetService.findAssociatedToPeriod( periodId, getConnectedUserId() );
 		
-		return new TypeBudgets(
+		return new TypeBudgetsDTO(
 			listBudgets2ListBudgetsDTO( budgetsNotAssociated ),
 			listPeriodsBudgets2ListBudgetsDTO( budgetsAssociated )
 		);

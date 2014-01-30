@@ -96,10 +96,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	PeriodDetailSrv.query(
 		{ periodId: $routeParams.periodId },
 		function( data ) {
-			// TODO factoriser avec addBudget
-			$scope.period = data;
-			$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-			$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+			setScope( $scope, data );
 		}
 	);
 	
@@ -114,14 +111,9 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 
 		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
 	        .success( function ( data ) {
-	        	
 	        	// TODO solution angular pour vider un formulaire ?
 	        	$("#amountBudget").val("");
-	        	
-				// TODO factoriser avec addBudget
-				$scope.period = data;
-				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+				setScope( $scope, data );
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errorsAddBudget = data;
@@ -140,15 +132,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
-	        	
-	        	// TODO
-//	        	console.log( $scope.formCreateOperation );
-//	        	$scope.formCreateOperation.$setPristine();
-	        	
-	        	// TODO factoriser avec addBudget
-				$scope.period = data;
-				$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-				$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+	        	setScope( $scope, data );
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errorsCreateOperation = data;
@@ -164,10 +148,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 			OperationDeleteSrv.query(
 				{ operationId: operation.id },
 				function( data ) {
-					// TODO factoriser avec addBudget
-					$scope.period = data;
-					$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-					$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+					setScope( $scope, data );
 				}
 			);
 		}
@@ -187,12 +168,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 					budgetId: budget.id
 				},
 				function( data ) {
-					console.log(data);
-					$scope.period = data;
-					// TODO factoriser avec get period
-					$scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
-					$scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
-					
+					setScope( $scope, data );
 				}
 			);
 		}
@@ -208,3 +184,19 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
         }
     };
 });
+
+function setScope( scope, data ) {
+	
+	scope.period = data;
+	scope.showBudgetsAssociated = data.typeBudgets.budgetsAssociated.length > 0;
+	scope.showBudgetsNotAssociated = data.typeBudgets.budgetsNotAssociated.length > 0;
+	
+	var nbOperations = 0;
+	$.each( data.typeBudgets.budgetsAssociated, function() {
+		$.each( this.operations, function() {
+			nbOperations++;
+		});
+	});
+	scope.nbOperations = nbOperations;
+	
+}

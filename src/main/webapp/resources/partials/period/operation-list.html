@@ -23,9 +23,19 @@
 		</div>
   	</div>
   	
+  	<div class="form-group">
+		<label class="col-sm-1 control-label">Budgets</label>
+		<div class="col-sm-3">
+			<select class="form-control" ng-model="budgetFilter" ng-init="Tout" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated">
+				<option value="">Tout</option>
+			</select>
+		</div>
+	</div>
+  	
 </div>
 
-<p class="lead">Nombre d'opérations : {{ ( period.operations|filter:queryOperation ).length }}/{{ period.operations.length }}</p>
+<!-- <p class="lead">Nombre d'opérations : {{ nbOperations() }} {{ ( period.typeBudgets.budgetsAssociated.operations|filter:queryOperation ).length }}/{{ period.typeBudgets.budgetsAssociated.operations.length }}</p> -->
+<p class="lead">Nombre d'opérations : {{ nbOperations }}</p>
 
 <table class="table table-bordered table-condensed">
 	
@@ -38,8 +48,8 @@
 		</tr>
 	</thead>
 	
-	<tbody>
-		<tr data-ng-repeat="operation in period.operations | filter:queryOperation | orderBy:orderOperation">
+	<tbody ng-repeat="budget in period.typeBudgets.budgetsAssociated">
+		<tr data-ng-repeat=" operation in budget.operations | filter:queryOperation | filterByBudget:this | orderBy:orderOperation">
 			<td>{{ operation.date }}</td>
 			<td>{{ operation.label }}</td>
 			<td>{{ operation.amount }}</td>

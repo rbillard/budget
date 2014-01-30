@@ -3,7 +3,6 @@ Budget
 
 TODO
 ====
-corriger double opération après ajout opération
 vider formulaire opération après création 
 pom rbillard
 finaliser TU
@@ -14,7 +13,6 @@ couleur dépassement
 couleur budget
 correction tri angular date et numérique
 message flash create, update
-opération filtre budget
 mapper
 remember me (gérer déconnexion -> ajax)
 renvoi page demandée après connexion
@@ -26,3 +24,5 @@ encoding js
 data-ng-... au lieu de ng-...
 garder lien budget ? ou compléter page budget ?
 todo et fixme dans le code
+changer css jquery ui
+trouver solution pour tri opération -> problème tbody répété

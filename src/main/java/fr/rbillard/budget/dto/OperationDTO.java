@@ -14,6 +14,7 @@ public class OperationDTO {
 	private final String date;
 	private final String label;
 	private final BigDecimal amount;
+	private final Long budgetId;
 
 	public OperationDTO( Operation operation ) {
 		
@@ -23,6 +24,7 @@ public class OperationDTO {
 		this.date = DateUtils.dateToString( operation.getDate(), AppConstants.FORMAT_DATE );
 		this.label = operation.getLabel();
 		this.amount = operation.getAmount();
+		this.budgetId = operation.getPeriodBudget().getId().getBudget().getId();
 		
 	}
 
@@ -40,6 +42,10 @@ public class OperationDTO {
 
 	public BigDecimal getAmount() {
 		return amount;
+	}
+	
+	public Long getBudgetId() {
+		return budgetId;
 	}
 	
 	public static List<OperationDTO> listOperation2ListOperationDTO( List<Operation> operations ) {

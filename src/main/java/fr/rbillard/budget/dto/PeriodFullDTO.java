@@ -15,8 +15,7 @@ public final class PeriodFullDTO extends PeriodLightDTO implements Serializable 
 	private static final long serialVersionUID = 1L;
 
 	
-	private TypeBudgets typeBudgets;
-	private List<OperationDTO> operations;
+	private TypeBudgetsDTO typeBudgets;
 	private BigDecimal totalAmount;
 	private BigDecimal totalConsumedAmount;
 	private BigDecimal remainingAmount;
@@ -25,40 +24,20 @@ public final class PeriodFullDTO extends PeriodLightDTO implements Serializable 
 	public PeriodFullDTO() {
 		
 	}
-	public PeriodFullDTO( Period period, TypeBudgets typeBudgets ) {
+	public PeriodFullDTO( Period period, TypeBudgetsDTO typeBudgets ) {
 		super( period );
 		this.totalAmount = period.getTotalAmount();
 		this.totalConsumedAmount = period.getTotalConsumedAmount();
 		this.remainingAmount = period.getRemainingAmount();
-
 		this.typeBudgets = typeBudgets;
-		
-		this.operations = new ArrayList<OperationDTO>();
-		for ( PeriodBudget periodBudget : period.getlBudgets() ) {
-			for ( Operation operation : periodBudget.getOperations() ) {
-				operations.add( new OperationDTO( operation ) );
-			}
-		}
-		
-	}
-	public PeriodFullDTO( Period period ) {
-		this( period, null );
 	}
 
 
-	public TypeBudgets getTypeBudgets() {
+	public TypeBudgetsDTO getTypeBudgets() {
 		return typeBudgets;
 	}
-	public void setTypeBudgets( TypeBudgets typeBudgets ) {
+	public void setTypeBudgets( TypeBudgetsDTO typeBudgets ) {
 		this.typeBudgets = typeBudgets;
-	}
-	
-	
-	public List<OperationDTO> getOperations() {
-		return operations;
-	}
-	public void setOperations( List<OperationDTO> operations ) {
-		this.operations = operations;
 	}
 	
 	
@@ -85,17 +64,5 @@ public final class PeriodFullDTO extends PeriodLightDTO implements Serializable 
 		this.remainingAmount = remainingAmount;
 	}
 	
-	
-	public static List<PeriodFullDTO> listPeriods2ListPeriodsDTO( List<Period> periods ) {
-		
-		List<PeriodFullDTO> periodsDTO = new ArrayList<PeriodFullDTO>( periods.size() );
-		
-		for ( Period period : periods ) {
-			periodsDTO.add( new PeriodFullDTO( period ) );
-		}
-		
-		return periodsDTO;
-		
-	}
 	
 }
