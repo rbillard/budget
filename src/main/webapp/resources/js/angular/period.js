@@ -111,8 +111,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 
 		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
 	        .success( function ( data ) {
-	        	// TODO solution angular pour vider un formulaire ?
-	        	$("#amountBudget").val("");
+	        	$scope.messageAddBudget = { "periodId": $routeParams.periodId };
 				setScope( $scope, data );
 	        })
 	        .error( function( data, status, headers, config ) {
@@ -132,6 +131,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
+	        	$scope.messageCreateOperation = { "periodId": $routeParams.periodId };
 	        	setScope( $scope, data );
 	        })
 	        .error( function( data, status, headers, config ) {

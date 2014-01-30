@@ -3,10 +3,10 @@ Budget
 
 TODO
 ====
-vider formulaire opération après création 
 pom rbillard
 finaliser TU
-validation angular + java
+validation java
+validation angular (après java)
 datepicker
 page login
 couleur dépassement
