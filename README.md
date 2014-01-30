@@ -7,7 +7,6 @@ pom rbillard
 finaliser TU
 validation java
 validation angular (après java)
-datepicker
 page login
 couleur dépassement
 couleur budget
