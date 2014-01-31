@@ -12,4 +12,9 @@ public class HomeController extends AbstractController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
+	}
+	
 }

@@ -43,6 +43,7 @@
 			<li><a href="#/period/create"/>Ajouter période</a></li>
 			<li><a href="#/budget/list"/>Budgets</a></li>
 			<li><a href="#/budget/create"/>Ajouter budget</a></li>
+			<li><a href="/budget/login?logout">Déconnexion</a></li>
           </ul>
         </div>
 	</nav>

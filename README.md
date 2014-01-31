@@ -6,7 +6,6 @@ TODO
 pom rbillard
 finaliser TU / couverture code
 validation angular (après java)
-page login
 couleur dépassement
 couleur budget
 correction tri angular date et numérique
@@ -22,6 +21,7 @@ i18n
 encoding js
 data-ng-... au lieu de ng-...
 garder lien budget ? ou compléter page budget ?
+correction logout
 todo et fixme dans le code
 trouver solution pour tri opération -> problème tbody répété
 référencement/SEO : https://developers.google.com/webmasters/ajax-crawling/docs/getting-started
