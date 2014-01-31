@@ -17,6 +17,7 @@ import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 import fr.rbillard.budget.service.IUserService;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 import fr.rbillard.springhibernate.domain.service.impl.GenericService;
 
 @Service
@@ -46,9 +47,9 @@ public class PeriodBudgetService extends GenericService<PeriodBudget, PeriodBudg
 	
 	@Override
 	@Transactional
-	public PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message ) {
+	public PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException {
 
-		// TODO assert valid
+		assertValid( message );
 		
 		Period period = periodService.getEntity( message.getPeriodId() );
 		User user = userService.getEntity( message.getUserId() );

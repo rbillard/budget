@@ -17,6 +17,7 @@ import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 import fr.rbillard.budget.service.IUserService;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 import fr.rbillard.springhibernate.domain.service.impl.GenericService;
 
 @Service
@@ -61,7 +62,9 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 
 	@Override
 	@Transactional
-	public Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException {
+	public Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException, ConstraintViolationFunctionalException {
+		
+		assertValid( dto );
 		
 		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
 		
@@ -79,7 +82,9 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 	
 	@Override
 	@Transactional
-	public Period create( PeriodLightDTO dto, Long userId ) throws ParseException {
+	public Period create( PeriodLightDTO dto, Long userId ) throws ParseException, ConstraintViolationFunctionalException {
+		
+		assertValid( dto );
 		
 		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
 		

@@ -4,13 +4,13 @@ Budget
 TODO
 ====
 pom rbillard
-finaliser TU
-validation java
+finaliser TU / couverture code
 validation angular (après java)
 page login
 couleur dépassement
 couleur budget
 correction tri angular date et numérique
+format montants
 message flash create, update
 mapper
 remember me (gérer déconnexion -> ajax)

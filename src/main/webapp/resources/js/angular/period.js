@@ -100,22 +100,24 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		}
 	);
 	
-	// add budget
+	// associate budget
 	
-	$scope.messageAddBudget = { "periodId": $routeParams.periodId };
+	$scope.messageAssociateBudget = { "periodId": $routeParams.periodId };
 	
 	$scope.associateBudget = function() {
 		
-		// FIXME directement l'id dans budgetId
-		$scope.messageAddBudget.budgetId = $scope.messageAddBudget.budgetId.id; 
+		// TODO directement l'id dans budgetId
+		if ( $scope.selectedAssociateBudget != undefined ) {
+			$scope.messageAddBudget.budgetId = $scope.selectedAssociateBudget.id;
+		}
 
-		$http.post( '/budget/period-budget', $scope.messageAddBudget, headers )
+		$http.post( '/budget/period-budget', $scope.messageAssociateBudget, headers )
 	        .success( function ( data ) {
-	        	$scope.messageAddBudget = { "periodId": $routeParams.periodId };
+	        	$scope.messageAssociateBudget = { "periodId": $routeParams.periodId };
 				setScope( $scope, data );
 	        })
 	        .error( function( data, status, headers, config ) {
-	            $scope.errorsAddBudget = data;
+	            $scope.errorsAssociateBudget = data;
 	        });
 		
 	};
@@ -126,8 +128,10 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	
 	$scope.createOperation = function() {
 		
-		// FIXME directement l'id dans budgetId
-		$scope.messageCreateOperation.budgetId = $scope.messageCreateOperation.budgetId.id;
+		// TODO directement l'id dans budgetId
+		if ( $scope.selectedBugdetCreateOperation != undefined ) {
+			$scope.messageCreateOperation.budgetId = $scope.selectedBugdetCreateOperation.id;
+		}
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {

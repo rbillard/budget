@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.utils.DateUtils;
@@ -31,6 +36,7 @@ public class PeriodLightDTO implements Serializable {
 	}
 	
 	
+	@NotNull
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +45,7 @@ public class PeriodLightDTO implements Serializable {
 	}
 	
 	
+	@NotBlank
 	public String getLabel() {
 		return label;
 	}
@@ -47,6 +54,7 @@ public class PeriodLightDTO implements Serializable {
 	}
 	
 	
+	@NotBlank
 	public String getStartDate() {
 		return startDate;
 	}
@@ -55,11 +63,18 @@ public class PeriodLightDTO implements Serializable {
 	}
 	
 	
+	@NotBlank
 	public String getEndDate() {
 		return endDate;
 	}
 	public void setEndDate( String endDate ) {
 		this.endDate = endDate;
+	}
+	
+	@AssertTrue( message = "La date de début doit être antérieur à la date de fin." )
+	private boolean isStartDateBeforeEndDate() {
+		// TODO
+		return true;
 	}
 	
 	

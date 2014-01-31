@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.rbillard.budget.dto.PeriodLightDTO;
 import fr.rbillard.budget.entity.Period;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 import fr.rbillard.springhibernate.domain.service.IGenericService;
 
 public interface IPeriodService extends IGenericService<Period, Long> {
@@ -13,8 +14,8 @@ public interface IPeriodService extends IGenericService<Period, Long> {
 
 	void delete( Long id, Long userId );
 
-	Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException;
+	Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException, ConstraintViolationFunctionalException;
 	
-	Period create( PeriodLightDTO dto, Long userId ) throws ParseException;
+	Period create( PeriodLightDTO dto, Long userId ) throws ParseException, ConstraintViolationFunctionalException;
 
 }

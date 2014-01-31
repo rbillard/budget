@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fr.rbillard.budget.dto.PeriodFullDTO;
 import fr.rbillard.budget.dto.PeriodLightDTO;
 import fr.rbillard.budget.entity.Period;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 
 @Controller
 @RequestMapping( value = "/period" )
@@ -61,7 +62,7 @@ public class PeriodController extends AbstractController {
 	@Consumes( APPLICATION_JSON )
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
-	public @ResponseBody PeriodFullDTO createPeriod( @RequestBody PeriodLightDTO dto ) throws ParseException {
+	public @ResponseBody PeriodFullDTO createPeriod( @RequestBody PeriodLightDTO dto ) throws ParseException, ConstraintViolationFunctionalException {
 		Period period = getPeriodService().create( dto, getConnectedUserId() );
 		return new PeriodFullDTO( period, getTypeBudgets( period.getId() ) );
 	}
@@ -70,7 +71,7 @@ public class PeriodController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.PUT )
 	@Transactional
-	public @ResponseBody PeriodFullDTO updatePeriod( @RequestBody PeriodLightDTO dto ) throws ParseException {
+	public @ResponseBody PeriodFullDTO updatePeriod( @RequestBody PeriodLightDTO dto ) throws ParseException, ConstraintViolationFunctionalException {
 		getPeriodService().update( dto, getConnectedUserId() );
 		return getPeriodDTO( dto.getId() );
 	}

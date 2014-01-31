@@ -19,6 +19,7 @@ import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.message.MessageCreateOperation;
 import fr.rbillard.budget.service.IOperationService;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 
 @Controller
 @RequestMapping( value = "/operation" )
@@ -31,7 +32,7 @@ public class OperationController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
 	@Transactional
-	public @ResponseBody PeriodFullDTO createOperation( @RequestBody MessageCreateOperation message ) throws ParseException {
+	public @ResponseBody PeriodFullDTO createOperation( @RequestBody MessageCreateOperation message ) throws ParseException, ConstraintViolationFunctionalException {
 		message.setUserId( getConnectedUserId() );
 		operationService.create( message );
 		return getPeriodDTO( message.getPeriodId() );

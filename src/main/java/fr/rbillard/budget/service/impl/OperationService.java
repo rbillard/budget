@@ -16,6 +16,7 @@ import fr.rbillard.budget.message.MessageCreateOperation;
 import fr.rbillard.budget.service.IOperationService;
 import fr.rbillard.budget.service.IPeriodBudgetService;
 import fr.rbillard.budget.service.IUserService;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 import fr.rbillard.springhibernate.domain.service.impl.GenericService;
 
 @Service
@@ -42,11 +43,11 @@ public class OperationService extends GenericService<Operation, Long, IOperation
 
 	@Override
 	@Transactional
-	public Operation create( MessageCreateOperation message ) throws ParseException {
+	public Operation create( MessageCreateOperation message ) throws ParseException, ConstraintViolationFunctionalException {
+		
+		assertValid( message );
 		
 		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
-		
-		// TODO assert valid message
 		
 		PeriodBudget periodBudget = periodBudgetService.getEntity( message.getUserId(), message.getPeriodId(), message.getBudgetId() );
 		

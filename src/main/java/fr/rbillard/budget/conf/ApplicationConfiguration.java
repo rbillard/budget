@@ -17,9 +17,4 @@ import fr.rbillard.springhibernate.controller.config.DefaultAppConfiguration;
 @EnableTransactionManagement
 public class ApplicationConfiguration extends DefaultAppConfiguration {
 	
-	@Bean
-	public LocalValidatorFactoryBean localValidatorFactoryBean() {
-		return new LocalValidatorFactoryBean();
-	}
-	
 }
