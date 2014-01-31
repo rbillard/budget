@@ -1,7 +1,46 @@
 /* app css stylesheet */
+
+body {
+	background-color: #000;	
+}
+
+#content {
+	background-color: #fff;	
+	min-height: 300px;
+}
+
+h2 {
+	border-top: 1px solid #f9f9f9;
+	border-bottom: 1px solid #f0f0f0;
+	margin-top: 40px;
+    padding: 10px;
+    background-image: linear-gradient(to bottom, #428BCA 0px, #b8e8fd 100%);
+}
+
+.tab-pane {
+	padding-top: 30px;
+}
+
 footer {
+	position: relative;
+	margin-top: 113px;
+}
+
+footer > div:first-child {
+	position: absolute;
+	bottom:0;
+	height: 50px;
+	width: 100%;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+
+footer > div:first-child + div {
 	background-image: url('../img/favicon.png');
+	position: absolute;
+	bottom: 0;
+	height: 120px;
+	width: 128px;
+	background-position: -25px 10px;
 	background-repeat: no-repeat;
-	background-position: -30px 15px;
-	height: 128px;
 }

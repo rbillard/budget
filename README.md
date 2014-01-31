@@ -23,6 +23,5 @@ encoding js
 data-ng-... au lieu de ng-...
 garder lien budget ? ou compléter page budget ?
 todo et fixme dans le code
-changer css jquery ui
 trouver solution pour tri opération -> problème tbody répété
 référencement/SEO : https://developers.google.com/webmasters/ajax-crawling/docs/getting-started

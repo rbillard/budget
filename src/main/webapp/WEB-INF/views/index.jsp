@@ -47,10 +47,12 @@
         </div>
 	</nav>
 
-  	<div ng-view></div>
+  	<div id="content" ng-view></div>
  
  	<footer>
- 		&nbsp;
+ 		<div class="navbar-inverse"></div>
+ 		<div></div>
  	</footer>
+ 	
 </body>
 </html>

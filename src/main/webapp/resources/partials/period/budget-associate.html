@@ -1,7 +1,5 @@
 <div ng-switch on="showBudgetsNotAssociated">
 
-	<h2>Associer un budget</h2>
-	
 	<form novalidate class="form-horizontal" ng-submit="associateBudget()" ng-switch-when="true">
 	
 		<div class="form-group">
@@ -27,5 +25,7 @@
 		</div>
 		
 	</form>
+	
+	<p ng-switch-when="false">Tous les budgets ont été associés.</p>
 	
 </div>

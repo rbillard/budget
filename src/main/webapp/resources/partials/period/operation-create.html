@@ -1,7 +1,5 @@
 <div ng-switch on="showBudgetsAssociated">
 
-	<h2>Créer une opération</h2>
-
 	<form name="formCreateOperation" novalidate class="form-horizontal" ng-submit="createOperation()" ng-switch-when="true">
 	
 		<div class="form-group">
@@ -42,5 +40,9 @@
 			</div>
 		</div>
 	</form>
+	
+	<p ng-switch-when="false">
+		Veuillez associer des budgets avant de créer des opérations.
+	</p>
 
 </div>
