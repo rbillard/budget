@@ -15,7 +15,7 @@
 		<div class="form-group">
 			<label for="dateOperation" class="col-sm-1 control-label">Date</label>
 			<div class="col-sm-3">
-				<input type="text" ng-model="messageCreateOperation.date" class="form-control" datepicker id="dateOperation" placeholder="Date">
+				<input type="text" ng-model="messageCreateOperation.date" class="form-control" datepicker-popup="{{ dateFormat }}" id="dateOperation" placeholder="Date">
 				<span>{{ errorsCreateOperation.date }}</span>
 			</div>
 		</div>

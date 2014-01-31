@@ -14,15 +14,14 @@
 	<link rel="stylesheet" href="/${ context }/resources/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" href="/${ context }/resources/css/bootstrap/bootstrap-theme.min.css">
 	
-	<link rel="stylesheet" href="/${ context }/resources/css/jquery/jquery-ui.min.css">
-	
 	<script src="/${ context }/resources/js/jquery/jquery-1.10.2.min.js"></script>
-	<script src="/${ context }/resources/js/jquery/jquery-ui.min.js"></script>
 	
 	<script src="/${ context }/resources/js/angular/constants.js"></script>
 	<script src="/${ context }/resources/js/angular/angular.min.js"></script>
 	<script src="/${ context }/resources/js/angular/angular-route.js"></script>
 	<script src="/${ context }/resources/js/angular/angular-resource.js"></script>
+	<script src="/${ context }/resources/js/angular/local/angular-locale_fr-fr.js"></script>
+	<script src="/${ context }/resources/js/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script>
 	<script src="/${ context }/resources/js/angular/app.js"></script>
 	<script src="/${ context }/resources/js/angular/common.js"></script>
 	<script src="/${ context }/resources/js/angular/period.js"></script>
@@ -34,7 +33,7 @@
 
 <body>
 
-	<div class="navbar navbar-inverse navbar-static-top">
+	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="navbar-header">
           <a class="navbar-brand" href="#/period/list"">Budget</a>
         </div>
@@ -46,9 +45,12 @@
 			<li><a href="#/budget/create"/>Ajouter budget</a></li>
           </ul>
         </div>
-	</div>
+	</nav>
 
   	<div ng-view></div>
  
+ 	<footer>
+ 		&nbsp;
+ 	</footer>
 </body>
 </html>

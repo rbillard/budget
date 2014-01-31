@@ -11,7 +11,7 @@
 	<div class="form-group">
 		<label for="startDate" class="col-sm-1 control-label">Date de début</label>
 		<div class="col-sm-3">
-			<input type="text" ng-model="period.startDate" class="form-control" datepicker id="startDate" placeholder="Date de début">
+			<input type="text" ng-model="period.startDate" class="form-control" datepicker-popup="{{ dateFormat }}" id="startDate" placeholder="Date de début">
 			<span>{{ errors.startDate }}</span>
 			<span>{{ errors.startDateBeforeEndDate }}</span>
 		</div>
@@ -20,7 +20,7 @@
 	<div class="form-group">
 		<label for="endDate" class="col-sm-1 control-label">Date de fin</label>
 		<div class="col-sm-3">
-			<input type="text" ng-model="period.endDate" class="form-control" datepicker id="endDate" placeholder="Date de fin">
+			<input type="text" ng-model="period.endDate" class="form-control" datepicker-popup="{{ dateFormat }}" id="endDate" placeholder="Date de fin">
 			<span>{{ errors.endDate }}</span>
 		</div>
 	</div>

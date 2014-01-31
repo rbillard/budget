@@ -174,15 +174,6 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		}
 	};
 	
-})
-.directive( 'hboTabs', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, elm, attrs) {
-            var jqueryElm = $(elm[0]);
-            $(jqueryElm).tabs()
-        }
-    };
 });
 
 function setScope( scope, data ) {

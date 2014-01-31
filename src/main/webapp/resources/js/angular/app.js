@@ -7,10 +7,11 @@ var budgetApp = angular.module( 'budgetApp', [
 	'budgetServices',
 	'operationServices',
 	'periodBudgetServices',
-	'operationFilters'
+	'operationFilters',
+	'ui.bootstrap'
 ]);
 
-budgetApp.config( function( $routeProvider ) {
+budgetApp.config( function( $routeProvider, datepickerConfig, datepickerPopupConfig ) {
 	
 	$routeProvider.
 
@@ -54,24 +55,16 @@ budgetApp.config( function( $routeProvider ) {
 		otherwise({
 			redirectTo: '/period/list'
 		});
+	
+	  
+	// DATEPICKER
+	datepickerConfig.showWeeks = false;
+	datepickerPopupConfig.showButtonBar = false;
 
-});
-
-// directive
-budgetApp.directive('datepicker', function() {
-    return {
-        restrict: 'A',
-        require : 'ngModel',
-        link : function (scope, element, attrs, ngModelCtrl) {
-            $(function(){
-                element.datepicker({
-                    dateFormat:'dd/mm/yy',
-                    onSelect:function (date) {
-                        ngModelCtrl.$setViewValue(date);
-                        scope.$apply();
-                    }
-                });
-            });
-        }
-    }
+})
+.run( function( $rootScope ) {
+	
+	// GLOBAL
+	$rootScope.dateFormat = dateFormat;
+	
 });

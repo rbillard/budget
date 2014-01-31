@@ -1,14 +1,13 @@
 <h1>{{ period.label }} <small>Du {{ period.startDate }} au {{ period.endDate }}</small></h1>
 
-<div data-hbo-tabs id="tabs">
-    <ul>
-        <li><a href="#tabs-1">LECTURE</a></li>
-        <li><a href="#tabs-2">GESTION</a></li>
-    </ul>
-    <div id="tabs-1">
-        <ng-include src="'/budget/resources/partials/period/period-read.html'"></ng-include>
-    </div>
-    <div id="tabs-2">
+<tabset>
+    
+	<tab heading="Lecture">
+		<ng-include src="'/budget/resources/partials/period/period-read.html'"></ng-include>
+	</tab>
+    
+    <tab heading="Gestion">
         <ng-include src="'/budget/resources/partials/period/period-write.html'"></ng-include>
-    </div>
-</div>
+    </tab>
+
+</tabset>
