@@ -44,7 +44,6 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		this.amount = amount;
 	}
 	
-	// TODO TU
 	@Transient
 	public BigDecimal getConsumedAmount() {
 		
@@ -58,7 +57,6 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 		
 	}
 	
-	// TODO TU
 	@Transient
 	public BigDecimal getRemainingAmount() {
 		return getAmount() != null ? getAmount().subtract( getConsumedAmount() ) : BigDecimal.ZERO;

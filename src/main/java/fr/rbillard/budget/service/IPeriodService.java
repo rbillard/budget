@@ -12,10 +12,10 @@ public interface IPeriodService extends IGenericService<Period, Long> {
 
 	List<Period> findByUser( Long userId );
 
-	void delete( Long id, Long userId );
+	void delete( Long id, Long ownerId );
 
-	Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException, ConstraintViolationFunctionalException;
+	Period update( PeriodLightDTO dto, Long ownerId ) throws ParseException, ConstraintViolationFunctionalException;
 	
-	Period create( PeriodLightDTO dto, Long userId ) throws ParseException, ConstraintViolationFunctionalException;
+	Period create( PeriodLightDTO dto, Long ownerId ) throws ParseException, ConstraintViolationFunctionalException;
 
 }

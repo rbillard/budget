@@ -12,5 +12,7 @@ public interface IOperationService extends IGenericService<Operation, Long> {
 	Operation create( MessageCreateOperation message ) throws ParseException, ConstraintViolationFunctionalException;
 
 	void delete( Long id, Long userId );
+	
+	Operation getOperation( Long id, Long userId );
 
 }

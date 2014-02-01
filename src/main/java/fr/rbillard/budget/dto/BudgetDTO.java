@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.PeriodBudget;
 
@@ -41,40 +43,46 @@ public class BudgetDTO implements Serializable {
 	public Long getId() {
 		return id;
 	}
-	public void setId( Long id ) {
+	public BudgetDTO setId( Long id ) {
 		this.id = id;
+		return this;
 	}
 	
 	
+	@NotBlank
 	public String getLabel() {
 		return label;
 	}
-	public void setLabel( String label ) {
+	public BudgetDTO setLabel( String label ) {
 		this.label = label;
+		return this;
 	}
 	
 	
 	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount( BigDecimal amount ) {
+	public BudgetDTO setAmount( BigDecimal amount ) {
 		this.amount = amount;
+		return this;
 	}
 	
 	
 	public BigDecimal getConsumedAmount() {
 		return consumedAmount;
 	}
-	public void setConsumedAmount( BigDecimal consumedAmount ) {
+	public BudgetDTO setConsumedAmount( BigDecimal consumedAmount ) {
 		this.consumedAmount = consumedAmount;
+		return this;
 	}
 	
 	
 	public BigDecimal getRemainingAmount() {
 		return remainingAmount;
 	}
-	public void setRemainingAmount( BigDecimal remainingAmount ) {
+	public BudgetDTO setRemainingAmount( BigDecimal remainingAmount ) {
 		this.remainingAmount = remainingAmount;
+		return this;
 	}
 	
 	
@@ -84,8 +92,9 @@ public class BudgetDTO implements Serializable {
 		}
 		return operations;
 	}
-	public void setOperations( List<OperationDTO> operations ) {
+	public BudgetDTO setOperations( List<OperationDTO> operations ) {
 		this.operations = operations;
+		return this;
 	}
 	
 

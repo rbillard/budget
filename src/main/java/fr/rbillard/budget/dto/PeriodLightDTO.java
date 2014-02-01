@@ -36,12 +36,12 @@ public class PeriodLightDTO implements Serializable {
 	}
 	
 	
-	@NotNull
 	public Long getId() {
 		return id;
 	}
-	public void setId( Long id ) {
+	public PeriodLightDTO setId( Long id ) {
 		this.id = id;
+		return this;
 	}
 	
 	
@@ -49,8 +49,9 @@ public class PeriodLightDTO implements Serializable {
 	public String getLabel() {
 		return label;
 	}
-	public void setLabel( String label ) {
+	public PeriodLightDTO setLabel( String label ) {
 		this.label = label;
+		return this;
 	}
 	
 	
@@ -58,8 +59,9 @@ public class PeriodLightDTO implements Serializable {
 	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate( String startDate ) {
+	public PeriodLightDTO setStartDate( String startDate ) {
 		this.startDate = startDate;
+		return this;
 	}
 	
 	
@@ -67,8 +69,9 @@ public class PeriodLightDTO implements Serializable {
 	public String getEndDate() {
 		return endDate;
 	}
-	public void setEndDate( String endDate ) {
+	public PeriodLightDTO setEndDate( String endDate ) {
 		this.endDate = endDate;
+		return this;
 	}
 	
 	@AssertTrue( message = "La date de début doit être antérieur à la date de fin." )

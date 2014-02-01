@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.entity.Budget;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 
 @Controller
 @RequestMapping( value = "/budget" )
@@ -49,7 +50,7 @@ public class BudgetController extends AbstractController {
 	@Consumes( APPLICATION_JSON )
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
-	public @ResponseBody BudgetDTO createBudget( @RequestBody BudgetDTO dto ) {
+	public @ResponseBody BudgetDTO createBudget( @RequestBody BudgetDTO dto ) throws ConstraintViolationFunctionalException {
 		Budget budget = getBudgetService().create( dto, getConnectedUserId() );
 		return new BudgetDTO( budget );
 	}
@@ -57,7 +58,7 @@ public class BudgetController extends AbstractController {
 	@Consumes( APPLICATION_JSON )
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.PUT )
-	public @ResponseBody BudgetDTO updateBudget( @RequestBody BudgetDTO budget ) {
+	public @ResponseBody BudgetDTO updateBudget( @RequestBody BudgetDTO budget ) throws ConstraintViolationFunctionalException {
 		getBudgetService().update( budget, getConnectedUserId() );
 		return budget;
 	}

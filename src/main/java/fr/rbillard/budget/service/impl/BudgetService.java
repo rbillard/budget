@@ -12,6 +12,7 @@ import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IUserService;
+import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 import fr.rbillard.springhibernate.domain.service.impl.GenericService;
 
 @Service
@@ -60,7 +61,9 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 
 	@Override
 	@Transactional
-	public Budget update( BudgetDTO dto, Long userId ) {
+	public Budget update( BudgetDTO dto, Long userId ) throws ConstraintViolationFunctionalException {
+		
+		assertValid( dto );
 		
 		// TODO dao.getBudget( id, userId )
 		Budget budget = getEntity( dto.getId() );
@@ -74,7 +77,9 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 
 	@Override
 	@Transactional
-	public Budget create( BudgetDTO dto, Long userId ) {
+	public Budget create( BudgetDTO dto, Long userId ) throws ConstraintViolationFunctionalException {
+		
+		assertValid( dto );
 		
 		User user = userService.getEntity( userId );
 		Budget budget = new Budget();

@@ -25,8 +25,6 @@ public class Operation extends AbstractEntity<Long> {
 
 	public static final String PROP_ID = "id";
 	public static final String PROP_PERIOD_BUDGET = "periodBudget";
-
-
 	
 	
 	private Long id;

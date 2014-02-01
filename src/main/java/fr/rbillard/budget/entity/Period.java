@@ -42,18 +42,6 @@ public class Period extends AbstractEntity<Long> {
 	private List<PeriodBudget> lBudgets;
 	
 
-	public Period() {
-	
-	}
-	public Period( Long id, String label, Date startDate, Date endDate, User user, List<PeriodBudget> lBudgets ) {
-		this.id = id;
-		this.label = label;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.user = user;
-		this.lBudgets = lBudgets;
-	}
-
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	public Long getId() {
@@ -117,7 +105,6 @@ public class Period extends AbstractEntity<Long> {
 		getlBudgets().add( lBudget );
 	}
 	
-	// TODO TU
 	@Transient
 	public BigDecimal getTotalAmount() {
 		
@@ -131,7 +118,6 @@ public class Period extends AbstractEntity<Long> {
 		
 	}
 	
-	// TODO TU
 	@Transient
 	public BigDecimal getTotalConsumedAmount() {
 		
@@ -145,7 +131,6 @@ public class Period extends AbstractEntity<Long> {
 		
 	}
 	
-	// TODO TU
 	@Transient
 	public BigDecimal getRemainingAmount() {
 		return getTotalAmount().subtract( getTotalConsumedAmount() );

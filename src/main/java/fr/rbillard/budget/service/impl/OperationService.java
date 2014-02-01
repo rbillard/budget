@@ -69,12 +69,18 @@ public class OperationService extends GenericService<Operation, Long, IOperation
 	@Transactional
 	public void delete( Long id, Long userId ) {
 		
-		Operation operation = dao.getOperation( id, userId );
+		Operation operation = getOperation( id, userId );
 		
 		operation.getPeriodBudget().removeOperation( operation );
 		
 		dao.delete( operation );
 		
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public Operation getOperation( Long id, Long userId ) {
+		return dao.getOperation( id, userId );
 	}
 
 }

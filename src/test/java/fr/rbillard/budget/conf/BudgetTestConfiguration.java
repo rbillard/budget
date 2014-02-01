@@ -33,12 +33,7 @@ public class BudgetTestConfiguration extends DefaultDataSourceConfiguration {
 		return new DataSourceConfigProvider() {
 
 			public DataSource dataSource() {
-				
-				return new EmbeddedDatabaseBuilder()
-		            .setType( EmbeddedDatabaseType.HSQL )
-//		            .addScript( "classpath:/import.sql" )
-		            .build();
-				
+				return getDataSource();
 			}
 
 			public Properties buildHibernateProperties() {
@@ -58,5 +53,15 @@ public class BudgetTestConfiguration extends DefaultDataSourceConfiguration {
 	public LocalValidatorFactoryBean localValidatorFactoryBean() {
 		return new LocalValidatorFactoryBean();
 	}
-
+	
+	@Bean
+	public DataSource getDataSource() {
+		
+		return new EmbeddedDatabaseBuilder()
+            .setType( EmbeddedDatabaseType.HSQL )
+//          .addScript( "classpath:/import.sql" )
+            .build();
+		
+	}
+	
 }

@@ -49,10 +49,10 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 
 	@Override
 	@Transactional
-	public void delete( Long id, Long userId ) {
+	public void delete( Long id, Long ownerId ) {
 		
 		// TODO dao.getPeriod( id, userId ); instead of :
-		User user = userService.getEntity( userId );
+		User user = userService.getEntity( ownerId );
 		Period period = getEntity( id );
 		user.removePeriod( period );
 		
@@ -62,7 +62,7 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 
 	@Override
 	@Transactional
-	public Period update( PeriodLightDTO dto, Long connectedUserId ) throws ParseException, ConstraintViolationFunctionalException {
+	public Period update( PeriodLightDTO dto, Long ownerId ) throws ParseException, ConstraintViolationFunctionalException {
 		
 		assertValid( dto );
 		
@@ -82,13 +82,13 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 	
 	@Override
 	@Transactional
-	public Period create( PeriodLightDTO dto, Long userId ) throws ParseException, ConstraintViolationFunctionalException {
+	public Period create( PeriodLightDTO dto, Long ownerId ) throws ParseException, ConstraintViolationFunctionalException {
 		
 		assertValid( dto );
 		
 		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
 		
-		User user = userService.getEntity( userId );
+		User user = userService.getEntity( ownerId );
 		Period period = new Period();
 		period.setLabel( dto.getLabel() );
 		period.setStartDate( df.parse( dto.getStartDate() ) );

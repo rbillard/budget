@@ -21,8 +21,9 @@ public class MessageAssociatePeriodBudget implements Serializable {
 	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId( Long userId ) {
+	public MessageAssociatePeriodBudget setUserId( Long userId ) {
 		this.userId = userId;
+		return this;
 	}
 
 
@@ -30,8 +31,9 @@ public class MessageAssociatePeriodBudget implements Serializable {
 	public Long getPeriodId() {
 		return periodId;
 	}
-	public void setPeriodId( Long periodId ) {
+	public MessageAssociatePeriodBudget setPeriodId( Long periodId ) {
 		this.periodId = periodId;
+		return this;
 	}
 
 
@@ -39,8 +41,9 @@ public class MessageAssociatePeriodBudget implements Serializable {
 	public Long getBudgetId() {
 		return budgetId;
 	}
-	public void setBudgetId( Long budgetId ) {
+	public MessageAssociatePeriodBudget setBudgetId( Long budgetId ) {
 		this.budgetId = budgetId;
+		return this;
 	}
 
 
@@ -48,8 +51,9 @@ public class MessageAssociatePeriodBudget implements Serializable {
 	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount( BigDecimal amount ) {
+	public MessageAssociatePeriodBudget setAmount( BigDecimal amount ) {
 		this.amount = amount;
+		return this;
 	}
 	
 }

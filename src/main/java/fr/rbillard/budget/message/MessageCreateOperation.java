@@ -2,7 +2,6 @@ package fr.rbillard.budget.message;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
@@ -24,8 +23,9 @@ public class MessageCreateOperation implements Serializable {
 	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId( Long userId ) {
+	public MessageCreateOperation setUserId( Long userId ) {
 		this.userId = userId;
+		return this;
 	}
 	
 	
@@ -33,8 +33,9 @@ public class MessageCreateOperation implements Serializable {
 	public Long getPeriodId() {
 		return periodId;
 	}
-	public void setPeriodId( Long periodId ) {
+	public MessageCreateOperation setPeriodId( Long periodId ) {
 		this.periodId = periodId;
+		return this;
 	}
 	
 	
@@ -42,8 +43,9 @@ public class MessageCreateOperation implements Serializable {
 	public Long getBudgetId() {
 		return budgetId;
 	}
-	public void setBudgetId( Long budgetId ) {
+	public MessageCreateOperation setBudgetId( Long budgetId ) {
 		this.budgetId = budgetId;
+		return this;
 	}
 	
 	
@@ -51,8 +53,9 @@ public class MessageCreateOperation implements Serializable {
 	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount( BigDecimal amount ) {
+	public MessageCreateOperation setAmount( BigDecimal amount ) {
 		this.amount = amount;
+		return this;
 	}
 	
 	
@@ -60,8 +63,9 @@ public class MessageCreateOperation implements Serializable {
 	public String getDate() {
 		return date;
 	}
-	public void setDate( String date ) {
+	public MessageCreateOperation setDate( String date ) {
 		this.date = date;
+		return this;
 	}
 	
 	
@@ -69,8 +73,9 @@ public class MessageCreateOperation implements Serializable {
 	public String getLabel() {
 		return label;
 	}
-	public void setLabel( String label ) {
+	public MessageCreateOperation setLabel( String label ) {
 		this.label = label;
+		return this;
 	}
 	
 
