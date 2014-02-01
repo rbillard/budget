@@ -1,5 +1,4 @@
 # Budget
-========
 **Budget** est une application permettant à un utilisateur de gérer ses budgets pendant des 
 périodes définies.
 
@@ -7,10 +6,8 @@ L'objectif de cette application est de synthétiser mes connaissances acquises e
 depuis le début de mon parcours professionnel en juin 2012. 
 
 ## Technologies
-===============
 
 ### Front
-=========
 HTML 5
 
 CSS 3
@@ -22,34 +19,33 @@ Bootstrap 3.0.3
 Bootstrap UI 0.10.0
 
 
+
 ### Back
-========
 Spring 4.0.1
 
 Hibernate 4
 
+
+
 ### Unit test
-=============
 jUnit 4.11
+
 
 
 ## Outils
 
 ### IDE
-=======
 Eclipse
 
 ### Base de données
-===================
 MySQL
 
 ### Serveur
-===========
 Tomcat 7
 
 
+
 ## Installation
-===============
 Base de données : script de création (tables + jeu de données) = *budget/src/main/sql/create.sql*
 
 Identifiants de connexion :
@@ -58,8 +54,9 @@ Identifiants de connexion :
 
 Fichier de propriétés à modifier : *budget/src/main/resources/database.properties*
 
+
+
 ## Contact
-==========
 N'hésitez pas à me contacter si vous avez des questions sur cette application et/ou mon parcours 
 professionnel. Je suis aussi ouvert à toutes discussions me permettant d'améliorer mes compétences.
 
@@ -68,8 +65,8 @@ billard.raphael@gmail.com
 www.raphael-billard.fr
 
 
-#### TODO
-=======
+
+##### TODO
 couleur dépassement
 
 couleur budget
