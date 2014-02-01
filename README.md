@@ -3,8 +3,7 @@ Budget
 
 TODO
 ====
-pom rbillard
-finaliser TU / couverture code
+pom rbillard / spring 4.0.1
 validation angular (après java)
 couleur dépassement
 couleur budget

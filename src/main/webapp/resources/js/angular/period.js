@@ -29,13 +29,15 @@ periodServices.factory( 'PeriodDeleteSrv', function( $resource ) {
 // CONTROLLERS
 var periodControllers = angular.module( 'periodControllers', [] );
 
-periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http ) {
+periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, $filter ) {
 	
 	$scope.period = {};
 	
 	$scope.createOrUpdatePeriod = function() {
 		
-		console.log($scope.period);
+		// TODO find a way to do it automatically
+		$scope.period.startDate = $filter('date')($scope.period.startDate, dateFormat);
+		$scope.period.endDate = $filter('date')($scope.period.endDate, dateFormat);
 		
 		// TODO factoriser avec update
 		$http.post( '/budget/period', $scope.period, headers )
@@ -84,8 +86,7 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 	
 });
 
-// TODO supprimer $location si inutile
-periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $location, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
+periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $filter, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
 	
 	$scope.orderOperation = "date";
 	$scope.orderBudget = "label";
@@ -103,12 +104,13 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	// associate budget
 	
 	$scope.messageAssociateBudget = { "periodId": $routeParams.periodId };
+	$scope.selectedAssociateBudget = {};
 	
 	$scope.associateBudget = function() {
 		
 		// TODO directement l'id dans budgetId
-		if ( $scope.selectedAssociateBudget != undefined ) {
-			$scope.messageAddBudget.budgetId = $scope.selectedAssociateBudget.id;
+		if ( $scope.selectedAssociateBudget.budget != undefined ) {
+			$scope.messageAssociateBudget.budgetId = $scope.selectedAssociateBudget.budget.id;
 		}
 
 		$http.post( '/budget/period-budget', $scope.messageAssociateBudget, headers )
@@ -125,13 +127,17 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 	// create operation
 	
 	$scope.messageCreateOperation = { "periodId": $routeParams.periodId };
+	$scope.selectedBugdetCreateOperation = {};
 	
 	$scope.createOperation = function() {
 		
 		// TODO directement l'id dans budgetId
-		if ( $scope.selectedBugdetCreateOperation != undefined ) {
-			$scope.messageCreateOperation.budgetId = $scope.selectedBugdetCreateOperation.id;
+		if ( $scope.selectedBugdetCreateOperation.budget != undefined ) {
+			$scope.messageCreateOperation.budgetId = $scope.selectedBugdetCreateOperation.budget.id;
 		}
+		
+		// TODO find a way to do it automatically
+		$scope.messageCreateOperation.date = $filter('date')($scope.messageCreateOperation.date, dateFormat);
 		
 		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
