@@ -43,6 +43,12 @@ MySQL
 ### Serveur
 Tomcat 7
 
+### Versioning
+GIT
+
+### Gestionnaire
+Maven
+
 
 
 ## Installation
@@ -72,8 +78,6 @@ couleur dépassement
 couleur budget
 
 correction tri angular date et numérique
-
-format montants
 
 message flash create, update
 
