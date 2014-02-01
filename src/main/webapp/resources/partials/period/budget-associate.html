@@ -1,26 +1,30 @@
 <div ng-switch on="showBudgetsNotAssociated">
 
-	<form novalidate class="form-horizontal" ng-submit="associateBudget()" ng-switch-when="true">
+	<form name="formAssociateBudget" novalidate class="form-horizontal" ng-submit="associateBudget()" ng-switch-when="true">
 	
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-error': formAssociateBudget.budget.$error.required}">
 			<label class="col-sm-1 control-label">Budgets</label>
 			<div class="col-sm-3">
-				<select class="form-control" ng-model="selectedAssociateBudget.budget" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated"></select>
+				<select class="form-control" name="budget" ng-model="selectedAssociateBudget.budget" ng-options="budget.label for budget in period.typeBudgets.budgetsNotAssociated" required></select>
 				<span>{{ errorsAssociateBudget.budgetId }}</span>
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-error': formAssociateBudget.amount.$error.required}">
 			<label for="amountBudget" class="col-sm-1 control-label">Montant</label>
 			<div class="col-sm-3">
-				<input type="text" ng-model="messageAssociateBudget.amount" class="form-control" id="amountBudget" placeholder="Montant">
+				<input type="number" ng-model="messageAssociateBudget.amount" class="form-control" id="amountBudget" name="amount" placeholder="Montant" required />
 				<span>{{ errorsAssociateBudget.amount }}</span>
 			</div>
+<!-- 			NE FONCTIONNE PAS -->
+<!-- 			<span ng-show="formAssociateBudget.amount.$error.number"> -->
+<!--         		Format incorrect -->
+<!--         	</span> -->
 		</div>
 	
 		<div class="form-group">
 			<div class="col-sm-offset-1 col-sm-10">
-				<button type="submit" class="btn btn-default">Associer</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="formAssociateBudget.$invalid">Associer</button>
 			</div>
 		</div>
 		

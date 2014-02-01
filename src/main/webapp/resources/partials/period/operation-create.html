@@ -2,41 +2,44 @@
 
 	<form name="formCreateOperation" novalidate class="form-horizontal" ng-submit="createOperation()" ng-switch-when="true">
 	
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-error': formCreateOperation.budget.$error.required}">
 			<label class="col-sm-1 control-label">Budgets</label>
 			<div class="col-sm-3">
-				<select class="form-control" ng-model="selectedBugdetCreateOperation.budget" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated"></select>
+				<select class="form-control" name="budget" ng-model="selectedBugdetCreateOperation.budget" ng-options="budget.label for budget in period.typeBudgets.budgetsAssociated" required></select>
 				<span>{{ errorsCreateOperation.budgetId }}</span>
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-error': formCreateOperation.date.$error.required}">
 			<label for="dateOperation" class="col-sm-1 control-label">Date</label>
 			<div class="col-sm-3">
-				<input type="text" ng-model="messageCreateOperation.date" class="form-control" datepicker-popup="{{ dateFormat }}" id="dateOperation" placeholder="Date">
+				<input type="text" ng-model="messageCreateOperation.date" class="form-control" datepicker-popup="{{ dateFormat }}" id="dateOperation" name="date" placeholder="Date" required>
 				<span>{{ errorsCreateOperation.date }}</span>
+				<span ng-show="formCreateOperation.date.$error.date">
+	        		Format incorrect
+	        	</span>
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-error': formCreateOperation.label.$error.required}">
 			<label for="labelOperation" class="col-sm-1 control-label">Libellé</label>
 			<div class="col-sm-3">
-				<input type="text" ng-model="messageCreateOperation.label" class="form-control" id="labelOperation" placeholder="Libellé">
+				<input type="text" ng-model="messageCreateOperation.label" class="form-control" id="labelOperation" name="label" placeholder="Libellé" required>
 				<span>{{ errorsCreateOperation.label }}</span>
 			</div>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" ng-class="{'has-error': formCreateOperation.amount.$error.required}">
 			<label for="amountOperation" class="col-sm-1 control-label">Montant</label>
 			<div class="col-sm-3">
-				<input type="text" ng-model="messageCreateOperation.amount" class="form-control" id="amountOperation" placeholder="Montant">
+				<input type="number" ng-model="messageCreateOperation.amount" class="form-control" id="amountOperation" name="amount" placeholder="Montant" required>
 				<span>{{ errorsCreateOperation.label }}</span>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<div class="col-sm-offset-1 col-sm-10">
-				<button type="submit" class="btn btn-default">Créer</button>
+				<button type="submit" class="btn btn-primary" ng-disabled="formCreateOperation.$invalid">Créer</button>
 			</div>
 		</div>
 	</form>

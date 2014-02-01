@@ -1,16 +1,16 @@
-<form novalidate class="form-horizontal" ng-submit="createOrUpdateBudget()" >
+<form name="formBudget" novalidate class="form-horizontal" ng-submit="createOrUpdateBudget()" >
 
-	<div class="form-group">
+	<div class="form-group" ng-class="{'has-error': formBudget.label.$error.required}">
 		<label for="label" class="col-sm-1 control-label">Libellé</label>
 		<div class="col-sm-3">
-			<input type="text" ng-model="budget.label" class="form-control" id="label" placeholder="Libellé">
+			<input type="text" ng-model="budget.label" class="form-control" id="label" name="label" placeholder="Libellé" required >
 			<span>{{ errors.label }}</span>
 		</div>
 	</div>
 	
 	<div class="form-group">
 		<div class="col-sm-offset-1 col-sm-10">
-			<button type="submit" class="btn btn-default">{{ submit }}</button>
+			<button type="submit" class="btn btn-primary" ng-disabled="formBudget.$invalid">{{ submit }}</button>
 		</div>
 	</div>
 	
