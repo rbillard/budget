@@ -5,18 +5,28 @@
 	<parent>
 		<groupId>fr.rbillard</groupId>
 		<artifactId>spring-hibernate.parent-pom</artifactId>
-		<version>1.0.1-SNAPSHOT</version>
+		<version>1.0.1</version>
 	</parent>
 
 	<artifactId>budget</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>budget</name>
+	
+	<repositories>
+	    <repository>
+	      <id>rbillard</id>
+	      <name>rbillard</name>
+	      <url>http://raphael-billard.fr/repository/</url>
+	      <snapshots><enabled>true</enabled></snapshots>
+	      <releases><enabled>true</enabled></releases>
+	    </repository>
+	 </repositories>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<fr.rbillard.spring-hibernate.controller.version>1.0.1-SNAPSHOT</fr.rbillard.spring-hibernate.controller.version>
+		<fr.rbillard.spring-hibernate.controller.version>1.0.1</fr.rbillard.spring-hibernate.controller.version>
 	</properties>
 
 	<dependencies>

@@ -24,7 +24,6 @@ Eclipse
 
 TODO
 ====
-pom rbillard / spring 4.0.1
 couleur dépassement
 couleur budget
 correction tri angular date et numérique
