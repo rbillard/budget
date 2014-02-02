@@ -2,7 +2,7 @@
 var operationServices = angular.module( 'operationServices', ['ngResource'] );
 
 operationServices.factory( 'OperationDeleteSrv', function( $resource ) {
-	return $resource( '/budget/operation/:operationId', {}, {
+	return $resource( context + '/operation/:operationId', {}, {
 		query: { method:'DELETE' }
 	});
 });

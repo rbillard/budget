@@ -2,25 +2,25 @@
 var budgetServices = angular.module( 'budgetServices', ['ngResource'] );
 
 budgetServices.factory( 'BudgetDetailSrv', function( $resource ) {
-	return $resource( '/budget/budget/:budgetId', {}, {
+	return $resource( context + '/budget/:budgetId', {}, {
 		query: { method:'GET' }
 	});
 });
 
 budgetServices.factory( 'BudgetListSrv', function( $resource ) {
-	return $resource( '/budget/budget/list', {}, {
+	return $resource( context + '/budget/list', {}, {
 		query: { method:'GET', isArray:true }
 	});
 });
 
 budgetServices.factory( 'BudgetDeleteSrv', function( $resource ) {
-	return $resource( '/budget/budget/:budgetId', {}, {
+	return $resource( context + '/budget/:budgetId', {}, {
 		query: { method:'DELETE', isArray:true }
 	});
 });
 
 budgetServices.factory( 'BudgetSelectSrv', function( $resource ) {
-	return $resource( '/budget/budget/period/:periodId', {}, {
+	return $resource( context + '/budget/period/:periodId', {}, {
 		query: { method:'GET', isArray:true }
 	});
 });
@@ -36,9 +36,9 @@ budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http ) {
 	
 	$scope.createOrUpdateBudget = function() {
 		
-		$http.post( '/budget/budget', $scope.budget, headers )
+		$http.post( context + '/budget', $scope.budget, headers )
 	        .success( function ( data ) {
-	        	window.location = "/budget/#/budget/" + data.id;
+	        	window.location = context + "/#/budget/" + data.id;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data;
@@ -55,9 +55,9 @@ budgetControllers.controller( 'BudgetDetailCtrl', function ( $scope, $routeParam
 	
 	$scope.createOrUpdateBudget = function() {
 		
-		$http.put( '/budget/budget', $scope.budget, headers )
+		$http.put( context + '/budget', $scope.budget, headers )
 	        .success( function ( data ) {
-	        	window.location = "/budget/#/budget/" + data.id;
+	        	window.location = context + "/#/budget/" + data.id;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data;

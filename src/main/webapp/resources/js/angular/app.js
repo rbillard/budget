@@ -1,6 +1,5 @@
 var budgetApp = angular.module( 'budgetApp', [
 	'ngRoute',
-	'appFilters',
 	'periodControllers',
 	'budgetControllers',
 	'periodServices',

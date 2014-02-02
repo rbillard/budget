@@ -7,11 +7,11 @@
 
 	<title>Budget</title>
     
-    <link rel="shortcut icon" href="/${ context }/resources/img/favicon.png">
+    <link rel="shortcut icon" href="<c:url value="/resources/img/favicon.png" />">
     
-	<link rel="stylesheet" href="/${ context }/resources/css/app.css">
-	<link rel="stylesheet" href="/${ context }/resources/css/bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="/${ context }/resources/css/bootstrap/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="<c:url value="/resources/css/app.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.min.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap-theme.min.css" />">
 
 </head>
 

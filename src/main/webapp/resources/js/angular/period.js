@@ -2,25 +2,25 @@
 var periodServices = angular.module( 'periodServices', ['ngResource'] );
 
 periodServices.factory( 'PeriodLightSrv', function( $resource ) {
-	return $resource( '/budget/period/:periodId/light', {}, {
+	return $resource( context + '/period/:periodId/light', {}, {
 		query: { method:'GET' }
 	});
 });
 
 periodServices.factory( 'PeriodListSrv', function( $resource ) {
-	return $resource( '/budget/period/list', {}, {
+	return $resource( context + '/period/list', {}, {
 		query: { method:'GET', isArray:true }
 	});
 });
 
 periodServices.factory( 'PeriodDetailSrv', function( $resource ) {
-	return $resource( '/budget/period/:periodId', {}, {
+	return $resource( context + '/period/:periodId', {}, {
 		query: { method:'GET' }
 	});
 });
 
 periodServices.factory( 'PeriodDeleteSrv', function( $resource ) {
-	return $resource( '/budget/period/:periodId', {}, {
+	return $resource( context + '/period/:periodId', {}, {
 		query: { method:'DELETE', isArray:true }
 	});
 });
@@ -40,9 +40,9 @@ periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, $fil
 		$scope.period.endDate = $filter('date')($scope.period.endDate, dateFormat);
 		
 		// TODO factoriser avec update
-		$http.post( '/budget/period', $scope.period, headers )
+		$http.post( context + '/period', $scope.period, headers )
 	        .success( function ( data ) {
-	        	window.location = "/budget/#/period/" + data.id;
+	        	window.location = context + "/#/period/" + data.id;
 	        })
 	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data;
@@ -58,9 +58,9 @@ periodControllers.controller( 'PeriodUpdateCtrl', function ( $scope, $http, $rou
 	$scope.createOrUpdatePeriod = function() {
 		
 		// TODO factoriser avec create
-		$http.put( '/budget/period', $scope.period, headers )
+		$http.put( context + '/period', $scope.period, headers )
 			.success( function ( data ) {
-				window.location = "/budget/#/period/" + data.id;
+				window.location = context + "/#/period/" + data.id;
 			})
 			.error( function( data, status, headers, config ) {
 				$scope.errors = data;
@@ -113,7 +113,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 			$scope.messageAssociateBudget.budgetId = $scope.selectedAssociateBudget.budget.id;
 		}
 
-		$http.post( '/budget/period-budget', $scope.messageAssociateBudget, headers )
+		$http.post( context + '/period-budget', $scope.messageAssociateBudget, headers )
 	        .success( function ( data ) {
 	        	$scope.messageAssociateBudget = { "periodId": $routeParams.periodId };
 				setScope( $scope, data );
@@ -139,7 +139,7 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		// TODO find a way to do it automatically
 		$scope.messageCreateOperation.date = $filter('date')($scope.messageCreateOperation.date, dateFormat);
 		
-		$http.post( '/budget/operation', $scope.messageCreateOperation, headers )
+		$http.post( context + '/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {
 	        	$scope.messageCreateOperation = { "periodId": $routeParams.periodId };
 	        	setScope( $scope, data );
