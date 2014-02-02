@@ -73,8 +73,6 @@ www.raphael-billard.fr
 
 
 ##### TODO
-couleur dépassement
-
 couleur budget
 
 correction tri angular date et numérique
