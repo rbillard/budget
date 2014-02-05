@@ -1,6 +1,7 @@
 package fr.rbillard.budget.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,7 @@ import fr.rbillard.budget.dao.IBudgetDAO;
 import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.User;
+import fr.rbillard.budget.exception.NoSuchEntityException;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IUserService;
 import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
@@ -42,11 +44,10 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 
 	@Override
 	@Transactional
-	public void delete( Long id, Long userId ) {
+	public void delete( Long id, Long userId ) throws NoSuchEntityException {
 
-		// TODO dao.getBudget( id, userId ); instead of :
+		Budget budget = getBudget( id, userId );
 		User user = userService.getEntity( userId );
-		Budget budget = getEntity( id );
 		user.removeBudget( budget );
 		
 		dao.delete( budget );
@@ -61,12 +62,11 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 
 	@Override
 	@Transactional
-	public Budget update( BudgetDTO dto, Long userId ) throws ConstraintViolationFunctionalException {
+	public Budget update( BudgetDTO dto, Long userId ) throws ConstraintViolationFunctionalException, NoSuchEntityException {
 		
 		assertValid( dto );
 		
-		// TODO dao.getBudget( id, userId )
-		Budget budget = getEntity( dto.getId() );
+		Budget budget = getBudget( dto.getId(), userId );
 		budget.setLabel( dto.getLabel() );
 		
 		update( budget );
@@ -89,6 +89,18 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 		
 		create( budget );
 		
+		return budget;
+		
+	}
+
+	@Override
+	@Transactional( readOnly = true )
+	public Budget getBudget( Long id, Long userId ) throws NoSuchEntityException {
+		
+		Budget budget = dao.getBudget( id, userId );
+		if ( budget == null ) {
+			throw new NoSuchEntityException( "Le budget d'id " + id + " n'existe pas pour l'utilisateur d'id " + userId );
+		}
 		return budget;
 		
 	}

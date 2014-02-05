@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.entity.Budget;
+import fr.rbillard.budget.exception.NoSuchEntityException;
 import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
 
 @Controller
@@ -29,14 +30,14 @@ public class BudgetController extends AbstractController {
 	
 	@Produces( APPLICATION_JSON ) 
 	@RequestMapping( value = "/{id}", method = RequestMethod.GET )
-	public @ResponseBody BudgetDTO getBudget( @PathVariable( value = "id" ) Long id ) {
-		Budget budget = getBudgetService().getEntity( id );
+	public @ResponseBody BudgetDTO getBudget( @PathVariable( value = "id" ) Long id ) throws NoSuchEntityException {
+		Budget budget = getBudgetService().getBudget( id, getConnectedUserId() );
 		return new BudgetDTO( budget );
 	}
 	
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
-	public @ResponseBody List<BudgetDTO> deleteBudget( @PathVariable( value = "id" ) Long id ) {
+	public @ResponseBody List<BudgetDTO> deleteBudget( @PathVariable( value = "id" ) Long id ) throws NoSuchEntityException {
 		
 		getBudgetService().delete( id, getConnectedUserId() );
 		
@@ -58,7 +59,7 @@ public class BudgetController extends AbstractController {
 	@Consumes( APPLICATION_JSON )
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.PUT )
-	public @ResponseBody BudgetDTO updateBudget( @RequestBody BudgetDTO budget ) throws ConstraintViolationFunctionalException {
+	public @ResponseBody BudgetDTO updateBudget( @RequestBody BudgetDTO budget ) throws ConstraintViolationFunctionalException, NoSuchEntityException {
 		getBudgetService().update( budget, getConnectedUserId() );
 		return budget;
 	}

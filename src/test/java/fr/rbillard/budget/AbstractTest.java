@@ -48,9 +48,6 @@ public abstract class AbstractTest {
 	@Autowired
 	private IOperationService operationService;
 	
-//	@Autowired
-//	private DataSource dataSource;
-	
 	@Autowired
 	private HibernateTransactionManager transactionManager;
 	

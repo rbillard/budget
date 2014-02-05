@@ -73,7 +73,11 @@ www.raphael-billard.fr
 
 
 ##### TODO
+pj facture pdf opération
+
 couleur budget
+
+error message global
 
 correction tri angular date et numérique
 
@@ -100,6 +104,8 @@ data-ng-... au lieu de ng-...
 garder lien budget ? ou compléter page budget ?
 
 correction logout
+
+hibernate 4.3
 
 todo et fixme dans le code
 

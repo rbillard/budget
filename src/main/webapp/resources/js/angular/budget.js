@@ -49,7 +49,14 @@ budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http ) {
 
 budgetControllers.controller( 'BudgetDetailCtrl', function ( $scope, $routeParams, $http, BudgetDetailSrv ) {
 
-	$scope.budget = BudgetDetailSrv.query({ budgetId: $routeParams.budgetId });
+	$scope.budget = BudgetDetailSrv.query(
+		{ budgetId: $routeParams.budgetId },
+		function( data ) {
+		}, 
+		function( error ) {
+			$scope.errorMessage = error.data;
+		}
+	);
 	
 	$scope.submit = "Modifier"; // TODO constants i18n
 	

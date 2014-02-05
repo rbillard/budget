@@ -17,6 +17,7 @@ import fr.rbillard.budget.dto.BudgetDTO;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.User;
+import fr.rbillard.budget.exception.NoSuchEntityException;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IUserService;
 import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
@@ -148,6 +149,32 @@ public class BudgetServiceTest extends AbstractTest {
 	private BudgetDTO getDefaultBudgetDTO() {
 		return new BudgetDTO()
 			.setLabel( "Budget DTO" );
+	}
+
+	@Test
+	public void testGetBudget() throws Exception {
+		
+		// when
+		Budget reloadedBudget = budgetService.getBudget( budget1.getId(), user1.getId() );
+		
+		// then
+		assertEquals( budget1, reloadedBudget );
+
+	}
+	
+	@Test( expected = NoSuchEntityException.class )
+	public void testGetBudget_NoSuchEntityException() throws Exception {
+		
+		// given
+		User user1 = newUser( "user1" );
+		Budget budget = newBudget( user1 );
+		User user2 = newUser( "user2" );
+		
+		// when
+		budgetService.getBudget( budget.getId(), user2.getId() );
+		
+		// then exception
+		
 	}
 
 }

@@ -68,4 +68,16 @@ public class BudgetDAO extends GenericHibernateDAO<Budget, Long> implements IBud
 		
 	}
 
+	@Override
+	public Budget getBudget( Long id, Long userId ) {
+		
+		return ( Budget ) uniqueResultByCriteria(
+			newDetachedCriteria()
+				.add( Restrictions.eq( Budget.PROP_ID, id ) )
+				.createCriteria( Budget.PROP_USER )
+					.add( Restrictions.eq( User.PROP_ID, userId ) )
+		);
+
+	}
+
 }
