@@ -21,6 +21,8 @@ Bootstrap UI 0.10.0
 
 
 ### Back
+Java 7
+
 Spring 4.0.1
 
 Hibernate 4
@@ -114,3 +116,5 @@ trouver solution pour tri opération -> problème tbody répété
 valide W3C
 
 référencement/SEO : https://developers.google.com/webmasters/ajax-crawling/docs/getting-started
+
+recherche opérations sur plusieurs périodes

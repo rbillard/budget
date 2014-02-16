@@ -88,7 +88,7 @@ public class BudgetDTO implements Serializable {
 	
 	public List<OperationDTO> getOperations() {
 		if ( operations == null ) {
-			operations = new ArrayList<OperationDTO>();
+			operations = new ArrayList<>();
 		}
 		return operations;
 	}
@@ -100,7 +100,7 @@ public class BudgetDTO implements Serializable {
 
 	public static List<BudgetDTO> listBudgets2ListBudgetsDTO( List<Budget> budgets ) {
 		
-		List<BudgetDTO> budgetsDTO = new ArrayList<BudgetDTO>( budgets.size() );
+		List<BudgetDTO> budgetsDTO = new ArrayList<>( budgets.size() );
 		
 		for ( Budget budget : budgets ) {
 			budgetsDTO.add( new BudgetDTO( budget ) );
@@ -112,7 +112,7 @@ public class BudgetDTO implements Serializable {
 	
 	public static List<BudgetDTO> listPeriodsBudgets2ListBudgetsDTO( List<PeriodBudget> periodsBudgets ) {
 
-		List<BudgetDTO> budgetsDTO = new ArrayList<BudgetDTO>( periodsBudgets.size() );
+		List<BudgetDTO> budgetsDTO = new ArrayList<>( periodsBudgets.size() );
 		
 		for ( PeriodBudget periodBudget : periodsBudgets ) {
 			budgetsDTO.add( new BudgetDTO( periodBudget ) );

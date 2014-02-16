@@ -59,7 +59,7 @@ public class Budget extends AbstractEntity<Long> {
 	@OneToMany( mappedBy = "id.budget", cascade = CascadeType.REMOVE )
 	public List<PeriodBudget> getlPeriod() {
 		if ( lPeriod == null ) {
-			lPeriod = new ArrayList<PeriodBudget>();
+			lPeriod = new ArrayList<>();
 		}
 		return lPeriod;
 	}

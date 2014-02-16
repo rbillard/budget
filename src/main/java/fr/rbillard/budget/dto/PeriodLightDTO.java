@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.AssertTrue;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -83,7 +82,7 @@ public class PeriodLightDTO implements Serializable {
 	
 	public static List<PeriodLightDTO> listPeriods2ListPeriodsLightDTO( List<Period> periods ) {
 		
-		List<PeriodLightDTO> periodsDTO = new ArrayList<PeriodLightDTO>( periods.size() );
+		List<PeriodLightDTO> periodsDTO = new ArrayList<>( periods.size() );
 		
 		for ( Period period : periods ) {
 			periodsDTO.add( new PeriodLightDTO( period ) );

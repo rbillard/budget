@@ -66,7 +66,7 @@ public class User extends AbstractEntity<Long> {
 	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
 	public List<Period> getPeriods() {
 		if ( periods == null ) {
-			periods = new ArrayList<Period>();
+			periods = new ArrayList<>();
 		}
 		return periods;
 	}
@@ -84,7 +84,7 @@ public class User extends AbstractEntity<Long> {
 	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
 	public List<Budget> getBudgets() {
 		if ( budgets == null ) {
-			budgets = new ArrayList<Budget>();
+			budgets = new ArrayList<>();
 		}
 		return budgets;
 	}

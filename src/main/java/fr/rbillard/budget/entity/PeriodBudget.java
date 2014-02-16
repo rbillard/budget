@@ -82,7 +82,7 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	@OneToMany( mappedBy = "periodBudget", fetch = FetchType.EAGER, cascade = CascadeType.ALL )
 	public List<Operation> getOperations() {
 		if ( operations == null ) {
-			operations = new ArrayList<Operation>();
+			operations = new ArrayList<>();
 		}
 		return operations;
 	}
