@@ -4,20 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
+import fr.rbillard.springhibernate.authentification.SimpleUser;
 
 @Entity
 @Table( name = "T_USER" )
-public class User extends AbstractEntity<Long> {
+public class User extends SimpleUser {
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -27,42 +22,10 @@ public class User extends AbstractEntity<Long> {
 	public static final String PROP_LOGIN = "login";
 
 	
-	private Long id;
-	private String login;
-	private String password;
 	private List<Period> periods;
 	private List<Budget> budgets;
 	
 
-	@Id
-	@GeneratedValue( strategy = GenerationType.AUTO )
-	public Long getId() {
-		return id;
-	}
-	public void setId( Long id ) {
-		this.id = id;
-	}
-	
-	
-	@NotNull
-	@Column( unique = true )
-	public String getLogin() {
-		return login;
-	}
-	public void setLogin( String login ) {
-		this.login = login;
-	}
-	
-	
-	@NotNull
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword( String password ) {
-		this.password = password;
-	}
-	
-	
 	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE )
 	public List<Period> getPeriods() {
 		if ( periods == null ) {

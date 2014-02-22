@@ -11,16 +11,16 @@ import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import fr.rbillard.budget.auth.SimpleUserDetails;
 import fr.rbillard.budget.dto.PeriodFullDTO;
 import fr.rbillard.budget.dto.TypeBudgetsDTO;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.PeriodBudget;
-import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.service.IBudgetService;
 import fr.rbillard.budget.service.IPeriodBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
+import fr.rbillard.springhibernate.authentification.SimpleUser;
+import fr.rbillard.springhibernate.authentification.SimpleUserDetails;
 
 @PropertySource({ "classpath:/application.properties" })
 public abstract class AbstractController {
@@ -48,8 +48,8 @@ public abstract class AbstractController {
 		return environment.getProperty( "context" );
 	}
 	
-	protected User getConnectedUser() {
-		return ( (SimpleUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ).getUser();
+	protected SimpleUser getConnectedUser() {
+		return ( (SimpleUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal() ).getSimpleUser();
 	}
 	protected Long getConnectedUserId() {
 		return getConnectedUser().getId();

@@ -23,9 +23,9 @@ Bootstrap UI 0.10.0
 ### Back
 Java 7
 
-Spring 4.0.1
+Spring 4.0.2
 
-Hibernate 4
+Hibernate 4.3.1
 
 
 
@@ -107,7 +107,7 @@ garder lien budget ? ou compléter page budget ?
 
 correction logout
 
-hibernate 4.3
+java 8 statistiques sur l'ensemble des budgets d'un utilisateur
 
 todo et fixme dans le code
 

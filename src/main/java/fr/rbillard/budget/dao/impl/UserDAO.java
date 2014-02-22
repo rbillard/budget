@@ -5,9 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import fr.rbillard.budget.auth.SimpleUserDetails;
 import fr.rbillard.budget.dao.IUserDAO;
 import fr.rbillard.budget.entity.User;
+import fr.rbillard.springhibernate.authentification.SimpleUserDetails;
 import fr.rbillard.springhibernate.domain.dao.impl.GenericHibernateDAO;
 
 @Repository
