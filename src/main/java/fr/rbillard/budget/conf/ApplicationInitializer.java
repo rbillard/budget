@@ -2,7 +2,7 @@ package fr.rbillard.budget.conf;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer /*DefaultAppInitializer*/ {
+public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 	
 	@Override
 	protected Class<?>[] getRootConfigClasses() {

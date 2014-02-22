@@ -18,6 +18,7 @@ import fr.rbillard.budget.service.IPeriodBudgetService;
 import fr.rbillard.budget.service.IPeriodService;
 import fr.rbillard.budget.service.IUserService;
 import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
+import fr.rbillard.springhibernate.domain.exception.FunctionalException;
 import fr.rbillard.springhibernate.domain.service.impl.GenericService;
 
 @Service
@@ -47,7 +48,7 @@ public class PeriodBudgetService extends GenericService<PeriodBudget, PeriodBudg
 	
 	@Override
 	@Transactional
-	public PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException {
+	public PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException, FunctionalException {
 
 		assertValid( message );
 		
@@ -56,12 +57,15 @@ public class PeriodBudgetService extends GenericService<PeriodBudget, PeriodBudg
 		Budget budget = budgetService.getEntity( message.getBudgetId() );
 		
 		if ( ! user.equals( period.getUser() ) || ! user.equals( budget.getUser() ) ) {
-			// TODO exception
+			throw new FunctionalException( getEnv().getProperty( "error-message.incompatible-budget-and-period" ) );
 		}
 		
-		// TODO check period and budget already associated
+		PeriodBudget periodBudget = getEntity( user.getId(), period.getId(), budget.getId() );
+		if ( periodBudget != null ) {
+			throw new FunctionalException( getEnv().getProperty( "error-message.budget-and-period-already-associated" ) );
+		}
 		
-		PeriodBudget periodBudget = new PeriodBudget( period, budget, message.getAmount() );
+		periodBudget = new PeriodBudget( period, budget, message.getAmount() );
 		period.addlBudget( periodBudget );
 		budget.addlBudget( periodBudget );
 		create( periodBudget );

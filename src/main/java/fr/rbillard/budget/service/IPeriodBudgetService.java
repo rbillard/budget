@@ -6,11 +6,12 @@ import fr.rbillard.budget.entity.PeriodBudget;
 import fr.rbillard.budget.entity.PeriodBudget.PeriodBudgetId;
 import fr.rbillard.budget.message.MessageAssociatePeriodBudget;
 import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
+import fr.rbillard.springhibernate.domain.exception.FunctionalException;
 import fr.rbillard.springhibernate.domain.service.IGenericService;
 
 public interface IPeriodBudgetService extends IGenericService<PeriodBudget, PeriodBudgetId> {
 
-	PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException;
+	PeriodBudget associatePeriodBudget( MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException, FunctionalException;
 
 	PeriodBudget getEntity( Long userId, Long periodId, Long budgetId );
 

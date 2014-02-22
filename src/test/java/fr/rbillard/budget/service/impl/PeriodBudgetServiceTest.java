@@ -18,6 +18,7 @@ import fr.rbillard.budget.entity.User;
 import fr.rbillard.budget.message.MessageAssociatePeriodBudget;
 import fr.rbillard.budget.service.IOperationService;
 import fr.rbillard.budget.service.IPeriodBudgetService;
+import fr.rbillard.springhibernate.domain.exception.FunctionalException;
 
 public class PeriodBudgetServiceTest extends AbstractTest {
 	
@@ -89,6 +90,50 @@ public class PeriodBudgetServiceTest extends AbstractTest {
 		assertEquals( budget, createdPeriodBudget.getId().getBudget() );
 		assertEquals( loadedPeriodBudget, createdPeriodBudget );
 		
+	}
+	
+	@Test( expected = FunctionalException.class )
+	public void testAssociatePeriodBudget_Incompatible() throws Exception {
+		
+		// given
+		User user1 = newUser( "user1" );
+		Period period = newPeriod( user1 );
+		
+		User user2 = newUser( "user2" );
+		Budget budget = newBudget( user2 );
+		
+		MessageAssociatePeriodBudget message = new MessageAssociatePeriodBudget()
+			.setUserId( user1.getId() )
+			.setPeriodId( period.getId() )
+			.setBudgetId( budget.getId() )
+			.setAmount( BigDecimal.TEN );
+		
+		// when
+		periodBudgetService.associatePeriodBudget( message );
+		
+	}
+	
+	@Test( expected = FunctionalException.class )
+	public void testAssociatePeriodBudget_AlreadyAssociated() throws Exception {
+		
+		// givne
+		User user = newUser();
+		Period period = newPeriod( user );
+		Budget budget = newBudget( user );
+		BigDecimal amount = BigDecimal.TEN;
+		MessageAssociatePeriodBudget message = new MessageAssociatePeriodBudget()
+			.setUserId( user.getId() )
+			.setPeriodId( period.getId() )
+			.setBudgetId( budget.getId() )
+			.setAmount( amount );
+		
+		periodBudgetService.associatePeriodBudget( message );
+		
+		// when
+		periodBudgetService.associatePeriodBudget( message );
+		
+		// then exception
+				
 	}
 
 	@Test

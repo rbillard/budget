@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import fr.rbillard.budget.dto.PeriodFullDTO;
 import fr.rbillard.budget.message.MessageAssociatePeriodBudget;
 import fr.rbillard.springhibernate.domain.exception.ConstraintViolationFunctionalException;
+import fr.rbillard.springhibernate.domain.exception.FunctionalException;
 
 @Controller
 @RequestMapping( value = "period-budget" )
@@ -23,7 +24,7 @@ public class PeriodBudgetController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( method = RequestMethod.POST )
 	@Transactional
-	public @ResponseBody PeriodFullDTO associatePeriodBudget( @RequestBody MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException {
+	public @ResponseBody PeriodFullDTO associatePeriodBudget( @RequestBody MessageAssociatePeriodBudget message ) throws ConstraintViolationFunctionalException, FunctionalException {
 		
 		message.setUserId( getConnectedUserId() );
 		getPeriodBudgetService().associatePeriodBudget( message );
