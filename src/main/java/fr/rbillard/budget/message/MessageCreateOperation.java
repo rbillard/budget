@@ -2,6 +2,7 @@ package fr.rbillard.budget.message;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,7 +16,7 @@ public class MessageCreateOperation implements Serializable {
 	private Long periodId;
 	private Long budgetId;
 	private BigDecimal amount;
-	private String date; // TODO date dateFormat
+	private Date date;
 	private String label;
 	
 	
@@ -60,10 +61,10 @@ public class MessageCreateOperation implements Serializable {
 	
 	
 	@NotNull
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public MessageCreateOperation setDate( String date ) {
+	public MessageCreateOperation setDate( Date date ) {
 		this.date = date;
 		return this;
 	}

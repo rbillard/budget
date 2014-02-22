@@ -2,12 +2,8 @@ package fr.rbillard.budget.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
-import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
-import fr.rbillard.budget.entity.PeriodBudget;
 
 public final class PeriodFullDTO extends PeriodLightDTO implements Serializable {
 	

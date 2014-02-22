@@ -6,6 +6,7 @@ var budgetApp = angular.module( 'budgetApp', [
 	'budgetServices',
 	'operationServices',
 	'periodBudgetServices',
+	'appFilters',
 	'operationFilters',
 	'ui.bootstrap'
 ]);
@@ -66,4 +67,10 @@ budgetApp.config( function( $routeProvider, datepickerConfig, datepickerPopupCon
 	// GLOBAL
 	$rootScope.dateFormat = dateFormat;
 	
+});
+
+angular.module('appFilters', []).filter('formatDate', function() {
+	return function( date ) {
+		return new Date( date ).toString( dateFormat );
+	};
 });

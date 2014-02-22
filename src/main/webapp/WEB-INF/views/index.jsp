@@ -19,6 +19,7 @@
 	<script src="<c:url value="/resources/js/jquery/jquery-1.10.2.min.js" />"></script>
 	
 	<script src="<c:url value="/resources/js/angular/constants.js" />"></script>
+	<script src="<c:url value="/resources/js/google/date.js" />"></script>
 	<script src="<c:url value="/resources/js/angular/angular.min.js" />"></script>
 	<script src="<c:url value="/resources/js/angular/angular-route.js" />"></script>
 	<script src="<c:url value="/resources/js/angular/angular-resource.js" />"></script>

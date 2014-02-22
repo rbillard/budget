@@ -1,15 +1,12 @@
 package fr.rbillard.budget.service.impl;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.dao.IPeriodDAO;
 import fr.rbillard.budget.dto.PeriodLightDTO;
 import fr.rbillard.budget.entity.Period;
@@ -66,13 +63,11 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 		
 		assertValid( dto );
 		
-		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
-		
 		// TODO get by id and user id
 		Period period = getEntity( dto.getId() );
 		period.setLabel( dto.getLabel() );
-		period.setStartDate( df.parse( dto.getStartDate() ) );
-		period.setEndDate( df.parse( dto.getEndDate() ) );
+		period.setStartDate( dto.getStartDate() );
+		period.setEndDate( dto.getEndDate() );
 		
 		update( period );
 
@@ -86,13 +81,11 @@ public class PeriodService extends GenericService<Period, Long, IPeriodDAO> impl
 		
 		assertValid( dto );
 		
-		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
-		
 		User user = userService.getEntity( ownerId );
 		Period period = new Period();
 		period.setLabel( dto.getLabel() );
-		period.setStartDate( df.parse( dto.getStartDate() ) );
-		period.setEndDate( df.parse( dto.getEndDate() ) );
+		period.setStartDate( dto.getStartDate() );
+		period.setEndDate( dto.getEndDate() );
 		period.setUser( user );
 		user.addPeriod( period );
 		

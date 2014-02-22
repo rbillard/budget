@@ -141,8 +141,7 @@ public class Period extends AbstractEntity<Long> {
 	// TODO message en conf
 	@AssertTrue( message = "La date de début doit être antérieur à la date de fin" )
 	private boolean isStartDateBeforeEndDate() {
-		// TODO
-		return true;
+		return startDate.equals( endDate ) || startDate.before( endDate );
 	}
 	
 }

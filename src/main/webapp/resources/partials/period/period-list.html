@@ -40,8 +40,8 @@
 		<tbody>
 			<tr data-ng-repeat="period in periods | filter:query | orderBy:orderProp">
 				<td><a href="#/period/{{ period.id }}">{{ period.label }}</a></td>
-				<td>{{ period.startDate }}</td>
-				<td>{{ period.endDate }}</td>
+				<td>{{ period.startDate | formatDate }}</td>
+				<td>{{ period.endDate | formatDate }}</td>
 				<td><a href="#/period/update/{{ period.id }}">Modifier</a></td>
 				<td><a ng-click="deletePeriod( period )">Supprimer</a></td>
 			</tr>

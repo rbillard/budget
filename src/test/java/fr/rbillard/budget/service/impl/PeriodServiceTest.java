@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.rbillard.budget.AbstractTest;
-import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.dto.PeriodLightDTO;
 import fr.rbillard.budget.entity.Period;
 import fr.rbillard.budget.entity.User;
@@ -81,11 +81,9 @@ public class PeriodServiceTest extends AbstractTest {
 
 	private void assertPeriod( User user, PeriodLightDTO dto, Period period ) {
 		
-		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
-		
 		assertEquals( dto.getLabel(), period.getLabel() );
-		assertEquals( dto.getStartDate(), df.format( period.getStartDate() ) );
-		assertEquals( dto.getEndDate(), df.format( period.getEndDate() ) );
+		assertEquals( dto.getStartDate(), period.getStartDate() );
+		assertEquals( dto.getEndDate(), period.getEndDate() );
 		assertEquals( user, period.getUser() );
 		
 	}
@@ -119,11 +117,14 @@ public class PeriodServiceTest extends AbstractTest {
 		
 	}
 	
-	private PeriodLightDTO getDefaultPeriodLightDTO() {
+	private PeriodLightDTO getDefaultPeriodLightDTO() throws ParseException {
+		
+		DateFormat df = new SimpleDateFormat( "dd/MM/yyyy" );
+		
 		return new PeriodLightDTO()
 			.setLabel( "Period DTO" )
-			.setStartDate( "01/01/2014" )
-			.setEndDate( "23/03/2014" );
+			.setStartDate( df.parse( "01/01/2014" ) )
+			.setEndDate( df.parse( "23/03/2014" ) );
 	}
 	
 }

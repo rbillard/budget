@@ -29,15 +29,11 @@ periodServices.factory( 'PeriodDeleteSrv', function( $resource ) {
 // CONTROLLERS
 var periodControllers = angular.module( 'periodControllers', [] );
 
-periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, $filter ) {
+periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http ) {
 	
 	$scope.period = {};
 	
 	$scope.createOrUpdatePeriod = function() {
-		
-		// TODO find a way to do it automatically
-		$scope.period.startDate = $filter('date')($scope.period.startDate, dateFormat);
-		$scope.period.endDate = $filter('date')($scope.period.endDate, dateFormat);
 		
 		// TODO factoriser avec update
 		$http.post( context + '/period', $scope.period, headers )
@@ -53,7 +49,7 @@ periodControllers.controller( 'PeriodCreateCtrl', function ( $scope, $http, $fil
 
 periodControllers.controller( 'PeriodUpdateCtrl', function ( $scope, $http, $routeParams, PeriodLightSrv ) {
 	
-	$scope.period = PeriodLightSrv.query({ periodId: $routeParams.periodId }, function(data) {console.log(data);});
+	$scope.period = PeriodLightSrv.query({ periodId: $routeParams.periodId });
 	
 	$scope.createOrUpdatePeriod = function() {
 		
@@ -86,7 +82,7 @@ periodControllers.controller( 'PeriodListCtrl', function ( $scope, PeriodListSrv
 	
 });
 
-periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, $filter, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
+periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParams, $http, PeriodDetailSrv, BudgetSelectSrv, OperationDeleteSrv, PeriodBudgetDeleteSrv ) {
 	
 	$scope.orderOperation = "date";
 	$scope.orderBudget = "label";
@@ -135,9 +131,6 @@ periodControllers.controller( 'PeriodDetailCtrl', function ( $scope, $routeParam
 		if ( $scope.selectedBugdetCreateOperation.budget != undefined ) {
 			$scope.messageCreateOperation.budgetId = $scope.selectedBugdetCreateOperation.budget.id;
 		}
-		
-		// TODO find a way to do it automatically
-		$scope.messageCreateOperation.date = $filter('date')($scope.messageCreateOperation.date, dateFormat);
 		
 		$http.post( context + '/operation', $scope.messageCreateOperation, headers )
 	        .success( function ( data ) {

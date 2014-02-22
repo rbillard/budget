@@ -48,7 +48,7 @@
 	
 	<tbody ng-repeat="budget in period.typeBudgets.budgetsAssociated">
 		<tr data-ng-repeat=" operation in budget.operations | filter:queryOperation | filterByBudget:this | orderBy:orderOperation">
-			<td>{{ operation.date }}</td>
+			<td>{{ operation.date | formatDate }}</td>
 			<td>{{ operation.label }}</td>
 			<td>{{ operation.amount }}</td>
 			<td><a ng-click="deleteOperation( operation )">Supprimer</a></td>

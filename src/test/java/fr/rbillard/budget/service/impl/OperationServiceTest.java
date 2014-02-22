@@ -7,12 +7,12 @@ import static org.junit.Assert.assertNull;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import fr.rbillard.budget.AbstractTest;
-import fr.rbillard.budget.app.AppConstants;
 import fr.rbillard.budget.entity.Budget;
 import fr.rbillard.budget.entity.Operation;
 import fr.rbillard.budget.entity.Period;
@@ -30,11 +30,11 @@ public class OperationServiceTest extends AbstractTest {
 	public void testCreate() throws Exception {
 		
 		// given
-		DateFormat df = new SimpleDateFormat( AppConstants.FORMAT_DATE );
+		DateFormat df = new SimpleDateFormat( "dd/MM/yyyy" );
 		User user = newUserWithOperation();
 		Period period = user.getPeriods().get( 0 );
 		Budget budget = user.getBudgets().get( 0 );
-		String date = "01/01/2014";
+		Date date = df.parse( "01/01/2014" );
 		String label = "New operation";
 		BigDecimal amount = BigDecimal.TEN;
 		MessageCreateOperation message = new MessageCreateOperation()
@@ -52,7 +52,7 @@ public class OperationServiceTest extends AbstractTest {
 		assertNotNull( operation.getId() );
 		assertEquals( period, operation.getPeriodBudget().getId().getPeriod() );
 		assertEquals( budget, operation.getPeriodBudget().getId().getBudget() );
-		assertEquals( df.parse( date ), operation.getDate() );
+		assertEquals( date, operation.getDate() );
 		assertEquals( label, operation.getLabel() );
 		assertEquals( amount, operation.getAmount() );
 		
