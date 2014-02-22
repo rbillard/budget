@@ -24,8 +24,7 @@ public class BudgetController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/list", method = RequestMethod.GET )
 	public @ResponseBody List<BudgetDTO> getBudgets() {
-		List<Budget> budgets = getBudgetService().findByUser( getConnectedUserId() );
-		return BudgetDTO.listBudgets2ListBudgetsDTO( budgets );
+		return getBudgetsFromConnectedUser();
 	}
 	
 	@Produces( APPLICATION_JSON ) 
@@ -38,10 +37,11 @@ public class BudgetController extends AbstractController {
 	@Produces( APPLICATION_JSON )
 	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
 	public @ResponseBody List<BudgetDTO> deleteBudget( @PathVariable( value = "id" ) Long id ) throws NoSuchEntityException {
-		
 		getBudgetService().delete( id, getConnectedUserId() );
-		
-		// TODO factoriser
+		return getBudgetsFromConnectedUser();
+	}
+
+	private List<BudgetDTO> getBudgetsFromConnectedUser() {
 		List<Budget> budgets = getBudgetService().findByUser( getConnectedUserId() );
 		return BudgetDTO.listBudgets2ListBudgetsDTO( budgets );
 	}

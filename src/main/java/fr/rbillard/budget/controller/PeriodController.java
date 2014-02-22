@@ -27,8 +27,7 @@ public class PeriodController extends AbstractController {
 	@RequestMapping( value = "/list", method = RequestMethod.GET )
 	@Transactional( readOnly = true )
 	public @ResponseBody List<PeriodLightDTO> getPeriods() {
-		List<Period> periods = getPeriodService().findByUser( getConnectedUserId() );
-		return PeriodLightDTO.listPeriods2ListPeriodsLightDTO( periods );
+		return getPeriodsFromConnectedUser();
 	}
 	
 	@Produces( APPLICATION_JSON ) 
@@ -49,12 +48,8 @@ public class PeriodController extends AbstractController {
 	@RequestMapping( value = "/{id}", method = RequestMethod.DELETE )
 	@Transactional
 	public @ResponseBody List<PeriodLightDTO> deletePeriod( @PathVariable( value = "id" ) Long id ) {
-		
 		getPeriodService().delete( id, getConnectedUserId() );
-		
-		// TODO factoriser
-		List<Period> periods = getPeriodService().findByUser( getConnectedUserId() );
-		return PeriodLightDTO.listPeriods2ListPeriodsLightDTO( periods );
+		return getPeriodsFromConnectedUser();
 	}
 	
 	// FULL REST
@@ -74,6 +69,11 @@ public class PeriodController extends AbstractController {
 	public @ResponseBody PeriodFullDTO updatePeriod( @RequestBody PeriodLightDTO dto ) throws ParseException, ConstraintViolationFunctionalException {
 		getPeriodService().update( dto, getConnectedUserId() );
 		return getPeriodDTO( dto.getId() );
+	}
+	
+	private List<PeriodLightDTO> getPeriodsFromConnectedUser() {
+		List<Period> periods = getPeriodService().findByUser( getConnectedUserId() );
+		return PeriodLightDTO.listPeriods2ListPeriodsLightDTO( periods );
 	}
 	
 }
