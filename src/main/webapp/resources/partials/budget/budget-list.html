@@ -27,7 +27,8 @@
 	
 		<thead>
 			<tr>
-				<th>Libellé</th>	
+				<th>Libellé</th>
+				<th>Couleur</th>
 				<th></th>	
 				<th></th>	
 			</tr>
@@ -36,6 +37,7 @@
 		<tbody>
 			<tr data-ng-repeat="budget in budgets | filter:query | orderBy:orderProp">
 				<td><a href="#/budget/{{ budget.id }}">{{ budget.label }}</a></td>
+				<td style="background-color:{{ budget.color }}"></td>
 				<td><a href="#/budget/update/{{ budget.id }}">Modifier</a></td>
 				<td><a ng-click="deleteBudget( budget )">Supprimer</a></td>
 			</tr>

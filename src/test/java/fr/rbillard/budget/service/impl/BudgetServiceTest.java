@@ -116,6 +116,7 @@ public class BudgetServiceTest extends AbstractTest {
 		// then
 		assertEquals( dto.getId(), modifiedBudget.getId() );
 		assertEquals( dto.getLabel(), modifiedBudget.getLabel() );
+		assertEquals( dto.getColor(), modifiedBudget.getColor() );
 
 	}
 
@@ -131,6 +132,7 @@ public class BudgetServiceTest extends AbstractTest {
 		// then
 		assertNotNull( createdBudget.getId() );
 		assertEquals( dto.getLabel(), createdBudget.getLabel() );
+		assertEquals( dto.getColor(), createdBudget.getColor() );
 		assertEquals( 4, budgets.size() );
 		assertTrue( budgets.contains( createdBudget ) );
 
@@ -148,7 +150,8 @@ public class BudgetServiceTest extends AbstractTest {
 	
 	private BudgetDTO getDefaultBudgetDTO() {
 		return new BudgetDTO()
-			.setLabel( "Budget DTO" );
+			.setLabel( "Budget DTO" )
+			.setColor( "#FFFFFF" );
 	}
 
 	@Test

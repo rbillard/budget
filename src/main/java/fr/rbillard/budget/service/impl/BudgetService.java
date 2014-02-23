@@ -67,6 +67,7 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 		
 		Budget budget = getBudget( dto.getId(), userId );
 		budget.setLabel( dto.getLabel() );
+		budget.setColor( dto.getColor() );
 		
 		update( budget );
 
@@ -83,6 +84,7 @@ public class BudgetService extends GenericService<Budget, Long, IBudgetDAO> impl
 		User user = userService.getEntity( userId );
 		Budget budget = new Budget();
 		budget.setLabel( dto.getLabel() );
+		budget.setColor( dto.getColor() );
 		budget.setUser( user );
 		user.addBudget( budget );
 		

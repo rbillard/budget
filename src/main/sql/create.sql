@@ -55,6 +55,7 @@ INSERT INTO `l_period_budget` (`amount`, `T_PERIOD_ID`, `T_BUDGET_ID`) VALUES
 CREATE TABLE IF NOT EXISTS `t_budget` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) NOT NULL,
+  `color` char(7) NOT NULL,
   `T_USER_ID` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_jdgkjdgsjg5dkjg5djs6fjkd5` (`T_USER_ID`)
@@ -64,11 +65,11 @@ CREATE TABLE IF NOT EXISTS `t_budget` (
 -- Contenu de la table `t_budget`
 --
 
-INSERT INTO `t_budget` (`id`, `label`, `T_USER_ID`) VALUES
-(1, 'Nourriture', 1),
-(2, 'Loisirs', 1),
-(3, 'Essence', 1),
-(13, 'Abonnement', 1);
+INSERT INTO `t_budget` (`id`, `label`, `color`, `T_USER_ID`) VALUES
+(1, 'Nourriture', '#FFFFFF', 1),
+(2, 'Loisirs', '#FF00FF', 1),
+(3, 'Essence', '#FF0000', 1),
+(13, 'Abonnement', '#FFFF00', 1);
 
 -- --------------------------------------------------------
 

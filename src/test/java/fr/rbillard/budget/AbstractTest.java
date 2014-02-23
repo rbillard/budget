@@ -142,7 +142,8 @@ public abstract class AbstractTest {
 		
 		Budget budget = new Budget();
 		budget.setUser( user );
-		budget.setLabel( "Lable budget" );
+		budget.setLabel( "Label budget" );
+		budget.setColor( "#FFFFFF" );
 		user.addBudget( budget );
 		budgetService.create( budget );
 		

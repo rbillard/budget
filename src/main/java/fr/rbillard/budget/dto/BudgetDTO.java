@@ -17,6 +17,7 @@ public class BudgetDTO implements Serializable {
 	
 	private Long id;
 	private String label;
+	private String color;
 	private BigDecimal amount;
 	private BigDecimal consumedAmount;
 	private BigDecimal remainingAmount;
@@ -28,11 +29,13 @@ public class BudgetDTO implements Serializable {
 	public BudgetDTO( Budget budget ) {
 		this.id = budget.getId();
 		this.label = budget.getLabel();
+		this.color = budget.getColor();
 		this.amount = null;
 	}
 	public BudgetDTO( PeriodBudget periodBudget ) {
 		this.id = periodBudget.getId().getBudget().getId();
 		this.label = periodBudget.getId().getBudget().getLabel();
+		this.color = periodBudget.getId().getBudget().getColor();
 		this.amount = periodBudget.getAmount();
 		this.consumedAmount = periodBudget.getConsumedAmount();
 		this.remainingAmount = periodBudget.getRemainingAmount();
@@ -55,6 +58,16 @@ public class BudgetDTO implements Serializable {
 	}
 	public BudgetDTO setLabel( String label ) {
 		this.label = label;
+		return this;
+	}
+	
+	
+	@NotBlank
+	public String getColor() {
+		return color;
+	}
+	public BudgetDTO setColor( String color ) {
+		this.color = color;
 		return this;
 	}
 	

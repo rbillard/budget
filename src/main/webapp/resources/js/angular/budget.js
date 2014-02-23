@@ -30,7 +30,7 @@ var budgetControllers = angular.module( 'budgetControllers', [] );
 
 budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http ) {
 	
-	$scope.budget = {};
+	$scope.budget = { "color": "#000000" };
 	
 	$scope.submit = "Enregistrer"; // TODO constants i18n
 	
@@ -43,6 +43,7 @@ budgetControllers.controller( 'BudgetCreateCtrl', function ( $scope, $http ) {
 	        .error( function( data, status, headers, config ) {
 	            $scope.errors = data;
 	        });
+		
     }
 	
 });

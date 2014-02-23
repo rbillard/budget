@@ -33,6 +33,7 @@ public class Budget extends AbstractEntity<Long> {
 	
 	private Long id;
 	private String label;
+	private String color;
 	private List<PeriodBudget> lPeriod;
 	private User user;
 	
@@ -53,6 +54,15 @@ public class Budget extends AbstractEntity<Long> {
 	}
 	public void setLabel( String label ) {
 		this.label = label;
+	}
+	
+	
+	@NotEmpty
+	public String getColor() {
+		return color;
+	}
+	public void setColor( String color ) {
+		this.color = color;
 	}
 	
 	

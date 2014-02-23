@@ -12,29 +12,8 @@
     
     <link rel="shortcut icon" href="<c:url value="/resources/img/favicon.png" />">
     
-	<link rel="stylesheet" href="<c:url value="/resources/css/app.css" />">
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/css/bootstrap.min.css" />">
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/css/bootstrap-theme.min.css" />">
-	
-	<script src="<c:url value="/resources/js/jquery/jquery-1.10.2.min.js" />"></script>
-	
-	<script src="<c:url value="/resources/js/angular/constants.js" />"></script>
-	<script src="<c:url value="/resources/js/google/date.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/angular.min.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/angular-route.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/angular-resource.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/local/angular-locale_fr-fr.js" />"></script>
-	<script src="<c:url value="/resources/js/bootstrap/ui-bootstrap-tpls-0.10.0.min.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/app.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/period.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/budget.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/operation.js" />"></script>
-	<script src="<c:url value="/resources/js/angular/period-budget.js" />"></script>
-	
-	<script type="text/javascript">
-		<c:url value="/" var="context" />
-		var context = "${ context }";
-	</script>
+	<jsp:include page="css.jsp"></jsp:include>
+	<jsp:include page="js.jsp"></jsp:include>
 	
 </head>
 

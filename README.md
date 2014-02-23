@@ -14,7 +14,7 @@ CSS 3
 
 Angularjs 1.2.13
 
-Bootstrap 3.0.3
+Bootstrap 3.1.1
 
 Bootstrap UI 0.10.0
 
@@ -76,8 +76,6 @@ www.raphael-billard.fr
 
 ##### TODO
 pj facture pdf opération
-
-couleur budget
 
 error message global
 
