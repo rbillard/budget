@@ -12,7 +12,7 @@ HTML 5
 
 CSS 3
 
-Angularjs 1.2.9
+Angularjs 1.2.13
 
 Bootstrap 3.0.3
 
