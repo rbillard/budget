@@ -13,8 +13,8 @@
     <link rel="shortcut icon" href="<c:url value="/resources/img/favicon.png" />">
     
 	<link rel="stylesheet" href="<c:url value="/resources/css/app.css" />">
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap.min.css" />">
-	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/bootstrap-theme.min.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/css/bootstrap.min.css" />">
+	<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap/css/bootstrap-theme.min.css" />">
 	
 	<script src="<c:url value="/resources/js/jquery/jquery-1.10.2.min.js" />"></script>
 	
