@@ -41,7 +41,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
-		<fr.rbillard.spring-hibernate.controller.version>1.0.2</fr.rbillard.spring-hibernate.controller.version>
+		<fr.rbillard.spring-hibernate.controller.version>1.0.3-SNAPSHOT</fr.rbillard.spring-hibernate.controller.version>
 	</properties>
 
 	<dependencies>

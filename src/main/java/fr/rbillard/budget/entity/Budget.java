@@ -43,8 +43,9 @@ public class Budget extends AbstractEntity<Long> {
 	public Long getId() {
 		return id;
 	}
-	public void setId( Long id ) {
+	public Budget/*void*/ setId( Long id ) {
 		this.id = id;
+		return this;
 	}
 	
 	

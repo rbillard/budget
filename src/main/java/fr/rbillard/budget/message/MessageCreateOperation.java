@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MessageCreateOperation implements Serializable {
 
 
@@ -18,6 +20,7 @@ public class MessageCreateOperation implements Serializable {
 	private BigDecimal amount;
 	private Date date;
 	private String label;
+	private MultipartFile file;
 	
 	
 	@NotNull
@@ -77,6 +80,14 @@ public class MessageCreateOperation implements Serializable {
 	public MessageCreateOperation setLabel( String label ) {
 		this.label = label;
 		return this;
+	}
+	
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile( MultipartFile file ) {
+		this.file = file;
 	}
 	
 

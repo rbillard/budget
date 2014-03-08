@@ -67,8 +67,9 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	public PeriodBudgetId getId() {
 		return id;
 	}
-	public void setId( PeriodBudgetId id ) {
+	public PeriodBudget/*void*/ setId( PeriodBudgetId id ) {
 		this.id = id;
+		return this;
 	}
 	
 	
