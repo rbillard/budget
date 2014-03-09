@@ -25,7 +25,7 @@ Java 7
 
 Spring 4.0.2
 
-Hibernate 4.3.1
+Hibernate 4.3.4
 
 
 
