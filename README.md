@@ -12,7 +12,7 @@ HTML 5
 
 CSS 3
 
-Angularjs 1.2.13
+Angularjs 1.3.0
 
 Bootstrap 3.1.1
 
@@ -23,7 +23,7 @@ Bootstrap UI 0.10.0
 ### Back
 Java 7
 
-Spring 4.0.2
+Spring 4.0.3
 
 Hibernate 4.3.4
 
