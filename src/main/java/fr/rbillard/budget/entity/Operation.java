@@ -13,10 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
 @Entity
 @Table( name = "T_OPERATION" )
+@Audited
+@AuditTable( "T_HISTO_OPERATION" )
 public class Operation extends AbstractEntity<Long> {
 	
 	
@@ -39,7 +44,7 @@ public class Operation extends AbstractEntity<Long> {
 	public Long getId() {
 		return id;
 	}
-	public Operation/*void*/ setId( Long id ) {
+	public Operation setId( Long id ) {
 		this.id = id;
 		return this;
 	}

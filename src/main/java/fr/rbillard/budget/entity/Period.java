@@ -47,7 +47,7 @@ public class Period extends AbstractEntity<Long> {
 	public Long getId() {
 		return id;
 	}
-	public Period/*void*/ setId( Long id ) {
+	public Period setId( Long id ) {
 		this.id = id;
 		return this;
 	}

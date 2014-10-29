@@ -54,6 +54,9 @@ public class DataSourceConfiguration extends DefaultDataSourceConfiguration {
 				Properties properties = new Properties();
 				properties.setProperty( "hibernate.dialect", environment.getProperty( "hibernate.dialect" ) );
 				properties.setProperty( "hibernate.show_sql", environment.getProperty( "hibernate.show_sql" ) );
+				properties.setProperty( "hibernate.hbm2ddl.auto", environment.getProperty( "hibernate.hbm2ddl.auto" ) );
+				properties.setProperty( "org.hibernate.envers.revision_field_name", environment.getProperty( "bi_revision_number" ) );
+				properties.setProperty( "org.hibernate.envers.revision_type_field_name", environment.getProperty( "bi_revision_type" ) );
 				return properties;
 				
 			}

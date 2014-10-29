@@ -17,11 +17,16 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.envers.AuditTable;
+import org.hibernate.envers.Audited;
+
 import fr.rbillard.budget.entity.PeriodBudget.PeriodBudgetId;
 import fr.rbillard.springhibernate.domain.entity.AbstractEntity;
 
 @Entity
 @Table( name = "L_PERIOD_BUDGET" )
+@Audited
+@AuditTable( "T_HISTO_PERIOD_BUDGET" )
 public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	
 
@@ -67,7 +72,7 @@ public class PeriodBudget extends AbstractEntity<PeriodBudgetId> {
 	public PeriodBudgetId getId() {
 		return id;
 	}
-	public PeriodBudget/*void*/ setId( PeriodBudgetId id ) {
+	public PeriodBudget setId( PeriodBudgetId id ) {
 		this.id = id;
 		return this;
 	}

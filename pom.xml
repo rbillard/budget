@@ -118,6 +118,14 @@
 			<scope>runtime</scope>
 		</dependency>
 		
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>4.3.4.Final</version>
+		</dependency>
+		
+		
 	</dependencies>
 	
 	<build>
